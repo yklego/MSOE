@@ -388,10 +388,14 @@ var key = () => { // only keypress can tell if "shift" is pressed at the same ti
 		case 103://"g" paste
 			if(mvpos(1)==CrtPos){
 				abcstr=abcstr+CpStr;
+				CrtPos=abcstr.length-1;
 			}else{
 				abcstr=abcstr.substring(0,mvpos(1))+CpStr+abcstr.substring(mvpos(1));
+				CrtPos=mvpos(1)+Cpstr.length;
+				CrtPos=mvpos(0);
 			}
 			break;
+	// ----------Copy Mode--------------
     default:
 	}
 	console.log(Dstate);

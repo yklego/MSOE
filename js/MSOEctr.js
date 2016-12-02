@@ -78,7 +78,6 @@ var checkbar = () => {//add bar automatically
 }
 
 var print = () => {//output svg
-	checkbar();
   abcjs.renderAbc('boo',"T: "+ttlstr+"\nM: "+tmpstr+"\nL: 1/4\n|"+rmsmb(abcstr),{},{add_classes:true, editable:true, listener:{highlight:(abcElem)=>{//update CrtPos when note is clicked
       console.log(abcElem.startChar);
       var offset=abcElem.startChar-15-ttlstr.length-tmpstr.length;
@@ -197,7 +196,7 @@ var toabcnote = (ch) => {//generate a string for a note in ABC format
 };
 
 var insert = (str,md) => {//insert string in the right position. mode=1 for notations not occupying a position
-  var InsBef=mvpos(1);//insert before
+	var InsBef=mvpos(1);//insert before
   if(InsBef!=CrtPos){//not the last note
     if(abcstr[InsBef-1]=="\n")//if on the position before a "\n", insert before "\n"
       InsBef--;
@@ -206,6 +205,7 @@ var insert = (str,md) => {//insert string in the right position. mode=1 for nota
     abcstr=abcstr+(md!=1?"$":"")+str;//append
   }
   CrtPos=(md!=1)?mvpos(1):CrtPos;
+	checkbar();
   console.log(abcstr);
 };
 

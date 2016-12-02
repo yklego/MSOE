@@ -76,6 +76,18 @@ var mvpos = (md) => {
       }
     }
   }
+	if(md==4){//4: move to the first note of this line
+		while(CrtPos!=0 && abcstr[CrtPos-1]!="\n"){
+			CrtPos=mvpos(0);
+		}
+		return;
+	}
+	if(md==5){//5: move to the last note of this line
+		while(CrtPos!=abcstr.length && abcstr[mvpos(1)-1]!="\n"){
+			CrtPos=mvpos(1);
+		}
+		return;
+	}
 	return CrtPos;
 };
 
@@ -319,6 +331,12 @@ var move = () => { // some keys can't be detected in keypress
   }
   if(event.keyCode==40){//"down"
     CrtPos=mvpos(3);
+  }
+	if(event.keyCode==36){//"home"
+    mvpos(4);
+  }
+	if(event.keyCode==35){//"end"
+    mvpos(5);
   }
   if(event.keyCode==8){//"backspace"
 		if(CrtPos!=0){//if not the start of abcstring

@@ -434,6 +434,7 @@ var chord = () => {//keyup event for chord mode
       CrtPos=mvpos(1);
     }
 		checkbar();
+	  print();
   }
 };
 

@@ -83,7 +83,7 @@ var mvpos = (md) => {
 		return;
 	}
 	if(md==5){//5: move to the last note of this line
-		while(CrtPos!=abcstr.length && abcstr[mvpos(1)-1]!="\n"){
+		while(CrtPos!=abcstr.length-1 && abcstr[mvpos(1)-1]!="\n"){
 			CrtPos=mvpos(1);
 		}
 		return;

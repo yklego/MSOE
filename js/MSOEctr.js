@@ -305,7 +305,7 @@ var key = () => { // only keypress can tell if "shift" is pressed at the same ti
       break;
   // ----------Insert Bar-------------
     case 93://"]" for #
-      if(CrtPos!=0){
+      if(CrtPos!=0 && abcstr[CrtPos-1]!="\n" && abcstr[CrtPos+1]!="|"){
         if(abcstr[CrtPos+2]!="^"){//only allow 2 #s
           if(abcstr[CrtPos+1]!="_"){
            abcstr=abcstr.substring(0,CrtPos+1)+"^"+abcstr.substring(CrtPos+1);
@@ -316,7 +316,7 @@ var key = () => { // only keypress can tell if "shift" is pressed at the same ti
       }
       break;
     case 91://"[" for b
-      if(CrtPos!=0){
+      if(CrtPos!=0 && abcstr[CrtPos-1]!="\n" && abcstr[CrtPos+1]!="|"){
         if(abcstr[CrtPos+2]!="_"){//only allow 2 bs
           if(abcstr[CrtPos+1]!="^"){
             abcstr=abcstr.substring(0,CrtPos+1)+"_"+abcstr.substring(CrtPos+1);

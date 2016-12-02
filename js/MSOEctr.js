@@ -157,7 +157,7 @@ var insertch = (str) => {//insert for chord
 };
 
 var rmsmb = (str) => {//remove symbols should not be in the final abcstring
-  return str.replace(/[\\*][\\$]|[\\#]/g,"");
+  return str.replace(/[*][\\$]|[\\#]/g,"");
 };
 
 

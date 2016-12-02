@@ -191,22 +191,6 @@ var key = () => { // only keypress can tell if "shift" is pressed at the same ti
 			Tstate=(Tstate==3)?0:Tstate+1;
 			break;
 	// ----------Change Tstate-----------
-		case 113://"Q"
-      if((CrtPos!=0)&&(abcstr[CrtPos-1]!="\n")){
-        var DelEnd=mvpos(1);//delete end
-        var Latter="";
-        if(DelEnd!=CrtPos){//if not the last note
-          if(abcstr[DelEnd-1]=="\n")//if on the position before a "\n", keep "\n" in Latter
-            DelEnd--;
-          Latter=abcstr.substring(DelEnd);
-        }
-        abcstr=abcstr.substring(0,CrtPos)+Latter;
-        CrtPos=mvpos(0);
-        console.log(CrtPos);
-		  	console.log(abcstr);
-      }
-			break;
-	// ----------Delete-----------------
     case 122://"Z"
       insert(toabcnote("C"),0);
       break;

@@ -3,7 +3,8 @@ var Tstate=1; //0:A, 1:A  2:a  3:a'
 var Dstate=5; //Mn, n=0~8. n=5 for N=1, n+1=>N*2, n-1=>N/2. 1n=N*(1+1/2), 2n=N*(1+1/2+1/4)... and so on
 var CrtPos=0; //current position
 var CpMd=false; //copy mode
-var CpIntvl=[0,0]; //copy intervel
+var CpStP=0; //copy startpoint
+var CpStr=""; //copy string
 var abcjs=window.ABCJS;
 
 var ttlstr="";//title string
@@ -368,10 +369,29 @@ var key = () => { // only keypress can tell if "shift" is pressed at the same ti
 		case 70://"shift+f" turn on and off copy mode
 			if(CpMd){
 				CpMd=false;
-				
+				if(mvpos(1)==CrtPos){
+					CpStr=abcstr.substring(CpStp);
+				}else{
+					CpStr=abcstr.substring(CpStp,mvpos(1));
+				}
+				break;
+			}else{
+				CpMd=true;
+				CpStp=CrtPos;
+				break;
 			}
 		case 102://"f" cancel copy mode(when it's on)
+			if(CpMd){
+				CpMd=false;
+			}
+			break;
 		case 103://"g" paste
+			if(mvpos(1)==CrtPos){
+				abcstr=abcstr+CpStr;
+			}else{
+				abcstr=abcstr.substring(0,mvpos(1))+CpStr+abcstr.substring(mvpos(1));
+			}
+			break;
     default:
 	}
 	console.log(Dstate);

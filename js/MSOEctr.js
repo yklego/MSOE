@@ -2,7 +2,7 @@ var abcstr="$"; //abcstring
 var Tstate=1; //0:A, 1:A  2:a  3:a'
 var Dstate=5; //Mn, n=0~8. n=5 for N=1, n+1=>N*2, n-1=>N/2. 1n=N*(1+1/2), 2n=N*(1+1/2+1/4)... and so on
 var CrtPos=0; //current position
-var L="";//the fundamental duration
+var L="/4";//the fundamental duration
 var abcjs=window.ABCJS;
 
 var ttlstr="";//title string
@@ -20,7 +20,7 @@ var chgtmp = (a) => {//update tempo
 			break;
 		}
 	}
-	if(L=="") L="/4";
+	if(tmpstr=="") L="/4";
   print();
 }
 

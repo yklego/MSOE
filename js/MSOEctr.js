@@ -67,6 +67,7 @@ var checkbar = () => {//add bar automatically
 			if(temD=="") temD="1";
 			SofD=SofD+tonum(temD);
 			temD="";
+			continue;
 		}
 		if(Cntin){
 			temD=abcstr[i]+temD;

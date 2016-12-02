@@ -53,7 +53,7 @@ var checkbar = () => {//add bar automatically
 	var Cntin=true;//counting
 	for(var i=ChFm-1;i>0;i--){
 		if(abcstr[i]=="|") break;
-		if(abcstr[i]=="\n") continue;
+		if(abcstr[i]=="\n" || abcstr[i]=="]" || abcstr[i]=="[") continue;
 		if(abcstr[i]=="$"){
 			if(abcstr[i-1]=="\n"){//the beginning of a line(not the first line)
 				break;

@@ -391,7 +391,7 @@ var key = () => { // only keypress can tell if "shift" is pressed at the same ti
 				CrtPos=abcstr.length-1;
 			}else{
 				abcstr=abcstr.substring(0,mvpos(1))+CpStr+abcstr.substring(mvpos(1));
-				CrtPos=mvpos(1)+Cpstr.length;
+				CrtPos=mvpos(1)+CpStr.length;
 				CrtPos=mvpos(0);
 			}
 			break;

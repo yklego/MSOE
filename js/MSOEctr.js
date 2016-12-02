@@ -42,6 +42,7 @@ var checkbar = () => {//add bar automatically
 			break;
 		}
 	}
+	if(tmpstr=="") MaxD=4;
 	
 	if(abcstr[CrtPos+1]==="|") return;
 	if(ChFm==CrtPos){

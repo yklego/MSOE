@@ -27,7 +27,7 @@ var chgtmp = (a) => {//update tempo
 var print = () => {//output svg
   abcjs.renderAbc('boo',"T: "+ttlstr+"\nM: "+tmpstr+"\nL: 1"+L+"\n|"+rmsmb(abcstr),{},{add_classes:true, editable:true, listener:{highlight:(abcElem)=>{//update CrtPos when note is clicked
       console.log(abcElem.startChar);
-      var offset=abcElem.startChar-15-ttlstr.length-tmpstr.length;
+      var offset=abcElem.startChar-13-ttlstr.length-tmpstr.length-L.length;
       var ignsmbs=["$","#","*"];//symbols that won't be in the final abcstring
       for(var i=0;i<abcstr.length;i++){
         if(!ignsmbs.includes(abcstr[i])){

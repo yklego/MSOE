@@ -2,22 +2,30 @@ var abcstr="$"; //abcstring
 var Tstate=1; //0:A, 1:A  2:a  3:a'
 var Dstate=5; //Mn, n=0~8. n=5 for N=1, n+1=>N*2, n-1=>N/2. 1n=N*(1+1/2), 2n=N*(1+1/2+1/4)... and so on
 var CrtPos=0; //current position
+var L="";//the fundamental duration
 var abcjs=window.ABCJS;
 
-var ttlstr="";
+var ttlstr="";//title string
 var chgttl = (a) => {//update title
   ttlstr=a.value;
   print();
 };
-var tmpstr="";
+var tmpstr="";//tempo string
 var chgtmp = (a) => {//update tempo
-  if(a.value.length==2) a.value=a.value[0]+"/"+a.value[1];
+  if(a.value.length==2) a.value=a.value[0]+"/"+a.value[1];//if user is lazy and inputs, for example, 44 for 4/4, add "/" for the lazy guy
   tmpstr=a.value;
+	for(var i=0;i<tmpstr.length;i++){//update L
+		if(tmpstr[i]=="/"){
+			L=tmpstr.substring(i);
+			break;
+		}
+	}
+	if(L=="") L="/4";
   print();
 }
 
 var print = () => {//output svg
-  abcjs.renderAbc('boo',"T: "+ttlstr+"\nM: "+tmpstr+"\nL: 1/4\n|"+rmsmb(abcstr),{},{add_classes:true, editable:true, listener:{highlight:(abcElem)=>{//update CrtPos when note is clicked
+  abcjs.renderAbc('boo',"T: "+ttlstr+"\nM: "+tmpstr+"\nL: 1"+L+"\n|"+rmsmb(abcstr),{},{add_classes:true, editable:true, listener:{highlight:(abcElem)=>{//update CrtPos when note is clicked
       console.log(abcElem.startChar);
       var offset=abcElem.startChar-15-ttlstr.length-tmpstr.length;
       var ignsmbs=["$","#","*"];//symbols that won't be in the final abcstring
@@ -230,10 +238,10 @@ var key = () => { // only keypress can tell if "shift" is pressed at the same ti
       break;
   // ----------Assemble Notes---------
     case 100://"D"
-      if(Dstate%10!=8){//Pause with duration of 8 is illegal
+      if(Dstate%10*("1"+L)!=2){//Pause with duration of 2 is illegal
         insert(toabcnote("z"),0);
       }else{
-        alert("Pause with duration of 8 is illegal.");
+        alert("Pause with duration of 2 is illegal.");
       }
       break;
   // ----------Insert Pause-----------

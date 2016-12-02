@@ -62,14 +62,14 @@ var checkbar = () => {//add bar automatically
 				continue;
 			}
 		}
-		if(abcstr[i]=="*"){//sum every note
+		if(abcstr[i]=="*"&&Cntin){//sum every note
 			Cntin=false;
 			if(temD=="") temD="1";
 			SofD=SofD+tonum(temD);
 			temD="";
 			continue;
 		}
-		if(Cntin==true){
+		if(Cntin){
 			temD=abcstr[i]+temD;
 		}
 	}

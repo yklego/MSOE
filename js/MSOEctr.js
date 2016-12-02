@@ -69,7 +69,7 @@ var checkbar = () => {//add bar automatically
 			temD="";
 			continue;
 		}
-		if(Cntin){
+		if(Cntin==true){
 			temD=abcstr[i]+temD;
 		}
 	}

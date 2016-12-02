@@ -9,6 +9,7 @@ var chgttl = (a) => {//update title
   ttlstr=a.value;
   print();
 };
+
 var tmpstr="";//tempo string
 var chgtmp = (a) => {//update tempo
   if(a.value.length==2) a.value=a.value[0]+"/"+a.value[1];//if user is lazy and inputs, for example, 44 for 4/4, add "/" for the lazy guy
@@ -16,7 +17,68 @@ var chgtmp = (a) => {//update tempo
   print();
 }
 
+var tonum = (str) => {
+	var Dnmntr=0;//denominator
+	var Nmrtr=0;//numerator
+	for(var i=0;i<str.length;i++){
+		if(str[i]=="/"){
+			Nmrtr=parseInt(str.substring(0,i));
+			Dnmntr=parseInt(str.substring(i+1));
+			return Nmrtr/Dnmntr;
+		}
+	}
+	return parseInt(str);
+}
+
+var checkbar = () => {//add bar automatically
+	var SofD=0;//sum of duration
+	var temD="";//temparary duration
+	var ChFm=mvpos(1);//check from
+	var MaxD;//the max duration between bars
+	
+	for(var i=0;i<tmpstr.length;i++){
+		if(tmpstr[i]=="/"){
+			MaxD=parseInt(tmpstr.substring(0,i));
+			break;
+		}
+	}
+	
+	if(abcstr[CrtPos+1]==="|") return;
+	if(ChFm==CrtPos){
+		ChFm=abcstr.length;
+	}else if(abcstr[ChFm+1]=="|"){
+		return;
+	}
+	var Cntin=true;//counting
+	for(var i=ChFm-1;i>0;i--){
+		if(abcstr[i]=="|") break;
+		if(abcstr[i]=="\n") continue;
+		if(abcstr[i]=="$"){
+			if(abcstr[i-1]=="\n"){//the beginning of a line(not the first line)
+				break;
+			}else{
+				Cntin=true;
+				continue;
+			}
+		}
+		if(abcstr[i]=="*"){//sum every note
+			Cntin=false;
+			if(temD=="") temD="1";
+			SofD=SofD+tonum(temD);
+			temD="";
+		}
+		if(Cntin){
+			temD=abcstr[i]+temD;
+		}
+	}
+	
+	if(SofD>=MaxD){
+		insert("|",0);
+	}
+}
+
 var print = () => {//output svg
+	checkbar();
   abcjs.renderAbc('boo',"T: "+ttlstr+"\nM: "+tmpstr+"\nL: 1/4\n|"+rmsmb(abcstr),{},{add_classes:true, editable:true, listener:{highlight:(abcElem)=>{//update CrtPos when note is clicked
       console.log(abcElem.startChar);
       var offset=abcElem.startChar-15-ttlstr.length-tmpstr.length;

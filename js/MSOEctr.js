@@ -206,7 +206,6 @@ var insert = (str,md) => {//insert string in the right position. mode=1 for nota
     abcstr=abcstr+(md!=1?"$":"")+str;//append
   }
   CrtPos=(md!=1)?mvpos(1):CrtPos;
-	checkbar();
   console.log(abcstr);
 };
 
@@ -256,24 +255,31 @@ var key = () => { // only keypress can tell if "shift" is pressed at the same ti
 	// ----------Change Tstate-----------
     case 122://"Z"
       insert(toabcnote("C"),0);
+			checkbar();
       break;
     case 120://"X"
       insert(toabcnote("D"),0);
+			checkbar();
       break;
     case 99://"C"
       insert(toabcnote("E"),0);
+			checkbar();
       break;
     case 118://"V"
       insert(toabcnote("F"),0);
+			checkbar();
       break;
     case 98://"B"
       insert(toabcnote("G"),0);
+			checkbar();
       break;
     case 110://"N"
       insert(toabcnote("A"),0);
+			checkbar();
       break;
     case 109://"M"
       insert(toabcnote("B"),0);
+			checkbar();
       break;
   // ----------Insert Note------------
 		case 115://"S"
@@ -427,6 +433,7 @@ var chord = () => {//keyup event for chord mode
       abcstr=abcstr.substring(0,mvpos(1)+1)+"#"+abcstr.substring(mvpos(1)+1);
       CrtPos=mvpos(1);
     }
+		checkbar();
   }
 };
 

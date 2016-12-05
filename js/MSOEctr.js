@@ -7,6 +7,33 @@ var CpStP=0; //copy startpoint
 var CpStr=""; //copy string
 var abcjs=window.ABCJS;
 
+//----new way to define Tstate(only concept)----
+var ChgTstate = (di) => {//change Tstate
+  if(!di){
+    Tstate=(Tstate==0)?0:Tstate-1;
+  }else{
+    Tstate=(Tstate==21)?21:Tstate+1;
+  }
+};
+
+var GetTstate = (offset) => {//return a ABC string for a note
+  var note;
+  var tune;
+  switch((Tstate+offset)%7){
+    case 0:
+      note="C";
+    //...
+  }
+  tune=Math.floor((Tstate+offset)/7);
+  switch(tune){
+    case 0:
+      return note+",";
+    //...
+  }
+};
+
+//----------------------------------------------
+
 var ttlstr="";//title string
 var chgttl = (a) => {//update title
   ttlstr=a.value;
@@ -87,6 +114,10 @@ var print = () => {//output svg
       console.log(abcElem.startChar);
       var offset=abcElem.startChar-15-ttlstr.length-tmpstr.length;
       var ignsmbs=["$","#","*"];//symbols that won't be in the final abcstring
+      if(offset==0){
+        CrtPos=0;
+        return;
+      }
       for(var i=0;i<abcstr.length;i++){
         if(!ignsmbs.includes(abcstr[i])){
           if(offset!=1){
@@ -369,17 +400,30 @@ var key = () => { // only keypress can tell if "shift" is pressed at the same ti
 		case 70://"shift+f" turn on and off copy mode
 			if(CpMd){
 				CpMd=false;
-				if(mvpos(1)==CrtPos){
-					CpStr=abcstr.substring(CpStp);
-				}else{
-					CpStr=abcstr.substring(CpStp,mvpos(1));
-				}
-				break;
+        var CpEdP=CrtPos;//copy end point
+        if(CrtPos<CpStP){//if the end is on the left of the startpoint, swap their values.
+          CpEdP=CpStP;
+          CpStP=CrtPos;
+        }
+        if(CpStP==0 || abcstr[CpStP-1]=="\n"){//don't copy the extra "$" of the startpoint of every line;
+          CpStP++;
+        }
+        var CpStrEd=CpEdP;//copy string end point
+        for(var i=CpEdP+1;i<=abcstr.length;i++){
+			    if(abcstr[i]=="$"){
+				    CpStrEd=i;
+		    	}
+	    	}
+        if(CpStrEd==CpEdP){
+          CpStr=abcstr.substring(CpStP);
+        }else{
+          CpStr=abcstr.substring(CpStP,CpStrEd);
+        }
 			}else{
 				CpMd=true;
-				CpStp=CrtPos;
-				break;
+				CpStP=CrtPos;
 			}
+      break;
 		case 102://"f" cancel copy mode(when it's on)
 			if(CpMd){
 				CpMd=false;
@@ -474,6 +518,7 @@ var chord = () => {//keyup event for chord mode
 
 var btn = (a) => {//buttons for notes
   insert(toabcnote(a.id),0);
+  checkbar();
   print();
 };
 

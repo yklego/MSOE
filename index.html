@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
+<link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css'>
+<link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css'>
+
+      <link rel="stylesheet" href="css/style.css">
+
+  
+</head>
+
+<body>
+  
+<div class="row top">
+  <div class="col-sm3- col-md-3 col-lg-3 left">
+    <div class="col-sm12- col-md-12 col-lg-12 title">Title</div>
+    <input class="col-sm12- col-md-12 col-lg-12 input_title" onchange="chgttl(this)"/>
+    <div class="col-sm-12 col-md-12 col-lg-12 title">Tempo</div>
+    <input class="col-sm-12 col-md-12 col-lg-12 input_tempo" onchange="chgtmp(this)"/>
+    <div class="col-sm-12 col-md-12 col-lg-12 title">Notes</div>
+    <div class="col-sm-12 col-md-12 col-lg-12"></div>
+  </div>
+  <div class="col-sm-9 col-md-9 col-lg-9 sheet">
+    <div id="boo"></div>
+  </div>
+</div>
+<div class="row bottom">
+  <div class="col-sm-12 col-md-12 col-lg-12 edit_line"> 
+    <div class="col-sm-8 col-md-8 col-lg-8 keyboard">
+      <button id="C" onclick="btn(this)">C(Z)</button>
+      <button id="D" onclick="btn(this)">D(X)</button>
+      <button id="E" onclick="btn(this)">E(C)</button>
+      <button id="F" onclick="btn(this)">F(V)</button>
+      <button id="G" onclick="btn(this)">G(B)</button>
+      <button id="A" onclick="btn(this)">A(N)</button>
+      <button id="B" onclick="btn(this)">B(M)</button>
+    </div>
+    <div class="col-sm-4 col-md-4 col-lg-4"></div>
+  </div>
+</div>
+  <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
+<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+<script src='js/abcjs_basic_2.3-min.js'></script>
+<script src="js/MSOEctr.js"></script>
+
+</body>
+</html>

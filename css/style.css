@@ -1,0 +1,55 @@
+* {
+  background-color: #F4ECDF;
+  font-family: Calibri;
+  font-size: 24px;
+  padding: -15px;
+  margin: 0px;
+  overflow: hidden;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  padding: -15px;
+  margin: 0px;
+}
+
+.row {
+  margin-left: -15px;
+  margin-right: -15px;
+}
+
+.top {
+  height: 70%;
+  overflow-y: scroll;
+}
+
+.bottom {
+  height: 30%;
+}
+
+.left {
+  padding: 10px;
+}
+
+.left input {
+  margin-left: 10px;
+  border: solid 1px black;
+  width: 50%;
+}
+
+.edit_line {
+  position: fixed;
+  bottom: 0%;
+  height: 30%;
+  border-top: solid 1px #222222;
+}
+
+.keyboard button {
+  background-color: white;
+  display: inline-block;
+  height: 200px;
+  width: 11%;
+  font-size: 20px;
+  color: #222222;
+}

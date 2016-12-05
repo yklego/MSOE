@@ -53,3 +53,34 @@ html, body {
   font-size: 20px;
   color: #222222;
 }
+
+
+
+.triangle{
+  position: absolute;
+}
+
+#left_triangle{
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 10px 15px 10px 0;
+  border-color: transparent black transparent transparent;
+  left: 280px;
+  top: 70px;
+}
+
+#right_triangle{
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 10px 0 10px 15px;
+  border-color: transparent transparent transparent black;
+  left: 380px;
+  top: 70px;
+}
+
+.edit_note{
+  width: 50px;
+}
+

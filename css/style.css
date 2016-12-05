@@ -54,12 +54,12 @@ html, body {
   font-size: 25px;
   color: #222222;
   z-index: 1;
-  padding-top: 160px;
+  padding-top: 150px;
 }
 
 .black{
   background-color: black;
-  height: 150px;
+  height: 130px;
   width: 8%;
   z-index: 2;
 }
@@ -113,8 +113,8 @@ html, body {
   border-style: solid;
   border-width: 10px 15px 10px 0;
   border-color: transparent black transparent transparent;
-  left: 22%;
-  top: 100px;
+  left: 10%;
+  top: 90px;
 }
 
 #right_triangle{
@@ -123,24 +123,24 @@ html, body {
   border-style: solid;
   border-width: 10px 0 10px 15px;
   border-color: transparent transparent transparent black;
-  left: 53%;
-  top: 100px;
+  left: 28%;
+  top: 90px;
 }
 
 .edit_note{
   position: absolute;
-  width: 15%;
-  top: 20px;
+  width: 12%;
+  top: 30px;
 }
 
 #thirty-second{
   left: 0%;
 }
 #sixteenth {
-  left: 30%;
+  left: 15%;
 }
 #eighth{
-  left: 60%;
+  left: 30%;
 }
 #quarter{
   left: -99999px;

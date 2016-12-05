@@ -64,7 +64,7 @@ html, body {
   border-width: 10px 15px 10px 0;
   border-color: transparent black transparent transparent;
   left: 22%;
-  top: 15%;
+  top: 100px;
 }
 
 #right_triangle{
@@ -74,13 +74,13 @@ html, body {
   border-width: 10px 0 10px 15px;
   border-color: transparent transparent transparent black;
   left: 53%;
-  top: 15%;
+  top: 100px;
 }
 
 .edit_note{
   position: absolute;
-  width: 25%;
-  top: 5%;
+  width: 15%;
+  top: 20px;
 }
 
 #thirty-second{

@@ -45,14 +45,64 @@ html, body {
 }
 
 .keyboard button {
+  position: absolute;
+}
+.white{
   background-color: white;
-  display: inline-block;
   height: 200px;
-  width: 11%;
-  font-size: 20px;
+  width: 12%;
+  font-size: 25px;
   color: #222222;
+  z-index: 1;
+  padding-top: 160px;
 }
 
+.black{
+  background-color: black;
+  height: 150px;
+  width: 8%;
+  z-index: 2;
+}
+
+#C{
+  left: 0%;
+}
+#CS{
+  left: 8%;
+}
+#D{
+  left: 12%;
+}
+#DS{
+  left: 20%;
+}
+#E{
+  left: 24%;
+}
+#F{
+  left: 36%;
+}
+#FS{
+  left: 44%;
+}
+#G{
+  left: 48%;
+}
+#GS{
+  left: 56%;
+}
+#A{
+  left: 60%;
+}
+#AS{
+  left: 68%;
+}
+#B{
+  left: 72%;
+}
+#CC{
+  left: 84%;
+}
 .triangle{
   position: absolute;
 }

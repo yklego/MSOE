@@ -5,6 +5,7 @@ var CrtPos=0; //current position
 var CpMd=false; //copy mode
 var CpStP=0; //copy startpoint
 var CpStr=""; //copy string
+var Edit=true; //if it's editable
 var abcjs=window.ABCJS;
 
 //----new way to define Tstate(only concept)----
@@ -36,12 +37,14 @@ var GetTstate = (offset) => {//return a ABC string for a note
 
 var ttlstr="";//title string
 var chgttl = (a) => {//update title
+  if(!Edit) return;
   ttlstr=a.value;
   print();
 };
 
 var tmpstr="";//tempo string
 var chgtmp = (a) => {//update tempo
+  if(!Edit) return;
   if(a.value.length==2) a.value=a.value[0]+"/"+a.value[1];//if user is lazy and inputs, for example, 44 for 4/4, add "/" for the lazy guy
   tmpstr=a.value;
   print();
@@ -298,6 +301,7 @@ var moveright = () => {
 
 var key = () => { // only keypress can tell if "shift" is pressed at the same time
   if(checkinput()) return;
+  if(!Edit) return;
 	switch(event.keyCode){
 		case 44://"<"
 				Dstate=(Dstate%10==0)?8:Dstate-1;
@@ -486,6 +490,7 @@ var key = () => { // only keypress can tell if "shift" is pressed at the same ti
 
 var move = () => { // some keys can't be detected in keypress
   if(checkinput()) return;//if inpus tags are focus, turn off key events
+  if(!Edit) return;
 	//not using switch for speed(avoid looking up table)
 	if(event.keyCode==37){//"left"
 		CrtPos=mvpos(0);
@@ -540,6 +545,7 @@ var move = () => { // some keys can't be detected in keypress
 
 var chord = () => {//keyup event for chord mode
   if(checkinput()) return;
+  if(!Edit) return;
   if(event.keyCode==16){//"shift" for chord mode off
     if(abcstr.substr(mvpos(1),3)==="$[]"){//if no notes are inserted
       abcstr=abcstr.substring(0,mvpos(1))+abcstr.substring(mvpos(1)+3);

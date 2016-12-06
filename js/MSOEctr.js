@@ -322,12 +322,12 @@ var key = () => { // only keypress can tell if "shift" is pressed at the same ti
     case 63://"shift+?" for chord mode
     case 47://"?"
       Tstate=(Tstate==3)?0:Tstate+1;
-      document.getElementById("octave").innerHTML(Tstate+3);
+      document.getElementById("octave").innerHTML=(Tstate+3);
       break;
     case 34://"shift+'" for chord mode
     case 39://"'" 
       Tstate=(Tstate==0)?3:Tstate-1;
-      document.getElementById("octave").innerHTML(Tstate+3);
+      document.getElementById("octave").innerHTML=(Tstate+3);
       break;
 	// ----------Change Tstate-----------
     case 122://"Z"

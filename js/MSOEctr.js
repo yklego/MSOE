@@ -568,24 +568,24 @@ var btn = (a) => {//buttons for notes
 
 $("#save").click(function(e) {
   var url = location.href.split("?")[1];
-  var index;
-  var key;
+  var urlIndex;
+  var urlKey;
   var rcvUrl = "";
   var push = false;
   if(url == null) {
-    index = "";
-    key = "";
+    urlIndex = "";
+    urlKey = "";
     push = true;
   }
   else {
-    index = url.split("!")[1];
-    key = url.split("!")[2];
+    urlIndex = url.split("!")[1];
+    urlKey = url.split("!")[2];
 
-    if(index == null) {
-      index = "";
+    if(urlIndex == null) {
+      urlIndex = "";
     }
-    if(key ==null)
-      key = "";
+    if(urlKey ==null)
+      urlKey = "";
   }
   if(history.pushState) {
     
@@ -595,8 +595,8 @@ $("#save").click(function(e) {
       async: false,
       data: {
         abcstr: abcstr,           
-        index: index,
-        key: key,
+        index: urlIndex,
+        key: urlKey,
       },
       success: function(rcvData) {
         console.log(rcvData);
@@ -630,13 +630,13 @@ $("#save").click(function(e) {
 window.onload = () => {
   var url = location.href.split("?")[1];
   if(url != null) {
-    var index = url.split("!")[1];
-    var key = url.split("!")[2];
+    var urlIndex = url.split("!")[1];
+    var urlKey = url.split("!")[2];
     
-    if(index == null)
-      index = "";
-    if(key == null)
-      key = "";
+    if(urlIndex == null)
+      urlIndex = "";
+    if(urlKey == null)
+      urlKey = "";
 
     if(index.length != 0)
     {
@@ -644,8 +644,8 @@ window.onload = () => {
         url: "./js/load.njs",
         async: false,
         data: {
-          index: index,
-          key: key,
+          index: urlIndex,
+          key: urlKey,
         },
         success: function(rcvData) {
           abcstr = rcvData;        

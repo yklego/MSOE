@@ -1,116 +1,167 @@
 ﻿<!DOCTYPE html>
 <html >
 <head>
-  <meta charset="UTF-8">
-  <meta charset="utf-8">
+<meta charset="UTF-8">
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  
-  <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
-<link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css'>
+
+<link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
 <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css'>
 
-      <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/style.css">
 
-  
+
 </head>
 
 <body>
-  
+dy>
+<div class="info"> 
+<button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#myModal">Score Info</button>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+<button type="button" class="close" data-dismiss="modal">&times;</button>
+<img src="http://i.imgur.com/T6PN20o.png" class="logo" width="400">  
+<h3 style="color:black;">Score Info</h3>
+</div>
+<div class="modal-body">
+<form role="form">
+<!--<div class="form-group">
+<label for="InputEmail">Email address</label>
+<input type="email" class="form-control" id="InputEmail" aria-describedby="emailHelp" placeholder="Enter your email here">
+</div>-->
+<div class="form-group">
+<label for="InputUser">Editor</label>
+<input type="text" class="form-control" id="InputUser" placeholder="Editor Name">
+</div>
+<div class="form-group">
+<label for="Title">Title</label>
+<input type="text" class="form-control" id="InputTitle" placeholder="Sonate 16 in C major" onchange="chgttl(this)">
+</div>
+<div class="form-group">
+<label for="Subtitle">Subtitle</label>
+<input type="text" class="form-control" id="InputSubtitle" placeholder="Sonata facile">
+</div>
+<div class="form-group">
+<label for="Artist">Artist</label>
+<input type="text" class="form-control" id="InputArtist" placeholder="W. A. Mozart">
+</div>
+<div class="form-group">
+<label for="Album">Album</label>
+<input type="text" class="form-control" id="InputAlbum" placeholder="W.A. Mozart: Piano Sonatas - Volume 1" >
+</div>
+<div class="form-group">
+<label for="Composer">Composer</label>
+<input type="text" class="form-control" id="InputComposer" placeholder="W. A. Mozart">
+</div>
+
+
+<button type="submit" class="btn btn-secondary btn-default" data-dismiss="modal">Submit!</button>
+</form>
+</div>
+<div class="modal-footer">
+<button type="submit" class="btn btn-default btn-default" data-dismiss="modal">Cancel</button>
+</div>
+</div>
+</div>
+</div> 
+</div>
+
+
 <div class="row top">
-  <div class="col-sm3- col-md-3 col-lg-3 left">
-    <div class="col-sm12- col-md-12 col-lg-12 title">Title</div>
-    <input class="col-sm12- col-md-12 col-lg-12 input_title" onchange="chgttl(this)"/>
-    <div class="col-sm-12 col-md-12 col-lg-12 title">Tempo</div>
-    <input class="col-sm-12 col-md-12 col-lg-12 input_tempo" onchange="chgtmp(this)"/>
-    <div class="col-sm-12 col-md-12 col-lg-12 title">Notes</div>
-    <div class="col-sm-12 col-md-12 col-lg-12">
-      <div class="row">
-        <button class="col-sm2- col-md-2 col-lg-2"><img src="img/notes-01.png" alt="" class="extra_note" id="" /></button>
-        <button class="col-sm2- col-md-2 col-lg-2"><img src="img/notes-02.png" alt="" class="extra_note" id="" /></button>
-        <button class="col-sm2- col-md-2 col-lg-2"><img src="img/notes-04.png" alt="" class="extra_note" id="" /></button>
-        <button class="col-sm2- col-md-2 col-lg-2"><img src="img/notes-08.png" alt="" class="extra_note" id="" /></button>
-        <button class="col-sm2- col-md-2 col-lg-2"><img src="img/notes-16.png" alt="" class="extra_note" id="" /></button>
-      </div>
-      <div class="row">
-        <button class="col-sm2- col-md-2 col-lg-2"><img src="img/notes-32.png" alt="" class="extra_note" id="" /></button>
-        <button class="col-sm2- col-md-2 col-lg-2"><img src="img/note-05.png" alt="" class="extra_note" id="" /></button>
-        <button class="col-sm2- col-md-2 col-lg-2"><img src="img/note-06.png" alt="" class="extra_note" id="" /></button>
-        <button class="col-sm2- col-md-2 col-lg-2"><img src="img/note-07.png" alt="" class="extra_note" id="" /></button>
-        <button class="col-sm2- col-md-2 col-lg-2"><img src="img/note-08.png" alt="" class="extra_note" id="" /></button>
-      </div>
-      <div class="row">
-        <button class="col-sm2- col-md-2 col-lg-2"><img src="img/note-09.png" alt="" class="extra_note" id="" /></button>
-        <button class="col-sm2- col-md-2 col-lg-2"><img src="img/note-10.png" alt="" class="extra_note" id="" /></button>
-        <button class="col-sm2- col-md-2 col-lg-2"><img src="img/note-11.png" alt="" class="extra_note" id="" /></button>
-        <button class="col-sm2- col-md-2 col-lg-2"><img src="img/note-12.png" alt="" class="extra_note" id="" /></button>
-        <button class="col-sm2- col-md-2 col-lg-2"><img src="img/note-13.png" alt="" class="extra_note" id="" /></button>
-      </div>
-      <div class="row">
-        <button class="col-sm2- col-md-2 col-lg-2"><img src="img/note-14.png" alt="" class="extra_note" id="" /></button>
-        <button class="col-sm2- col-md-2 col-lg-2"><img src="img/note-15.png" alt="" class="extra_note" id="" /></button>
-        <button class="col-sm2- col-md-2 col-lg-2"><img src="img/note-16.png" alt="" class="extra_note" id="" /></button>
-        <button class="col-sm2- col-md-2 col-lg-2"><img src="img/note-17.png" alt="" class="extra_note" id="" /></button>
-        <button class="col-sm2- col-md-2 col-lg-2"><img src="img/note-18.png" alt="" class="extra_note" id="" /></button>
-      </div>
-      <div class="row">
-        <button class="col-sm2- col-md-2 col-lg-2"><img src="img/note-19.png" alt="" class="extra_note" id="" /></button>
-        <button class="col-sm2- col-md-2 col-lg-2"><img src="img/note-20.png" alt="" class="extra_note" id="" /></button>
-        <button class="col-sm2- col-md-2 col-lg-2"><img src="img/note-21.png" alt="" class="extra_note" id="" /></button>
-        <button class="col-sm2- col-md-2 col-lg-2"><img src="img/note-22.png" alt="" class="extra_note" id="" /></button>
-        <button class="col-sm2- col-md-2 col-lg-2"><img src="img/note-23.png" alt="" class="extra_note" id="" /></button>
-      </div>
-      <div class="row">
-        <button class="col-sm2- col-md-2 col-lg-2"><img src="img/note-24.png" alt="" class="extra_note" id="" /></button>
-        <button class="col-sm2- col-md-2 col-lg-2"><img src="img/note-25.png" alt="" class="extra_note" id="" /></button>
-        <button class="col-sm2- col-md-2 col-lg-2"><img src="img/note-26.png" alt="" class="extra_note" id="" /></button>
-      </div>
-    </div>
-  </div>
-  <div class="col-sm-9 col-md-9 col-lg-9 sheet">
-    <div id="boo"></div>
-  </div>
+<div class="col-sm3- col-md-3 col-lg-3 left">
+<div class="col-sm-12 col-md-12 col-lg-12 title">Tempo</div>
+<input class="col-sm-12 col-md-12 col-lg-12 input_tempo" onchange="chgtmp(this)"/>
+<div class="col-sm-12 col-md-12 col-lg-12 title">Notes</div>
+<div class="col-sm-12 col-md-12 col-lg-12">
+<div class="row">
+<button class="col-sm2- col-md-2 col-lg-2"><img src="img/notes-01.png" alt="" class="extra_note" id="" /></button>
+<button class="col-sm2- col-md-2 col-lg-2"><img src="img/notes-02.png" alt="" class="extra_note" id="" /></button>
+<button class="col-sm2- col-md-2 col-lg-2"><img src="img/notes-04.png" alt="" class="extra_note" id="" /></button>
+<button class="col-sm2- col-md-2 col-lg-2"><img src="img/notes-08.png" alt="" class="extra_note" id="" /></button>
+<button class="col-sm2- col-md-2 col-lg-2"><img src="img/notes-16.png" alt="" class="extra_note" id="" /></button>
+</div>
+<div class="row">
+<button class="col-sm2- col-md-2 col-lg-2"><img src="img/notes-32.png" alt="" class="extra_note" id="" /></button>
+<button class="col-sm2- col-md-2 col-lg-2"><img src="img/note-05.png" alt="" class="extra_note" id="" /></button>
+<button class="col-sm2- col-md-2 col-lg-2"><img src="img/note-06.png" alt="" class="extra_note" id="" /></button>
+<button class="col-sm2- col-md-2 col-lg-2"><img src="img/note-07.png" alt="" class="extra_note" id="" /></button>
+<button class="col-sm2- col-md-2 col-lg-2"><img src="img/note-08.png" alt="" class="extra_note" id="" /></button>
+</div>
+<div class="row">
+<button class="col-sm2- col-md-2 col-lg-2"><img src="img/note-09.png" alt="" class="extra_note" id="" /></button>
+<button class="col-sm2- col-md-2 col-lg-2"><img src="img/note-10.png" alt="" class="extra_note" id="" /></button>
+<button class="col-sm2- col-md-2 col-lg-2"><img src="img/note-11.png" alt="" class="extra_note" id="" /></button>
+<button class="col-sm2- col-md-2 col-lg-2"><img src="img/note-12.png" alt="" class="extra_note" id="" /></button>
+<button class="col-sm2- col-md-2 col-lg-2"><img src="img/note-13.png" alt="" class="extra_note" id="" /></button>
+</div>
+<div class="row">
+<button class="col-sm2- col-md-2 col-lg-2"><img src="img/note-14.png" alt="" class="extra_note" id="" /></button>
+<button class="col-sm2- col-md-2 col-lg-2"><img src="img/note-15.png" alt="" class="extra_note" id="" /></button>
+<button class="col-sm2- col-md-2 col-lg-2"><img src="img/note-16.png" alt="" class="extra_note" id="" /></button>
+<button class="col-sm2- col-md-2 col-lg-2"><img src="img/note-17.png" alt="" class="extra_note" id="" /></button>
+<button class="col-sm2- col-md-2 col-lg-2"><img src="img/note-18.png" alt="" class="extra_note" id="" /></button>
+</div>
+<div class="row">
+<button class="col-sm2- col-md-2 col-lg-2"><img src="img/note-19.png" alt="" class="extra_note" id="" /></button>
+<button class="col-sm2- col-md-2 col-lg-2"><img src="img/note-20.png" alt="" class="extra_note" id="" /></button>
+<button class="col-sm2- col-md-2 col-lg-2"><img src="img/note-21.png" alt="" class="extra_note" id="" /></button>
+<button class="col-sm2- col-md-2 col-lg-2"><img src="img/note-22.png" alt="" class="extra_note" id="" /></button>
+<button class="col-sm2- col-md-2 col-lg-2"><img src="img/note-23.png" alt="" class="extra_note" id="" /></button>
+</div>
+<div class="row">
+<button class="col-sm2- col-md-2 col-lg-2"><img src="img/note-24.png" alt="" class="extra_note" id="" /></button>
+<button class="col-sm2- col-md-2 col-lg-2"><img src="img/note-25.png" alt="" class="extra_note" id="" /></button>
+<button class="col-sm2- col-md-2 col-lg-2"><img src="img/note-26.png" alt="" class="extra_note" id="" /></button>
+</div>
+</div>
+</div>
+<div class="col-sm-9 col-md-9 col-lg-9 sheet">
+<div id="boo"></div>
+</div>
 </div>
 <div class="row bottom">
-  <div class="col-sm-12 col-md-12 col-lg-12 edit_line"> 
-    <div class="col-sm-7 col-md-7 col-lg-7 keyboard">
-      <button id="C" class="white" onclick="btn(this)">Z</button>
-      <button id="CS" class="black"></button>
-      <button id="D" class="white" onclick="btn(this)">X</button>
-      <button id="DS"  class="black"></button>
-      <button id="E" class="white" onclick="btn(this)">C</button>
-      <button id="F" class="white" onclick="btn(this)">V</button>
-      <button id="FS"  class="black"></button>
-      <button id="G" class="white" onclick="btn(this)">B</button>
-      <button id="GS"  class="black"></button>
-      <button id="A" class="white" onclick="btn(this)">N</button>
-      <button id="AS"  class="black"></button>
-      <button id="B" class="white" onclick="btn(this)">M</button>
-      <button id="CC" class="white" onclick="btn(this)">,</button>
-    </div>
-    <div class="col-sm-2 col-md-2 col-lg-2">
-      <img src="img/notes-32.png" alt="" class="edit_note" id="thirty-second" />
-			<img src="img/notes-16.png" alt="" class="edit_note" id="sixteenth" />
-			<img src="img/notes-08.png" alt="" class="edit_note" id="eighth" />
-			<img src="img/notes-04.png" alt="" class="edit_note" id="quarter" />
-			<img src="img/notes-02.png" alt="" class="edit_note" id="half" />
-			<img src="img/notes-01.png" alt="" class="edit_note" id="whole" />
-
-			<div class="triangle" id="left_triangle"></div>
-			<div class="triangle" id="right_triangle"></div> 
-    </div>
-    <div class="col-sm-3 col-md-3 col-lg-3">
-      <div class="octave">Octave: </div><div id="octave" class="octave">4</div>
-      <button id="save" class="save">save</button>
-      <input readonly="value" class="site">
-    </div>
-  </div>
+<div class="col-sm-12 col-md-12 col-lg-12 edit_line"> 
+<div class="col-sm-7 col-md-7 col-lg-7 keyboard">
+<button id="C" class="white" onclick="btn(this)">Z</button>
+<button id="CS" class="black"></button>
+<button id="D" class="white" onclick="btn(this)">X</button>
+<button id="DS"  class="black"></button>
+<button id="E" class="white" onclick="btn(this)">C</button>
+<button id="F" class="white" onclick="btn(this)">V</button>
+<button id="FS"  class="black"></button>
+<button id="G" class="white" onclick="btn(this)">B</button>
+<button id="GS"  class="black"></button>
+<button id="A" class="white" onclick="btn(this)">N</button>
+<button id="AS"  class="black"></button>
+<button id="B" class="white" onclick="btn(this)">M</button>
+<button id="CC" class="white" onclick="btn(this)">,</button>
 </div>
-  <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js'></script>
+<div class="col-sm-2 col-md-2 col-lg-2">
+<img src="img/notes-32.png" alt="" class="edit_note" id="thirty-second" />
+<img src="img/notes-16.png" alt="" class="edit_note" id="sixteenth" />
+<img src="img/notes-08.png" alt="" class="edit_note" id="eighth" />
+<img src="img/notes-04.png" alt="" class="edit_note" id="quarter" />
+<img src="img/notes-02.png" alt="" class="edit_note" id="half" />
+<img src="img/notes-01.png" alt="" class="edit_note" id="whole" />
+
+<div class="triangle" id="left_triangle"></div>
+<div class="triangle" id="right_triangle"></div> 
+</div>
+<div class="col-sm-3 col-md-3 col-lg-3">
+<div class="octave">Octave: </div><div id="octave" class="octave">4</div>
+<button id="save" class="save">save</button>
+<input readonly="value" class="site">
+</div>
+</div>
+</div>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
 <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>
 <script src='js/abcjs_basic_2.3-min.js'></script>
 <script src="js/MSOEctr.js"></script>
-
+<script src="js/initializedlogpage.js"></script>
 </body>
 </html>

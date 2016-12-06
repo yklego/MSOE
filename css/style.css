@@ -37,6 +37,10 @@ html, body {
   width: 50%;
 }
 
+.extra_note{
+  width: 18%;
+}
+
 .edit_line {
   position: fixed;
   bottom: 0%;

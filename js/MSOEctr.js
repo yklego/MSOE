@@ -7,7 +7,6 @@ var CpStP=0; //copy startpoint
 var CpStr=""; //copy string
 var abcjs=window.ABCJS;
 
-<<<<<<< HEAD
 //----new way to define Tstate(only concept)----
 var ChgTstate = (di) => {//change Tstate
   if(!di){

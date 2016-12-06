@@ -157,10 +157,13 @@ button{
   left: -77777px;
 }
 .save{
-  background
-
+  background-color: white;
+  width: 10%;
+  border: 1px solid;
 }
 .site{
+  width: 30%;
+  border: 1px solid;
 }
 
 

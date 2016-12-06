@@ -35,8 +35,6 @@ var GetTstate = (offset) => {//return a ABC string for a note
 
 //----------------------------------------------
 
-=======
->>>>>>> gh-pages
 var ttlstr="";//title string
 var chgttl = (a) => {//update title
   ttlstr=a.value;
@@ -117,13 +115,10 @@ var print = () => {//output svg
       console.log(abcElem.startChar);
       var offset=abcElem.startChar-15-ttlstr.length-tmpstr.length;
       var ignsmbs=["$","#","*"];//symbols that won't be in the final abcstring
-<<<<<<< HEAD
       if(offset==0){
         CrtPos=0;
         return;
       }
-=======
->>>>>>> gh-pages
       for(var i=0;i<abcstr.length;i++){
         if(!ignsmbs.includes(abcstr[i])){
           if(offset!=1){
@@ -272,8 +267,6 @@ var checkinput = () => {//if input tags are focused, turn off key events
     return false;
 }
 
-<<<<<<< HEAD
-=======
 var moveleft = () => {
   var x1 = $('#thirty-second').offset().left;
   var x2 = $('#sixteenth').offset().left;
@@ -304,23 +297,16 @@ var moveright = () => {
   $('#whole').css('left', x5);
 }
 
->>>>>>> gh-pages
 var key = () => { // only keypress can tell if "shift" is pressed at the same time
   if(checkinput()) return;
 	switch(event.keyCode){
 		case 44://"<"
 				Dstate=(Dstate%10==0)?8:Dstate-1;
-<<<<<<< HEAD
-			break;
-		case 46://">"
-				Dstate=(Dstate%10==8)?0:Dstate+1;
-=======
         moveright();
 			break;
 		case 46://">"
 				Dstate=(Dstate%10==8)?0:Dstate+1;
         moveleft();
->>>>>>> gh-pages
 			break;
 		case 60://"shift+>"
 			if((Math.floor(Dstate/10))!=0)
@@ -447,7 +433,6 @@ var key = () => { // only keypress can tell if "shift" is pressed at the same ti
 		case 70://"shift+f" turn on and off copy mode
 			if(CpMd){
 				CpMd=false;
-<<<<<<< HEAD
         var CpEdP=CrtPos;//copy end point
         if(CrtPos<CpStP){//if the end is on the left of the startpoint, swap their values.
           CpEdP=CpStP;
@@ -472,19 +457,6 @@ var key = () => { // only keypress can tell if "shift" is pressed at the same ti
 				CpStP=CrtPos;
 			}
       break;
-=======
-				if(mvpos(1)==CrtPos){
-					CpStr=abcstr.substring(CpStp);
-				}else{
-					CpStr=abcstr.substring(CpStp,mvpos(1));
-				}
-				break;
-			}else{
-				CpMd=true;
-				CpStp=CrtPos;
-				break;
-			}
->>>>>>> gh-pages
 		case 102://"f" cancel copy mode(when it's on)
 			if(CpMd){
 				CpMd=false;

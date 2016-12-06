@@ -4,7 +4,10 @@
   font-size: 24px;
   padding: -15px;
   margin: 0px;
+<<<<<<< HEAD
   overflow: hidden;
+=======
+>>>>>>> gh-pages
 }
 
 html, body {
@@ -38,6 +41,20 @@ html, body {
   width: 50%;
 }
 
+<<<<<<< HEAD
+=======
+button{
+ padding: 0px;
+ border: 0px;
+}
+
+.extra_note{
+  width: 80%;
+  margin: 0px;
+  padding: 0px;
+}
+
+>>>>>>> gh-pages
 .edit_line {
   position: fixed;
   bottom: 0%;
@@ -46,10 +63,120 @@ html, body {
 }
 
 .keyboard button {
+<<<<<<< HEAD
   background-color: white;
   display: inline-block;
   height: 200px;
   width: 11%;
   font-size: 20px;
   color: #222222;
+=======
+  position: absolute;
+  border: solid 1px;
+}
+.white{
+  background-color: white;
+  height: 200px;
+  width: 12%;
+  font-size: 25px;
+  color: #222222;
+  z-index: 1;
+  padding-top: 150px;
+}
+
+.black{
+  background-color: black;
+  height: 130px;
+  width: 8%;
+  z-index: 2;
+}
+
+#C{
+  left: 0%;
+}
+#CS{
+  left: 8%;
+}
+#D{
+  left: 12%;
+}
+#DS{
+  left: 20%;
+}
+#E{
+  left: 24%;
+}
+#F{
+  left: 36%;
+}
+#FS{
+  left: 44%;
+}
+#G{
+  left: 48%;
+}
+#GS{
+  left: 56%;
+}
+#A{
+  left: 60%;
+}
+#AS{
+  left: 68%;
+}
+#B{
+  left: 72%;
+}
+#CC{
+  left: 84%;
+}
+.triangle{
+  position: absolute;
+}
+#left_triangle{
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 10px 15px 10px 0;
+  border-color: transparent black transparent transparent;
+  left: 90px;
+  top: 80px;
+}
+
+#right_triangle{
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 10px 0 10px 15px;
+  border-color: transparent transparent transparent black;
+  left: 210px;
+  top: 80px;
+}
+
+.edit_note{
+  position: absolute;
+  width: 10%;
+  top: 10px;
+  padding: 0px;
+  margin: 0px;
+}
+
+#thirty-second{
+  left: -88888px;
+}
+#sixteenth {
+  left: -99999px;
+}
+#eighth{
+  left: 0px;
+}
+#quarter{
+  left: 100px;
+}
+#half{
+  left: 200px;
+}
+#whole{ 
+  left: -77777px;
+>>>>>>> gh-pages
 }

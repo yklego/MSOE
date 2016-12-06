@@ -7,6 +7,7 @@ var CpStP=0; //copy startpoint
 var CpStr=""; //copy string
 var abcjs=window.ABCJS;
 
+<<<<<<< HEAD
 //----new way to define Tstate(only concept)----
 var ChgTstate = (di) => {//change Tstate
   if(!di){
@@ -34,6 +35,8 @@ var GetTstate = (offset) => {//return a ABC string for a note
 
 //----------------------------------------------
 
+=======
+>>>>>>> gh-pages
 var ttlstr="";//title string
 var chgttl = (a) => {//update title
   ttlstr=a.value;
@@ -114,10 +117,13 @@ var print = () => {//output svg
       console.log(abcElem.startChar);
       var offset=abcElem.startChar-15-ttlstr.length-tmpstr.length;
       var ignsmbs=["$","#","*"];//symbols that won't be in the final abcstring
+<<<<<<< HEAD
       if(offset==0){
         CrtPos=0;
         return;
       }
+=======
+>>>>>>> gh-pages
       for(var i=0;i<abcstr.length;i++){
         if(!ignsmbs.includes(abcstr[i])){
           if(offset!=1){
@@ -266,14 +272,55 @@ var checkinput = () => {//if input tags are focused, turn off key events
     return false;
 }
 
+<<<<<<< HEAD
+=======
+var moveleft = () => {
+  var x1 = $('#thirty-second').offset().left;
+  var x2 = $('#sixteenth').offset().left;
+  var x3 = $('#eighth').offset().left;
+  var x4 = $('#quarter').offset().left;
+  var x5 = $('#half').offset().left;
+  var x6 = $('#whole').offset().left;
+  $('#thirty-second').css('left', x2);
+  $('#sixteenth').css('left', x3);
+  $('#eighth').css('left', x4);
+  $('#quarter').css('left', x5);
+  $('#half').css('left', x6);
+  $('#whole').css('left', x1);
+}
+
+var moveright = () => {
+  var x1 = $('#thirty-second').offset().left;
+  var x2 = $('#sixteenth').offset().left;
+  var x3 = $('#eighth').offset().left;
+  var x4 = $('#quarter').offset().left;
+  var x5 = $('#half').offset().left;
+  var x6 = $('#whole').offset().left;
+  $('#thirty-second').css('left', x6);
+  $('#sixteenth').css('left', x1);
+  $('#eighth').css('left', x2);
+  $('#quarter').css('left', x3);
+  $('#half').css('left', x4);
+  $('#whole').css('left', x5);
+}
+
+>>>>>>> gh-pages
 var key = () => { // only keypress can tell if "shift" is pressed at the same time
   if(checkinput()) return;
 	switch(event.keyCode){
 		case 44://"<"
 				Dstate=(Dstate%10==0)?8:Dstate-1;
+<<<<<<< HEAD
 			break;
 		case 46://">"
 				Dstate=(Dstate%10==8)?0:Dstate+1;
+=======
+        moveright();
+			break;
+		case 46://">"
+				Dstate=(Dstate%10==8)?0:Dstate+1;
+        moveleft();
+>>>>>>> gh-pages
 			break;
 		case 60://"shift+>"
 			if((Math.floor(Dstate/10))!=0)
@@ -400,6 +447,7 @@ var key = () => { // only keypress can tell if "shift" is pressed at the same ti
 		case 70://"shift+f" turn on and off copy mode
 			if(CpMd){
 				CpMd=false;
+<<<<<<< HEAD
         var CpEdP=CrtPos;//copy end point
         if(CrtPos<CpStP){//if the end is on the left of the startpoint, swap their values.
           CpEdP=CpStP;
@@ -424,6 +472,19 @@ var key = () => { // only keypress can tell if "shift" is pressed at the same ti
 				CpStP=CrtPos;
 			}
       break;
+=======
+				if(mvpos(1)==CrtPos){
+					CpStr=abcstr.substring(CpStp);
+				}else{
+					CpStr=abcstr.substring(CpStp,mvpos(1));
+				}
+				break;
+			}else{
+				CpMd=true;
+				CpStp=CrtPos;
+				break;
+			}
+>>>>>>> gh-pages
 		case 102://"f" cancel copy mode(when it's on)
 			if(CpMd){
 				CpMd=false;
@@ -518,7 +579,10 @@ var chord = () => {//keyup event for chord mode
 
 var btn = (a) => {//buttons for notes
   insert(toabcnote(a.id),0);
+<<<<<<< HEAD
   checkbar();
+=======
+>>>>>>> gh-pages
   print();
 };
 

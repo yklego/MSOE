@@ -37,10 +37,13 @@ html, body {
   width: 50%;
 }
 
-.extra_note{
-  display: inline-block;
-  width: 1%;
+button{
+  padding: 0px;
   border: 0px;
+}
+
+.extra_note{
+  width: 1%;
   margin: 0px;
   padding: 0px;
 }

@@ -249,6 +249,7 @@ var moveleft = (a) => {
     x = x + 100;
   }
   $(a).css('left', x);
+  alert(x);
 }
 
 var moveright = (a) => {
@@ -265,6 +266,7 @@ var moveright = (a) => {
     x = x - 100;
   }
   $(a).css('left', x);
+  alert(x);
 }
 
 var moveallleft = () => {

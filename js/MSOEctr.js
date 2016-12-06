@@ -237,34 +237,34 @@ var checkinput = () => {//if input tags are focused, turn off key events
 
 var moveleft = (a) => {
   var x = $(a).offset().left;
-  if(x == -9999%){
+  if(x == -99999){
     x = 0;
-  } else if(x == -8888%) {
-    x = -9999;
-  } else if(x == -7777%) {
-    x = -8888;
-  } else if (x == 30%) {
-    x = -7777;
+  } else if(x == -88888) {
+    x = -99999;
+  } else if(x == -77777) {
+    x = -88888;
+  } else if (x == 200) {
+    x = -777777;
   } else {
-    x = x + 15;
+    x = x + 100;
   }
-  $(a).css('left', x + '%');
+  $(a).css('left', x);
 }
 
 var moveright = (a) => {
   var x = $(a).offset().left;
-  if(x == -9999%){
-    x = -8888;
-  } else if(x == -8888%) {
-    x = -7777;
-  } else if(x == -7777%) {
-    x = 30;
-  } else if (x == 0%) {
-    x = -9999;
+  if(x == -99999){
+    x = -88888;
+  } else if(x == -88888) {
+    x = -77777;
+  } else if(x == -77777) {
+    x = 200;
+  } else if (x == 0) {
+    x = -99999;
   } else {
-    x = x - 15;
+    x = x - 100;
   }
-  $(a).css('left', x + '%');
+  $(a).css('left', x);
 }
 
 var moveallleft = () => {
@@ -290,11 +290,11 @@ var key = () => { // only keypress can tell if "shift" is pressed at the same ti
 	switch(event.keyCode){
 		case 44://"<"
 				Dstate=(Dstate%10==0)?8:Dstate-1;
-        //moveallright();
+        moveallright();
 			break;
 		case 46://">"
 				Dstate=(Dstate%10==8)?0:Dstate+1;
-        //moveallleft();
+        moveallleft();
 			break;
 		case 60://"shift+>"
 			if((Math.floor(Dstate/10))!=0)

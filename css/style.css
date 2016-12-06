@@ -38,7 +38,9 @@ html, body {
 }
 
 .extra_note{
+  display: inline-block;
   width: 1%;
+  border: 0px;
   margin: 0px;
   padding: 0px;
 }

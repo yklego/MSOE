@@ -235,14 +235,66 @@ var checkinput = () => {//if input tags are focused, turn off key events
     return false;
 }
 
+var moveleft = (a) => {
+  var x = $(a).offset().left;
+  if(x == -9999%){
+    x = 0;
+  } else if(x == -8888%) {
+    x = -9999;
+  } else if(x == -7777%) {
+    x = -8888;
+  } else if (x == 30%) {
+    x = -7777;
+  } else {
+    x = x + 15;
+  }
+  $(a).css('left', x + '%');
+}
+
+var moveright = (a) => {
+  var x = $(a).offset().left;
+  if(x == -9999%){
+    x = -8888;
+  } else if(x == -8888%) {
+    x = -7777;
+  } else if(x == -7777%) {
+    x = 30;
+  } else if (x == 0%) {
+    x = -9999;
+  } else {
+    x = x - 15;
+  }
+  $(a).css('left', x + '%');
+}
+
+var moveallleft = () => {
+  moveleft('#thirty-second');
+  moveleft('#sixteenth');
+  moveleft('#eighth');
+  moveleft('#quarter');
+  moveleft('#half');
+  moveleft('#whole');
+}
+
+var moveallright = () => {
+  moveright('#thirty-second');
+  moveright('#sixteenth');
+  moveright('#eighth');
+  moveright('#quarter');
+  moveright('#half');
+  moveright('#whole');
+}
+
 var key = () => { // only keypress can tell if "shift" is pressed at the same time
   if(checkinput()) return;
 	switch(event.keyCode){
 		case 44://"<"
 				Dstate=(Dstate%10==0)?8:Dstate-1;
+        moveallright();
 			break;
 		case 46://">"
 				Dstate=(Dstate%10==8)?0:Dstate+1;
+        moveallleft();
 			break;
 		case 60://"shift+>"
 			if((Math.floor(Dstate/10))!=0)

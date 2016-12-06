@@ -106,15 +106,14 @@ html, body {
 .triangle{
   position: absolute;
 }
-
 #left_triangle{
   width: 0;
   height: 0;
   border-style: solid;
   border-width: 10px 15px 10px 0;
   border-color: transparent black transparent transparent;
-  left: 10%;
-  top: 90px;
+  left: 13%;
+  top: 70px;
 }
 
 #right_triangle{
@@ -124,30 +123,30 @@ html, body {
   border-width: 10px 0 10px 15px;
   border-color: transparent transparent transparent black;
   left: 28%;
-  top: 90px;
+  top: 70px;
 }
 
 .edit_note{
   position: absolute;
-  width: 12%;
-  top: 30px;
+  width: 10%;
+  top: 10px;
 }
 
 #thirty-second{
-  left: 0%;
+  left: -88888%;
 }
 #sixteenth {
-  left: 15%;
+  left: -99999%;
 }
 #eighth{
-  left: 30%;
+  left: 0%;
 }
 #quarter{
-  left: -99999px;
+  left: 15%;
 }
 #half{
-  left: -99999px;
+  left: 30%;
 }
 #whole{ 
-  left: -99999px;
+  left: -77777%;
 }

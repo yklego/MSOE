@@ -7,6 +7,7 @@ var CpStP=0; //copy startpoint
 var CpStr=""; //copy string
 var abcjs=window.ABCJS;
 
+<<<<<<< HEAD
 //----new way to define Tstate(only concept)----
 var ChgTstate = (di) => {//change Tstate
   if(!di){
@@ -266,14 +267,46 @@ var checkinput = () => {//if input tags are focused, turn off key events
     return false;
 }
 
+var moveleft = () => {
+  var x1 = $('#thirty-second').offset().left;
+  var x2 = $('#sixteenth').offset().left;
+  var x3 = $('#eighth').offset().left;
+  var x4 = $('#quarter').offset().left;
+  var x5 = $('#half').offset().left;
+  var x6 = $('#whole').offset().left;
+  $('#thirty-second').css('left', x2);
+  $('#sixteenth').css('left', x3);
+  $('#eighth').css('left', x4);
+  $('#quarter').css('left', x5);
+  $('#half').css('left', x6);
+  $('#whole').css('left', x1);
+}
+
+var moveright = () => {
+  var x1 = $('#thirty-second').offset().left;
+  var x2 = $('#sixteenth').offset().left;
+  var x3 = $('#eighth').offset().left;
+  var x4 = $('#quarter').offset().left;
+  var x5 = $('#half').offset().left;
+  var x6 = $('#whole').offset().left;
+  $('#thirty-second').css('left', x6);
+  $('#sixteenth').css('left', x1);
+  $('#eighth').css('left', x2);
+  $('#quarter').css('left', x3);
+  $('#half').css('left', x4);
+  $('#whole').css('left', x5);
+}
+
 var key = () => { // only keypress can tell if "shift" is pressed at the same time
   if(checkinput()) return;
 	switch(event.keyCode){
 		case 44://"<"
 				Dstate=(Dstate%10==0)?8:Dstate-1;
+        moveright();
 			break;
 		case 46://">"
 				Dstate=(Dstate%10==8)?0:Dstate+1;
+        moveleft();
 			break;
 		case 60://"shift+>"
 			if((Math.floor(Dstate/10))!=0)
@@ -518,7 +551,10 @@ var chord = () => {//keyup event for chord mode
 
 var btn = (a) => {//buttons for notes
   insert(toabcnote(a.id),0);
+<<<<<<< HEAD
   checkbar();
+=======
+>>>>>>> gh-pages
   print();
 };
 

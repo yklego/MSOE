@@ -290,11 +290,11 @@ var key = () => { // only keypress can tell if "shift" is pressed at the same ti
 	switch(event.keyCode){
 		case 44://"<"
 				Dstate=(Dstate%10==0)?8:Dstate-1;
-        moveallright();
+        //moveallright();
 			break;
 		case 46://">"
 				Dstate=(Dstate%10==8)?0:Dstate+1;
-        moveallleft();
+        //moveallleft();
 			break;
 		case 60://"shift+>"
 			if((Math.floor(Dstate/10))!=0)

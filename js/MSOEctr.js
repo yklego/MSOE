@@ -244,7 +244,7 @@ var moveleft = (a) => {
   } else if(x == -77777) {
     x = -88888;
   } else if (x == 200) {
-    x = -777777;
+    x = -77777;
   } else {
     x = x + 100;
   }

@@ -235,7 +235,7 @@ var checkinput = () => {//if input tags are focused, turn off key events
     return false;
 }
 
-var moveleft = (a) => {
+var moveleft = () => {
   var x1 = $('#thirty-second').offset().left;
   var x2 = $('sixteenth').offset().left;
   var x3 = $('eighth').offset().left;
@@ -250,7 +250,7 @@ var moveleft = (a) => {
   $('#whole').css('left', x1);
 }
 
-var moveright = (a) => {
+var moveright = () => {
   var x1 = $('#thirty-second').offset().left;
   var x2 = $('sixteenth').offset().left;
   var x3 = $('eighth').offset().left;

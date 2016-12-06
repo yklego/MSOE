@@ -236,55 +236,33 @@ var checkinput = () => {//if input tags are focused, turn off key events
 }
 
 var moveleft = (a) => {
-  var x = $(a).offset().left;
-  if(x == -99999){
-    x = 0;
-  } else if(x == -88888) {
-    x = -99999;
-  } else if(x == -77777) {
-    x = -88888;
-  } else if (x == 200) {
-    x = -77777;
-  } else {
-    x = x + 100;
-  }
-  $(a).css('left', x);
-  alert(x);
+  var x1 = $('#thirty-second').offset().left;
+  var x2 = $('sixteenth').offset().left;
+  var x3 = $('eighth').offset().left;
+  var x4 = $('quarter').offset().left;
+  var x5 = $('half').offset().left;
+  var x6 = $('whole').offset().left;
+  $('#thirty-second').css('left', x2);
+  $('#sixteenth').css('left', x3);
+  $('#eighth').css('left', x4);
+  $('#quarter').css('left', x5);
+  $('#half').css('left', x6);
+  $('#whole').css('left', x1);
 }
 
 var moveright = (a) => {
-  var x = $(a).offset().left;
-  if(x == -99999){
-    x = -88888;
-  } else if(x == -88888) {
-    x = -77777;
-  } else if(x == -77777) {
-    x = 200;
-  } else if (x == 0) {
-    x = -99999;
-  } else {
-    x = x - 100;
-  }
-  $(a).css('left', x);
-  alert(x);
-}
-
-var moveallleft = () => {
-  moveleft('#thirty-second');
-  moveleft('#sixteenth');
-  moveleft('#eighth');
-  moveleft('#quarter');
-  moveleft('#half');
-  moveleft('#whole');
-}
-
-var moveallright = () => {
-  moveright('#thirty-second');
-  moveright('#sixteenth');
-  moveright('#eighth');
-  moveright('#quarter');
-  moveright('#half');
-  moveright('#whole');
+  var x1 = $('#thirty-second').offset().left;
+  var x2 = $('sixteenth').offset().left;
+  var x3 = $('eighth').offset().left;
+  var x4 = $('quarter').offset().left;
+  var x5 = $('half').offset().left;
+  var x6 = $('whole').offset().left;
+  $('#thirty-second').css('left', x6);
+  $('#sixteenth').css('left', x1);
+  $('#eighth').css('left', x2);
+  $('#quarter').css('left', x3);
+  $('#half').css('left', x4);
+  $('#whole').css('left', x5);
 }
 
 var key = () => { // only keypress can tell if "shift" is pressed at the same time
@@ -292,11 +270,11 @@ var key = () => { // only keypress can tell if "shift" is pressed at the same ti
 	switch(event.keyCode){
 		case 44://"<"
 				Dstate=(Dstate%10==0)?8:Dstate-1;
-        moveallright();
+        moveright();
 			break;
 		case 46://">"
 				Dstate=(Dstate%10==8)?0:Dstate+1;
-        moveallleft();
+        moveleft();
 			break;
 		case 60://"shift+>"
 			if((Math.floor(Dstate/10))!=0)

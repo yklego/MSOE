@@ -130,6 +130,8 @@ html, body {
   position: absolute;
   width: 10%;
   top: 10px;
+  padding: 0px;
+  margin: 0px;
 }
 
 #thirty-second{

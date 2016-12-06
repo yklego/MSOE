@@ -156,14 +156,18 @@ button{
 #whole{ 
   left: -77777px;
 }
+.octave{
+  display: inline-block;
+}
+
 .save{
   background-color: white;
   width: 10%;
-  border: 1px solid;
+  border: solid 1px;
 }
 .site{
-  width: 30%;
-  border: 1px solid;
+  width: 50%;
+  border: solid 1px;
 }
 
 

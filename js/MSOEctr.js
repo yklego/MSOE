@@ -554,10 +554,7 @@ var chord = () => {//keyup event for chord mode
 
 var btn = (a) => {//buttons for notes
   insert(toabcnote(a.id),0);
-<<<<<<< HEAD
   checkbar();
-=======
->>>>>>> gh-pages
   print();
 };
 

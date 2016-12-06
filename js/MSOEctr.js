@@ -566,7 +566,98 @@ var btn = (a) => {//buttons for notes
   print();
 };
 
+$("#save").click(function(e) {
+  var url = location.href.split("?")[1];
+  var index;
+  var key;
+  var rcvUrl = "";
+  var push = false;
+  if(url == null) {
+    index = "";
+    key = "";
+    push = true;
+  }
+  else {
+    index = url.split("!")[1];
+    key = url.split("!")[2];
+
+    if(index == null) {
+      index = "";
+    }
+    if(key ==null)
+      key = "";
+  }
+  if(history.pushState) {
+    
+    e.preventDefault();
+    $.ajax( {
+      url: "./js/save.njs",
+      async: false,
+      data: {
+        abcstr: abcstr,           
+        index: index,
+        key: key,
+      },
+      success: function(rcvData) {
+        console.log(rcvData);
+        rcvUrl += rcvData;
+      },
+      error: function() {
+        console.log('connect to save.njs failed');
+      }
+    });
+
+    if(push) {
+      console.log("push"+rcvUrl);
+
+      history.pushState( {title: ""}, "", location.href.split("?")[0]+"?"+rcvUrl);
+      url = rcvUrl;
+    }
+    else {
+      if( !url.localeCompare(rcvUrl))
+      {
+        console.log(rcvUrl);
+        console.log("process url error");
+
+      }
+    }
+  }
+  else {
+    console.log("web brower doesn't support history api");
+  }
+});
+
 window.onload = () => {
+  var url = location.href.split("?")[1];
+  if(url != null) {
+    var index = url.split("!")[1];
+    var key = url.split("!")[2];
+    
+    if(index == null)
+      index = "";
+    if(key == null)
+      key = "";
+
+    if(index.length != 0)
+    {
+      $.ajax( {
+        url: "./js/load.njs",
+        async: false,
+        data: {
+          index: index,
+          key: key,
+        },
+        success: function(rcvData) {
+          abcstr = rcvData;        
+          console.log(rcvData);
+        },
+        error: function(){
+          console.log("connect to load.njs failed");
+        }
+      });
+    }
+  }
+  
 	print();
   document.onkeypress=key;
  	document.onkeydown=move;

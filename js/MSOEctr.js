@@ -638,7 +638,7 @@ window.onload = () => {
     if(urlKey == null)
       urlKey = "";
 
-    if(index.length != 0)
+    if(urlIndex.length != 0)
     {
       $.ajax( {
         url: "./js/load.njs",

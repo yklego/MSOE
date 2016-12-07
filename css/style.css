@@ -11,6 +11,11 @@ html, body {
   padding: -15px;
   margin: 0px;
 }
+.panel-group {
+width:300px
+}
+
+
 .row {
   margin-left: -15px;
   margin-right: -15px;

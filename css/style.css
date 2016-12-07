@@ -138,6 +138,12 @@ button{
   margin: 0px;
 }
 
+#eighth2{
+  left: -66666px;
+}
+#sixty-fourth {
+  left: -77777px;
+}
 #thirty-second{
   left: -88888px;
 }
@@ -154,15 +160,18 @@ button{
   left: 200px;
 }
 #whole{ 
-  left: -77777px;
+  left: -44444px;
 }
+#breve{ 
+  left: -55555px;
+}
+
 .octave{
   display: inline-block;
 }
 
 .save{
   background-color: white;
-  width: 10%;
   border: solid 1px;
 }
 .site{

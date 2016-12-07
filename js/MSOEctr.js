@@ -650,6 +650,9 @@ window.onload = () => {
         success: function(rcvData) {
           abcstr = rcvData;        
           console.log(rcvData);
+          console.log(rcvData.length);
+          if(rcvData.length < 2)
+            window.location.replace("http://luffy.ee.ncku.edu.tw/~lin11220206/MSOE/");
         },
         error: function(){
           console.log("connect to load.njs failed");

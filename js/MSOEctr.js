@@ -656,6 +656,7 @@ $("#save").click(function(e) {
 
       }
     }
+    document.getElementById("url").setAttribute('value', location.href.split("?")[0]+"?"+rcvUrl);  
   }
   else {
     console.log("web brower doesn't support history api");

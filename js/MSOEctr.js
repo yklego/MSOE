@@ -270,8 +270,8 @@ var checkinput = () => {//if input tags are focused, turn off key events
 }
 
 var moveright = () => {
-  var x0 = $('#eighth2').position().left;
-  var x1 = $('#sixty-fourth').position().left;
+  //var x0 = $('#eighth2').position().left;
+  //var x1 = $('#sixty-fourth').position().left;
   var x2 = $('#thirty-second').position().left;
   var x3 = $('#sixteenth').position().left;
   var x4 = $('#eighth').position().left;
@@ -279,20 +279,20 @@ var moveright = () => {
   var x6 = $('#half').position().left;
   var x7 = $('#whole').position().left;
   //var x8 = $('#breve').position().left;
-  $('#eighth2').css('left', x1);
-  $('#sixty-fourth').css('left', x2);
+  //$('#eighth2').css('left', x1);
+  //$('#sixty-fourth').css('left', x2);
   $('#thirty-second').css('left', x3);
   $('#sixteenth').css('left', x4);
   $('#eighth').css('left', x5);
   $('#quarter').css('left', x6);
   $('#half').css('left', x7);
-  //$('#whole').css('left', x8);
-  $('#breve').css('left', x0);
+  $('#whole').css('left', x2);
+  //$('#breve').css('left', x0);
 }
 
 var moveleft = () => {
-  var x0 = $('#eighth2').position().left;
-  var x1 = $('#sixty-fourth').position().left;
+  //var x0 = $('#eighth2').position().left;
+  //var x1 = $('#sixty-fourth').position().left;
   var x2 = $('#thirty-second').position().left;
   var x3 = $('#sixteenth').position().left;
   var x4 = $('#eighth').position().left;
@@ -301,14 +301,14 @@ var moveleft = () => {
   var x7 = $('#whole').position().left;
   //var x8 = $('#breve').position().left;
   //$('#eighth2').css('left', x8);
-  $('#sixty-fourth').css('left', x0);
-  $('#thirty-second').css('left', x1);
+  //$('#sixty-fourth').css('left', x0);
+  $('#thirty-second').css('left', x7);
   $('#sixteenth').css('left', x2);
   $('#eighth').css('left', x3);
   $('#quarter').css('left', x4);
   $('#half').css('left', x5);
   $('#whole').css('left', x6);
-  $('#breve').css('left', x7);
+  //$('#breve').css('left', x7);
 }
 
 var key = () => { // only keypress can tell if "shift" is pressed at the same time

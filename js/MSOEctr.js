@@ -286,7 +286,7 @@ var moveright = () => {
   $('#eighth').css('left', x5);
   $('#quarter').css('left', x6);
   $('#half').css('left', x7);
-  $('#whole').css('left', x2);
+  $('#whole').css('left', x8);
   $('#breve').css('left', x0);
 }
 
@@ -302,7 +302,7 @@ var moveleft = () => {
   var x8 = $('#breve').position().left;
   $('#eighth2').css('left', x8);
   $('#sixty-fourth').css('left', x0);
-  $('#thirty-second').css('left', x7);
+  $('#thirty-second').css('left', x1);
   $('#sixteenth').css('left', x2);
   $('#eighth').css('left', x3);
   $('#quarter').css('left', x4);

@@ -270,7 +270,7 @@ var checkinput = () => {//if input tags are focused, turn off key events
 }
 
 var moveright = () => {
-  var x0 = $('#eighth2').position().left;
+  var x0 = $('#quarter2').position().left;
   var x1 = $('#sixty-fourth').position().left;
   var x2 = $('#thirty-second').position().left;
   var x3 = $('#sixteenth').position().left;
@@ -279,7 +279,7 @@ var moveright = () => {
   var x6 = $('#half').position().left;
   var x7 = $('#whole').position().left;
   var x8 = $('#breve').position().left;
-  $('#eighth2').css('left', x1);
+  $('#quarter2').css('left', x1);
   $('#sixty-fourth').css('left', x2);
   $('#thirty-second').css('left', x3);
   $('#sixteenth').css('left', x4);
@@ -291,7 +291,7 @@ var moveright = () => {
 }
 
 var moveleft = () => {
-  var x0 = $('#eighth2').position().left;
+  var x0 = $('#quarter2').position().left;
   var x1 = $('#sixty-fourth').position().left;
   var x2 = $('#thirty-second').position().left;
   var x3 = $('#sixteenth').position().left;
@@ -300,7 +300,7 @@ var moveleft = () => {
   var x6 = $('#half').position().left;
   var x7 = $('#whole').position().left;
   var x8 = $('#breve').position().left;
-  $('#eighth2').css('left', x8);
+  $('#quarter2').css('left', x8);
   $('#sixty-fourth').css('left', x0);
   $('#thirty-second').css('left', x1);
   $('#sixteenth').css('left', x2);
@@ -345,30 +345,37 @@ var key = () => { // only keypress can tell if "shift" is pressed at the same ti
     case 122://"Z"
       insert(toabcnote("C"),0);
 			checkbar();
+      highlight("#C");
       break;
     case 120://"X"
       insert(toabcnote("D"),0);
 			checkbar();
+      highlight("#D");
       break;
     case 99://"C"
       insert(toabcnote("E"),0);
 			checkbar();
+      highlight("#E");
       break;
     case 118://"V"
       insert(toabcnote("F"),0);
 			checkbar();
+      highlight("#F");
       break;
     case 98://"B"
       insert(toabcnote("G"),0);
 			checkbar();
+      highlight("#G");
       break;
     case 110://"N"
       insert(toabcnote("A"),0);
 			checkbar();
+      highlight("#A");
       break;
     case 109://"M"
       insert(toabcnote("B"),0);
 			checkbar();
+      highlight("#B");
       break;
   // ----------Insert Note------------
 		case 115://"S"

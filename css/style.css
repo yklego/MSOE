@@ -50,6 +50,7 @@ width: 50%;
 button{
 padding: 0px;
 border: 0px;
+background: rgba(0,0,0,0);
 }
 .extra_note{
 width: 80%;
@@ -151,7 +152,7 @@ top: 80px;
 
 .edit_note{
 position: absolute;
-width: 10%;
+width: 30%;
 top: 10px;
 padding: 0px;
 margin: 0px;

@@ -35,6 +35,16 @@ var GetTstate = (offset) => {//return a ABC string for a note
 
 //----------------------------------------------
 
+$("#DDDD").click(function(){
+  if(Dstate%10!=8){//Pause with duration of 8 is illegal
+      insert(toabcnote("z"),0);
+      print();
+  }
+  else{
+      alert("Pause with duration of 8 is illegal.");
+  }
+});
+
 var ttlstr="";//title string
 var chgttl = (a) => {//update title
   if(!Edit) return;
@@ -580,7 +590,7 @@ var chord = () => {//keyup event for chord mode
 };
 
 var highlight = (a) => {
-  $(a).css('background-color', 'red');
+  $(a).css('background-color', 'rgba(255,0,0,0.5)');
   setTimeout("clean()", '700');
 }
 

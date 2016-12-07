@@ -58,7 +58,8 @@ padding: 0px;
 position: fixed;
 bottom: 0%;
 height: 30%;
-        border-top: solid 1px #222222;
+border-top: solid 1px #222222;
+background-color:black;
 }
 
 .keyboard button {

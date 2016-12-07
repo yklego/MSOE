@@ -36,6 +36,8 @@ MongoDB.connect('mongodb://wp2016_groupJ:groupJ@localhost/wp2016_groupJ', functi
         collection.insert({
           index: index,
           key: key,
+          ttlstr: param.ttlstr,
+          tmpstr: param.tmpstr,
           abcstr: param.abcstr,
         }, function(err, data) {
           if(data)
@@ -50,6 +52,8 @@ MongoDB.connect('mongodb://wp2016_groupJ:groupJ@localhost/wp2016_groupJ', functi
         {
           index: param.index,
           key: param.key,
+          ttlstr: param.ttlstr,
+          tmpstr: param.tmpstr,
           abcstr: param.abcstr,
         }, function(err, data)
         {

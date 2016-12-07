@@ -629,6 +629,8 @@ $("#save").click(function(e) {
       url: "./js/save.njs",
       async: false,
       data: {
+        ttlstr: ttlstr,
+        tmpstr: tmpstr,
         abcstr: abcstr,           
         index: urlIndex,
         key: urlKey,
@@ -665,6 +667,7 @@ $("#save").click(function(e) {
 
 window.onload = () => {
   var url = location.href.split("?")[1];
+  console.log("load "+url);
   if(url != null) {
     var urlIndex = url.split("!")[1];
     var urlKey = url.split("!")[2];
@@ -676,6 +679,7 @@ window.onload = () => {
 
     if(urlIndex.length != 0)
     {
+      console.log("first");
       $.ajax( {
         url: "./js/load.njs",
         async: false,
@@ -684,11 +688,22 @@ window.onload = () => {
           key: urlKey,
         },
         success: function(rcvData) {
-          abcstr = rcvData;        
+          ttlstr = rcvData.split("!")[0]; 
+          tmpstr = rcvData.split("!")[1];
+          abcstr = rcvData.split("!")[2];
+          
           console.log(rcvData);
           console.log(rcvData.length);
           if(rcvData.length < 2)
             window.location.replace("http://luffy.ee.ncku.edu.tw/~lin11220206/MSOE/");
+          else
+          {
+            console.log("bbb");
+            $(function () { $('#myModal').modal({
+            keyboard: false,
+            show: false
+            })});
+          }
         },
         error: function(){
           console.log("connect to load.njs failed");
@@ -696,7 +711,12 @@ window.onload = () => {
       });
     }
   }
-  
+  else
+  {
+    $(function () { $('#myModal').modal({
+    keyboard: false
+    })});
+  }
 	print();
   document.onkeypress=key;
  	document.onkeydown=move;

@@ -278,7 +278,7 @@ var moveright = () => {
   var x5 = $('#quarter').position().left;
   var x6 = $('#half').position().left;
   var x7 = $('#whole').position().left;
-  var x8 = $('#breve').position().left;
+  //var x8 = $('#breve').position().left;
   $('#eighth2').css('left', x1);
   $('#sixty-fourth').css('left', x2);
   $('#thirty-second').css('left', x3);
@@ -286,7 +286,7 @@ var moveright = () => {
   $('#eighth').css('left', x5);
   $('#quarter').css('left', x6);
   $('#half').css('left', x7);
-  $('#whole').css('left', x8);
+  //$('#whole').css('left', x8);
   $('#breve').css('left', x0);
 }
 
@@ -299,8 +299,8 @@ var moveleft = () => {
   var x5 = $('#quarter').position().left;
   var x6 = $('#half').position().left;
   var x7 = $('#whole').position().left;
-  var x8 = $('#breve').position().left;
-  $('#eighth2').css('left', x8);
+  //var x8 = $('#breve').position().left;
+  //$('#eighth2').css('left', x8);
   $('#sixty-fourth').css('left', x0);
   $('#thirty-second').css('left', x1);
   $('#sixteenth').css('left', x2);

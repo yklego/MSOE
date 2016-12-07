@@ -601,7 +601,101 @@ var btn = (a) => {//buttons for notes
   highlight(a);
 };
 
+$("#save").click(function(e) {
+  var url = location.href.split("?")[1];
+  var urlIndex;
+  var urlKey;
+  var rcvUrl = "";
+  var push = false;
+  if(url == null) {
+    urlIndex = "";
+    urlKey = "";
+    push = true;
+  }
+  else {
+    urlIndex = url.split("!")[1];
+    urlKey = url.split("!")[2];
+
+    if(urlIndex == null) {
+      urlIndex = "";
+    }
+    if(urlKey ==null)
+      urlKey = "";
+  }
+  if(history.pushState) {
+    
+    e.preventDefault();
+    $.ajax( {
+      url: "./js/save.njs",
+      async: false,
+      data: {
+        abcstr: abcstr,           
+        index: urlIndex,
+        key: urlKey,
+      },
+      success: function(rcvData) {
+        console.log(rcvData);
+        rcvUrl += rcvData;
+      },
+      error: function() {
+        console.log('connect to save.njs failed');
+      }
+    });
+
+    if(push) {
+      console.log("push"+rcvUrl);
+
+      history.pushState( {title: ""}, "", location.href.split("?")[0]+"?"+rcvUrl);
+      url = rcvUrl;
+    }
+    else {
+      if( !url.localeCompare(rcvUrl))
+      {
+        console.log(rcvUrl);
+        console.log("process url error");
+
+      }
+    }
+  }
+  else {
+    console.log("web brower doesn't support history api");
+  }
+});
+
 window.onload = () => {
+  var url = location.href.split("?")[1];
+  if(url != null) {
+    var urlIndex = url.split("!")[1];
+    var urlKey = url.split("!")[2];
+    
+    if(urlIndex == null)
+      urlIndex = "";
+    if(urlKey == null)
+      urlKey = "";
+
+    if(urlIndex.length != 0)
+    {
+      $.ajax( {
+        url: "./js/load.njs",
+        async: false,
+        data: {
+          index: urlIndex,
+          key: urlKey,
+        },
+        success: function(rcvData) {
+          abcstr = rcvData;        
+          console.log(rcvData);
+          console.log(rcvData.length);
+          if(rcvData.length < 2)
+            window.location.replace("http://luffy.ee.ncku.edu.tw/~lin11220206/MSOE/");
+        },
+        error: function(){
+          console.log("connect to load.njs failed");
+        }
+      });
+    }
+  }
+  
 	print();
   document.onkeypress=key;
  	document.onkeydown=move;

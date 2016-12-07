@@ -1,5 +1,5 @@
 
-n () { $('#myModal').modal({
+$(function () { $('#myModal').modal({
 keyboard: false
 })});
 

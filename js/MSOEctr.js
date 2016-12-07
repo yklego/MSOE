@@ -269,34 +269,46 @@ var checkinput = () => {//if input tags are focused, turn off key events
     return false;
 }
 
-var moveleft = () => {
-  var x1 = $('#thirty-second').position().left;
-  var x2 = $('#sixteenth').position().left;
-  var x3 = $('#eighth').position().left;
-  var x4 = $('#quarter').position().left;
-  var x5 = $('#half').position().left;
-  var x6 = $('#whole').position().left;
-  $('#thirty-second').css('left', x2);
-  $('#sixteenth').css('left', x3);
-  $('#eighth').css('left', x4);
-  $('#quarter').css('left', x5);
-  $('#half').css('left', x6);
-  $('#whole').css('left', x1);
+var moveright = () => {
+  var x0 = $('#eighth2').position().left;
+  var x1 = $('#sixty-fourth').position().left;
+  var x2 = $('#thirty-second').position().left;
+  var x3 = $('#sixteenth').position().left;
+  var x4 = $('#eighth').position().left;
+  var x5 = $('#quarter').position().left;
+  var x6 = $('#half').position().left;
+  var x7 = $('#whole').position().left;
+  var x8 = $('#breve').position().left;
+  $('#eighth2').css('left', x1);
+  $('#sixty-fourth').css('left', x2);
+  $('#thirty-second').css('left', x3);
+  $('#sixteenth').css('left', x4);
+  $('#eighth').css('left', x5);
+  $('#quarter').css('left', x6);
+  $('#half').css('left', x7);
+  $('#whole').css('left', x8);
+  $('#breve').css('left', x0);
 }
 
-var moveright = () => {
-  var x1 = $('#thirty-second').position().left;
-  var x2 = $('#sixteenth').position().left;
-  var x3 = $('#eighth').position().left;
-  var x4 = $('#quarter').position().left;
-  var x5 = $('#half').position().left;
-  var x6 = $('#whole').position().left;
-  $('#thirty-second').css('left', x6);
-  $('#sixteenth').css('left', x1);
-  $('#eighth').css('left', x2);
-  $('#quarter').css('left', x3);
-  $('#half').css('left', x4);
-  $('#whole').css('left', x5);
+var moveleft = () => {
+  var x0 = $('#eighth2').position().left;
+  var x1 = $('#sixty-fourth').position().left;
+  var x2 = $('#thirty-second').position().left;
+  var x3 = $('#sixteenth').position().left;
+  var x4 = $('#eighth').position().left;
+  var x5 = $('#quarter').position().left;
+  var x6 = $('#half').position().left;
+  var x7 = $('#whole').position().left;
+  var x8 = $('#breve').position().left;
+  $('#eighth2').css('left', x8);
+  $('#sixty-fourth').css('left', x0);
+  $('#thirty-second').css('left', x1);
+  $('#sixteenth').css('left', x2);
+  $('#eighth').css('left', x3);
+  $('#quarter').css('left', x4);
+  $('#half').css('left', x5);
+  $('#whole').css('left', x6);
+  $('#breve').css('left', x7);
 }
 
 var key = () => { // only keypress can tell if "shift" is pressed at the same time
@@ -562,7 +574,7 @@ var chord = () => {//keyup event for chord mode
 
 var highlight = (a) => {
   $(a).css('background-color', 'red');
-  setTimeout("clean()", '800');
+  setTimeout("clean()", '700');
 }
 
 var clean = () => {

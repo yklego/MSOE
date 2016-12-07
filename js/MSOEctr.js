@@ -270,12 +270,12 @@ var checkinput = () => {//if input tags are focused, turn off key events
 }
 
 var moveleft = () => {
-  var x1 = $('#thirty-second').offset().left;
-  var x2 = $('#sixteenth').offset().left;
-  var x3 = $('#eighth').offset().left;
-  var x4 = $('#quarter').offset().left;
-  var x5 = $('#half').offset().left;
-  var x6 = $('#whole').offset().left;
+  var x1 = $('#thirty-second').position().left;
+  var x2 = $('#sixteenth').position().left;
+  var x3 = $('#eighth').position().left;
+  var x4 = $('#quarter').position().left;
+  var x5 = $('#half').position().left;
+  var x6 = $('#whole').position().left;
   $('#thirty-second').css('left', x2);
   $('#sixteenth').css('left', x3);
   $('#eighth').css('left', x4);
@@ -285,12 +285,12 @@ var moveleft = () => {
 }
 
 var moveright = () => {
-  var x1 = $('#thirty-second').offset().left;
-  var x2 = $('#sixteenth').offset().left;
-  var x3 = $('#eighth').offset().left;
-  var x4 = $('#quarter').offset().left;
-  var x5 = $('#half').offset().left;
-  var x6 = $('#whole').offset().left;
+  var x1 = $('#thirty-second').position().left;
+  var x2 = $('#sixteenth').position().left;
+  var x3 = $('#eighth').position().left;
+  var x4 = $('#quarter').position().left;
+  var x5 = $('#half').position().left;
+  var x6 = $('#whole').position().left;
   $('#thirty-second').css('left', x6);
   $('#sixteenth').css('left', x1);
   $('#eighth').css('left', x2);
@@ -560,10 +560,26 @@ var chord = () => {//keyup event for chord mode
   }
 };
 
+var highlight = (a) => {
+  $(a).css('background-color', 'red');
+  setTimeout("clean()", '800');
+}
+
+var clean = () => {
+    $('#C').css('background-color', 'white');
+    $('#D').css('background-color', 'white');
+    $('#E').css('background-color', 'white');
+    $('#F').css('background-color', 'white');
+    $('#G').css('background-color', 'white');
+    $('#A').css('background-color', 'white');
+    $('#B').css('background-color', 'white');
+}
+
 var btn = (a) => {//buttons for notes
   insert(toabcnote(a.id),0);
   checkbar();
   print();
+  highlight(a);
 };
 
 window.onload = () => {

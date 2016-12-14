@@ -16,11 +16,15 @@
 </head>
 
 <body>
-<!--row top left-->
+
+
+<div class="logo"><img src="http://i.imgur.com/AXlHDR1.png" class="logo" width=300px></div>
+<div class="info"><button type="button" class="btn btn-secondary-lg" data-toggle="modal" data-target="#myModal">Score Info</button></div>
+
 <div class="row top">
+
+<!--row top left-->
 <div class="col-sm-3 col-md-3 col-lg-3 left">
-<div class="col-sm-12 col-md-12 col-lg-12 logo"><img src="http://i.imgur.com/AXlHDR1.png" class="logo" width=300px></div>
-<div class="col-sm-12 col-md-12 col-lg-12 info"><button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#myModal">Score Info</button></div>
 <div class="col-sm-12 col-md-12 col-lg-12 title">Tempo</div>
 <input class="col-sm-12 col-md-12 col-lg-12 input_tempo" onchange="chgtmp(this)"/>
 <div class="col-sm-12 col-md-12 col-lg-12 title">Notes</div>
@@ -67,16 +71,14 @@
 </div>
 </div>
 </div>
-</div>
 
-<!-- the boo -->
+<!--row top boo -->
 <div class="col-sm-7 col-md-7 col-lg-7 sheet">
 <div id="boo"></div>
 </div>
-</div>
 
-<!--row right-->
-<div class="col-sm-2 col-md-2 col-lg-2 panel">  
+<!--row top right-->
+<div class="col-sm-2 col-md-2 col-lg-2 right">  
 <div class="panel-group" id="accordion">
 <div class="panel panel-default">
 <div class="panel-heading">
@@ -121,8 +123,9 @@ G:貼上<br>
 </div>
 </div>
 </div>
+</div>
 
-<!--bottom-->
+<!--row bottom-->
 <div class="row bottom">
 <div class="col-sm-12 col-md-12 col-lg-12 edit_line"> 
 <div class="col-sm-7 col-md-7 col-lg-7 keyboard">

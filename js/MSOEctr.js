@@ -571,7 +571,6 @@ var move = () => { // some keys can't be detected in keypress
 		}
 		console.log(CrtPos);
 		console.log(abcstr);
-    print();
   }
   if(event.keyCode==16){//"shift" for chord mode on
     var InsBef=mvpos(1);//insert before
@@ -580,6 +579,7 @@ var move = () => { // some keys can't be detected in keypress
     }
   }
 	console.log(CrtPos);
+	    print();
 };
 
 var chord = () => {//keyup event for chord mode

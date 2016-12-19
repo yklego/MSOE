@@ -38,6 +38,7 @@ var GetTstate = (offset) => {//return a ABC string for a note
 $("#DDDD").click(function(){
   if(Dstate%10!=8){//Pause with duration of 8 is illegal
       insert(toabcnote("z"),0);
+	 checkbar();
       print();
   }
   else{
@@ -407,6 +408,7 @@ var key = () => { // only keypress can tell if "shift" is pressed at the same ti
     case 100://"D"
       if(Dstate%10!=8){//Pause with duration of 8 is illegal
         insert(toabcnote("z"),0);
+	      checkbar();
       }else{
         alert("Pause with duration of 8 is illegal.");
       }
@@ -483,6 +485,7 @@ var key = () => { // only keypress can tell if "shift" is pressed at the same ti
         for(var i=CpEdP+1;i<=abcstr.length;i++){
 			    if(abcstr[i]=="$"){
 				    CpStrEd=i;
+				    break;
 		    	}
 	    	}
         if(CpStrEd==CpEdP){

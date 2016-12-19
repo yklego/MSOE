@@ -220,6 +220,34 @@ var numtostr = (num) => {//transform a float to a string in fraction form(for du
   return num;
 };
 
+var miditone = (ch,inc) => {
+	var temnum;
+	switch(ch.charCodeAt(0)){
+		case 65:
+			temnum=8+inc;
+			break;
+		case 66:
+			temnum=10+inc;
+			break;
+		case 67:
+			temnum=0+inc;
+			break;
+		case 68:
+			temnum=2+inc;
+			break;
+		case 69:
+			temnum=4+inc;
+			break;
+		case 70:
+			temnum=5+inc;
+			break;
+		case 71:
+			temnum=7+inc;
+			break;
+	}
+	return 48+(Tstate)*12+temnum;
+}
+
 var toabcnote = (ch) => {//generate a string for a note in ABC format
   if(ch!="z"){//pause has no tune
     switch(Tstate){//for tunes
@@ -360,36 +388,43 @@ var key = () => { // only keypress can tell if "shift" is pressed at the same ti
 	// ----------Change Tstate-----------
     case 122://"Z"
       insert(toabcnote("C"),0);
+			miditone("C",0);
 			checkbar();
       highlight("#C");
       break;
     case 120://"X"
       insert(toabcnote("D"),0);
+			miditone("D",0);
 			checkbar();
       highlight("#D");
       break;
     case 99://"C"
       insert(toabcnote("E"),0);
+			miditone("E",0);
 			checkbar();
       highlight("#E");
       break;
     case 118://"V"
       insert(toabcnote("F"),0);
+			miditone("F",0);
 			checkbar();
       highlight("#F");
       break;
     case 98://"B"
       insert(toabcnote("G"),0);
+			miditone("G",0);
 			checkbar();
       highlight("#G");
       break;
     case 110://"N"
       insert(toabcnote("A"),0);
+			miditone("A",0);
 			checkbar();
       highlight("#A");
       break;
     case 109://"M"
       insert(toabcnote("B"),0);
+			miditone("B",0);
 			checkbar();
       highlight("#B");
       break;
@@ -448,24 +483,31 @@ var key = () => { // only keypress can tell if "shift" is pressed at the same ti
   // ----------Accidental-------------
     case 90://"shift+Z"
       insertch(toabcnote("C"));
+			miditone("C",0);
       break;
     case 88://"shift+X"
       insertch(toabcnote("D"));
+			miditone("D",0);
       break;
     case 67://"shift+C"
       insertch(toabcnote("E"));
+			miditone("E",0);
       break;
     case 86://"shift+V"
       insertch(toabcnote("F"));
+			miditone("F",0);
       break;
     case 66://"shift+B"
       insertch(toabcnote("G"));
+			miditone("G",0);
       break;
     case 78://"shift+N"
       insertch(toabcnote("A"));
+			miditone("A",0);
       break;
     case 77://"shift+M"
       insertch(toabcnote("B"));
+			miditone("B",0);
       break;
   // ----------Chord Mode-------------
     case 13://"enter"
@@ -614,6 +656,7 @@ var clean = () => {
 
 var btn = (a) => {//buttons for notes
   insert(toabcnote(a.id),0);
+	miditone(a.id,0);
   checkbar();
   print();
   highlight(a);

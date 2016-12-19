@@ -268,7 +268,11 @@ var insertch = (str) => {//insert for chord
 };
 
 var rmsmb = (str) => {//remove symbols should not be in the final abcstring
-  return str.replace(/[*]|[$]|[#]/g,"");
+	var Ins=mvpos(1);
+	if(Ins==CrtPos) Ins=abcstr.length;
+	if(abcstr[Ins-1]=="\n") Ins--;
+	str=str.substring(0,Ins)+"!style=x!B8"+str.substring(Ins);
+	return str.replace(/[*]|[$]|[#]/g,"");
 };
 
 

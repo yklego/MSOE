@@ -35,6 +35,16 @@ var GetTstate = (offset) => {//return a ABC string for a note
 
 //----------------------------------------------
 
+$("#DDDD").click(function(){
+  if(Dstate%10!=8){//Pause with duration of 8 is illegal
+      insert(toabcnote("z"),0);
+      print();
+  }
+  else{
+      alert("Pause with duration of 8 is illegal.");
+  }
+});
+
 var ttlstr="";//title string
 var chgttl = (a) => {//update title
   if(!Edit) return;
@@ -269,34 +279,46 @@ var checkinput = () => {//if input tags are focused, turn off key events
     return false;
 }
 
-var moveleft = () => {
-  var x1 = $('#thirty-second').offset().left;
-  var x2 = $('#sixteenth').offset().left;
-  var x3 = $('#eighth').offset().left;
-  var x4 = $('#quarter').offset().left;
-  var x5 = $('#half').offset().left;
-  var x6 = $('#whole').offset().left;
-  $('#thirty-second').css('left', x2);
-  $('#sixteenth').css('left', x3);
-  $('#eighth').css('left', x4);
-  $('#quarter').css('left', x5);
-  $('#half').css('left', x6);
-  $('#whole').css('left', x1);
+var moveright = () => {
+  var x0 = $('#quarter2').position().left;
+  var x1 = $('#sixty-fourth').position().left;
+  var x2 = $('#thirty-second').position().left;
+  var x3 = $('#sixteenth').position().left;
+  var x4 = $('#eighth').position().left;
+  var x5 = $('#quarter').position().left;
+  var x6 = $('#half').position().left;
+  var x7 = $('#whole').position().left;
+  var x8 = $('#breve').position().left;
+  $('#quarter2').css('left', x1);
+  $('#sixty-fourth').css('left', x2);
+  $('#thirty-second').css('left', x3);
+  $('#sixteenth').css('left', x4);
+  $('#eighth').css('left', x5);
+  $('#quarter').css('left', x6);
+  $('#half').css('left', x7);
+  $('#whole').css('left', x8);
+  $('#breve').css('left', x0);
 }
 
-var moveright = () => {
-  var x1 = $('#thirty-second').offset().left;
-  var x2 = $('#sixteenth').offset().left;
-  var x3 = $('#eighth').offset().left;
-  var x4 = $('#quarter').offset().left;
-  var x5 = $('#half').offset().left;
-  var x6 = $('#whole').offset().left;
-  $('#thirty-second').css('left', x6);
-  $('#sixteenth').css('left', x1);
-  $('#eighth').css('left', x2);
-  $('#quarter').css('left', x3);
-  $('#half').css('left', x4);
-  $('#whole').css('left', x5);
+var moveleft = () => {
+  var x0 = $('#quarter2').position().left;
+  var x1 = $('#sixty-fourth').position().left;
+  var x2 = $('#thirty-second').position().left;
+  var x3 = $('#sixteenth').position().left;
+  var x4 = $('#eighth').position().left;
+  var x5 = $('#quarter').position().left;
+  var x6 = $('#half').position().left;
+  var x7 = $('#whole').position().left;
+  var x8 = $('#breve').position().left;
+  $('#quarter2').css('left', x8);
+  $('#sixty-fourth').css('left', x0);
+  $('#thirty-second').css('left', x1);
+  $('#sixteenth').css('left', x2);
+  $('#eighth').css('left', x3);
+  $('#quarter').css('left', x4);
+  $('#half').css('left', x5);
+  $('#whole').css('left', x6);
+  $('#breve').css('left', x7);
 }
 
 var key = () => { // only keypress can tell if "shift" is pressed at the same time
@@ -333,30 +355,37 @@ var key = () => { // only keypress can tell if "shift" is pressed at the same ti
     case 122://"Z"
       insert(toabcnote("C"),0);
 			checkbar();
+      highlight("#C");
       break;
     case 120://"X"
       insert(toabcnote("D"),0);
 			checkbar();
+      highlight("#D");
       break;
     case 99://"C"
       insert(toabcnote("E"),0);
 			checkbar();
+      highlight("#E");
       break;
     case 118://"V"
       insert(toabcnote("F"),0);
 			checkbar();
+      highlight("#F");
       break;
     case 98://"B"
       insert(toabcnote("G"),0);
 			checkbar();
+      highlight("#G");
       break;
     case 110://"N"
       insert(toabcnote("A"),0);
 			checkbar();
+      highlight("#A");
       break;
     case 109://"M"
       insert(toabcnote("B"),0);
 			checkbar();
+      highlight("#B");
       break;
   // ----------Insert Note------------
 		case 115://"S"
@@ -560,32 +589,48 @@ var chord = () => {//keyup event for chord mode
   }
 };
 
+var highlight = (a) => {
+  $(a).css('background-color', 'rgba(255,0,0,0.5)');
+  setTimeout("clean()", '700');
+}
+
+var clean = () => {
+    $('#C').css('background-color', 'white');
+    $('#D').css('background-color', 'white');
+    $('#E').css('background-color', 'white');
+    $('#F').css('background-color', 'white');
+    $('#G').css('background-color', 'white');
+    $('#A').css('background-color', 'white');
+    $('#B').css('background-color', 'white');
+}
+
 var btn = (a) => {//buttons for notes
   insert(toabcnote(a.id),0);
   checkbar();
   print();
+  highlight(a);
 };
 
 $("#save").click(function(e) {
   var url = location.href.split("?")[1];
-  var index;
-  var key;
+  var urlIndex;
+  var urlKey;
   var rcvUrl = "";
   var push = false;
   if(url == null) {
-    index = "";
-    key = "";
+    urlIndex = "";
+    urlKey = "";
     push = true;
   }
   else {
-    index = url.split("!")[1];
-    key = url.split("!")[2];
+    urlIndex = url.split("!")[1];
+    urlKey = url.split("!")[2];
 
-    if(index == null) {
-      index = "";
+    if(urlIndex == null) {
+      urlIndex = "";
     }
-    if(key ==null)
-      key = "";
+    if(urlKey ==null)
+      urlKey = "";
   }
   if(history.pushState) {
     
@@ -594,9 +639,11 @@ $("#save").click(function(e) {
       url: "./js/save.njs",
       async: false,
       data: {
+        ttlstr: ttlstr,
+        tmpstr: tmpstr,
         abcstr: abcstr,           
-        index: index,
-        key: key,
+        index: urlIndex,
+        key: urlKey,
       },
       success: function(rcvData) {
         console.log(rcvData);
@@ -621,6 +668,7 @@ $("#save").click(function(e) {
 
       }
     }
+    document.getElementById("url").setAttribute('value', location.href.split("?")[0]+"?"+rcvUrl);  
   }
   else {
     console.log("web brower doesn't support history api");
@@ -629,27 +677,43 @@ $("#save").click(function(e) {
 
 window.onload = () => {
   var url = location.href.split("?")[1];
+  console.log("load "+url);
   if(url != null) {
-    var index = url.split("!")[1];
-    var key = url.split("!")[2];
+    var urlIndex = url.split("!")[1];
+    var urlKey = url.split("!")[2];
     
-    if(index == null)
-      index = "";
-    if(key == null)
-      key = "";
+    if(urlIndex == null)
+      urlIndex = "";
+    if(urlKey == null)
+      urlKey = "";
 
-    if(index.length != 0)
+    if(urlIndex.length != 0)
     {
+      console.log("first");
       $.ajax( {
         url: "./js/load.njs",
         async: false,
         data: {
-          index: index,
-          key: key,
+          index: urlIndex,
+          key: urlKey,
         },
         success: function(rcvData) {
-          abcstr = rcvData;        
+          ttlstr = rcvData.split("!")[0]; 
+          tmpstr = rcvData.split("!")[1];
+          abcstr = rcvData.split("!")[2];
+          
           console.log(rcvData);
+          console.log(rcvData.length);
+          if(rcvData.length < 2)
+            window.location.replace("http://luffy.ee.ncku.edu.tw/~lin11220206/MSOE/");
+          else
+          {
+            console.log("bbb");
+            $(function () { $('#myModal').modal({
+            keyboard: false,
+            show: false
+            })});
+          }
         },
         error: function(){
           console.log("connect to load.njs failed");
@@ -657,7 +721,12 @@ window.onload = () => {
       });
     }
   }
-  
+  else
+  {
+    $(function () { $('#myModal').modal({
+    keyboard: false
+    })});
+  }
 	print();
   document.onkeypress=key;
  	document.onkeydown=move;

@@ -20,7 +20,7 @@ MongoDB.connect("mongodb://wp2016_groupJ:groupJ@localhost/wp2016_groupJ", functi
             console.log("");
           }
           else {
-            console.log(data.abcstr);
+            console.log(data.ttlstr+"!"+data.tmpstr+"!"+data.abcstr);
           }
         }
         else

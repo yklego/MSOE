@@ -148,38 +148,38 @@ var print = () => {//output svg
     }
   }});
 	//----code copied from other website for shadow----//
-	var defs = $("svg")[0].append("defs");
+	var defs = document.getElementsByTagName("svg")[0].appendChild(document.createElement("defs"));
 
 	// create filter with id #drop-shadow
 	// height=130% so that the shadow is not clipped
-	var filter = defs.append("filter")
-			.attr("id", "drop-shadow")
-			.attr("height", "130%");
+	var filter = defs.appendChild(document.createElement("filter"))
+			.setAttribute("id", "drop-shadow")
+			.setAttribute("height", "130%");
 
 	// SourceAlpha refers to opacity of graphic that this filter will be applied to
 	// convolve that with a Gaussian with standard deviation 3 and store result
 	// in blur
-	filter.append("feGaussianBlur")
-			.attr("in", "SourceAlpha")
-			.attr("stdDeviation", 5)
-			.attr("result", "blur");
+	filter.appendChild(document.createElement("feGaussianBlur"))
+			.setAttribute("in", "SourceAlpha")
+			.setAttribute("stdDeviation", 5)
+			.setAttribute("result", "blur");
 
 	// translate output of Gaussian blur to the right and downwards with 2px
 	// store result in offsetBlur
-	filter.append("feOffset")
-			.attr("in", "blur")
-			.attr("dx", 5)
-			.attr("dy", 5)
-			.attr("result", "offsetBlur");
+	filter.appendChild(document.createElement("feOffset"))
+			.setAttribute("in", "blur")
+			.setAttribute("dx", 5)
+			.setAttribute("dy", 5)
+			.setAttribute("result", "offsetBlur");
 
 	// overlay original SourceGraphic over translated blurred opacity by using
 	// feMerge filter. Order of specifying inputs is important!
-	var feMerge = filter.append("feMerge");
+	var feMerge = filter.appendChild(document.createElement("feMerge"));
 
-	feMerge.append("feMergeNode")
-			.attr("in", "offsetBlur")
-	feMerge.append("feMergeNode")
-			.attr("in", "SourceGraphic");
+	feMerge.appendChild(document.createElement("feMergeNode"))
+			.setAttribute("in", "offsetBlur")
+	feMerge.appendChild(document.createElement("feMergeNode"))
+			.setAttribute("in", "SourceGraphic");
 	//----end----//
 	var notes=document.getElementsByTagName("rect");
 	for(var i=0;i<notes.length;i++){

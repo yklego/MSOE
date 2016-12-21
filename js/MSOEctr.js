@@ -699,8 +699,7 @@ window.onload = () => {
           ttlstr = rcvData.split("!")[0]; 
           tmpstr = rcvData.split("!")[1];
           abcstr = rcvData.split("!")[2];
-          
-          if(rcvData.length < 2)
+          if(rcvData.trim().length < 4)
             window.location.replace("http://luffy.ee.ncku.edu.tw/~lin11220206/MSOE/");
           else
           {

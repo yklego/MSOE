@@ -150,8 +150,7 @@ var print = () => {//output svg
 	var notes=document.getElementsByTagName("rect");
 	for(var i=0;i<notes.length;i++){
 		if(notes[i].getAttribute("height")=="8.13900000000001"&&notes[i].getAttribute("width")=="9.843"){
-			notes[i].previousSibling.setAttribute("fill","rgba(99,95,95,1)");
-			notes[i].previousSibling.setAttribute("stroke","rgba(99,95,95,1)");
+			notes[i].previousSibling.setAttribute("fill","rgba(99, 148, 159, 0.9)");
 		}
 	}
 };
@@ -306,7 +305,7 @@ var rmsmb = (str) => {//remove symbols should not be in the final abcstring
 	var Ins=mvpos(1);
 	if(Ins==CrtPos) Ins=abcstr.length;
 	if(abcstr[Ins-1]=="\n") Ins--;
-	str=str.substring(0,Ins)+"!style=x!B4"+str.substring(Ins);
+	str=str.substring(0,Ins)+"!style=x!G4"+str.substring(Ins);
 	console.log("after rmsmb:"+str);
 	return str.replace(/[*]|[$]|[#]/g,"");
 };

@@ -306,7 +306,7 @@ var rmsmb = (str) => {//remove symbols should not be in the final abcstring
 	var Ins=mvpos(1);
 	if(Ins==CrtPos) Ins=abcstr.length;
 	if(abcstr[Ins-1]=="\n") Ins--;
-	str=str.substring(0,Ins)+"!style=x!G"+str.substring(Ins);
+	str=str.substring(0,Ins)+"!style=x!G2"+str.substring(Ins);
 	console.log("after rmsmb:"+str);
 	return str.replace(/[*]|[$]|[#]/g,"");
 };

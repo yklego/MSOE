@@ -128,16 +128,21 @@ var print = () => {//output svg
       console.log(abcElem.startChar);
 			var ignsmbs=["$","#","*"];//symbols that won't be in the final abcstring
 			var NumBefCrt=0;//number of chars before current position
+	  	var LthofCrt=(mvpos(1)==CrtPos)?(abcstr.length-CrtPos-1):(mvpos(1)-CrtPos-1);//length of current notation
       for(var i=1;i<(mvpos(1)==CrtPos?abcstr.length:mvpos(1));i++){
 				if(!ignsmbs.includes(abcstr[i])){
 					NumBefCrt++;
 				}
 			}
 			var offset=abcElem.startChar-15-ttlstr.length-tmpstr.length;
-      if(offset>NumBefCrt+11)
+      if(offset>NumBefCrt+11){
 				offset-=11;
+			}else if(offset==NumBefCrt+1){
+				offset-=LthofCrt;
+			}
       if(offset==0){
         CrtPos=0;
+	      print();
         return;
       }
       for(var i=0;i<abcstr.length;i++){
@@ -146,14 +151,15 @@ var print = () => {//output svg
             offset--;
           }else if(abcstr[i]!="["){
             CrtPos=i-1;
+		  print();
             return;
           }else{//for chord
             CrtPos=i-2;
+		  print();
             return;
           }
         }
       }
-	  print();
     }
   }});
 };

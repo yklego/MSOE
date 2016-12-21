@@ -147,10 +147,45 @@ var print = () => {//output svg
       }
     }
   }});
+	//----code copied from other website for shadow----//
+	var defs = svg.append("defs");
+
+	// create filter with id #drop-shadow
+	// height=130% so that the shadow is not clipped
+	var filter = defs.append("filter")
+			.attr("id", "drop-shadow")
+			.attr("height", "130%");
+
+	// SourceAlpha refers to opacity of graphic that this filter will be applied to
+	// convolve that with a Gaussian with standard deviation 3 and store result
+	// in blur
+	filter.append("feGaussianBlur")
+			.attr("in", "SourceAlpha")
+			.attr("stdDeviation", 5)
+			.attr("result", "blur");
+
+	// translate output of Gaussian blur to the right and downwards with 2px
+	// store result in offsetBlur
+	filter.append("feOffset")
+			.attr("in", "blur")
+			.attr("dx", 5)
+			.attr("dy", 5)
+			.attr("result", "offsetBlur");
+
+	// overlay original SourceGraphic over translated blurred opacity by using
+	// feMerge filter. Order of specifying inputs is important!
+	var feMerge = filter.append("feMerge");
+
+	feMerge.append("feMergeNode")
+			.attr("in", "offsetBlur")
+	feMerge.append("feMergeNode")
+			.attr("in", "SourceGraphic");
+	//----end----//
 	var notes=document.getElementsByTagName("rect");
 	for(var i=0;i<notes.length;i++){
 		if(notes[i].getAttribute("height")=="8.13900000000001"&&notes[i].getAttribute("width")=="9.843"){
 			notes[i].previousSibling.setAttribute("fill","rgba(99, 148, 159, 0.9)");
+			notes[i].previousSibling.style.filter="url(#drop-shadow)";
 		}
 	}
 };

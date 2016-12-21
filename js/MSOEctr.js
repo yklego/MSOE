@@ -147,45 +147,11 @@ var print = () => {//output svg
       }
     }
   }});
-	//----code copied from other website for shadow----//
-	var defs = document.getElementsByTagName("svg")[0].appendChild(document.createElement("defs"));
-
-	// create filter with id #drop-shadow
-	// height=130% so that the shadow is not clipped
-	var filter = defs.appendChild(document.createElement("filter"));
-	filter.setAttribute("id", "drop-shadow");
-	filter.setAttribute("height", "130%");
-
-	// SourceAlpha refers to opacity of graphic that this filter will be applied to
-	// convolve that with a Gaussian with standard deviation 3 and store result
-	// in blur
-	var fgb = filter.appendChild(document.createElement("feGaussianBlur"));
-	fgb.setAttribute("in", "SourceAlpha");
-	fgb.setAttribute("stdDeviation", 5);
-	fgb.setAttribute("result", "blur");
-
-	// translate output of Gaussian blur to the right and downwards with 2px
-	// store result in offsetBlur
-	var fof = filter.appendChild(document.createElement("feOffset"));
-	fof.setAttribute("in", "blur");
-	fof.setAttribute("dx", 5);
-	fof.setAttribute("dy", 5);
-	fof.setAttribute("result", "offsetBlur");
-
-	// overlay original SourceGraphic over translated blurred opacity by using
-	// feMerge filter. Order of specifying inputs is important!
-	var feMerge = filter.appendChild(document.createElement("feMerge"));
-
-	var fmg1 = feMerge.appendChild(document.createElement("feMergeNode"));
-	fmg1.setAttribute("in", "offsetBlur");
-	var fmg2 = feMerge.appendChild(document.createElement("feMergeNode"));
-	fmg2.setAttribute("in", "SourceGraphic");
-	//----end----//
 	var notes=document.getElementsByTagName("rect");
 	for(var i=0;i<notes.length;i++){
 		if(notes[i].getAttribute("height")=="8.13900000000001"&&notes[i].getAttribute("width")=="9.843"){
 			notes[i].previousSibling.setAttribute("fill","rgba(99, 148, 159, 0.9)");
-			notes[i].previousSibling.style.filter="url(#drop-shadow)";
+			notes[i].previousSibling.setAttribute("stroke","rgba(99, 148, 159, 0.9)");
 		}
 	}
 };

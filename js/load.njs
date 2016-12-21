@@ -2,11 +2,15 @@
 
 var querystring = require('querystring');
 var param = querystring.parse(process.env.QUERY_STRING);
+var fs = require('fs');
 var MongoDB = require('mongodb').MongoClient;
+
+var data = fs.readFileSync('mongo.json', 'utf-8');
+var account = JSON.parse(data);
 
 console.log('Content-type: text/plain; charset=utf-8\n');
 
-MongoDB.connect("mongodb://wp2016_groupJ:groupJ@localhost/wp2016_groupJ", function(err, db)
+MongoDB.connect("mongodb://"+account.id+":"+account.pwd+"@localhost/wp2016_groupJ", function(err, db)
 {
   if(!err)
   {

@@ -649,7 +649,6 @@ $("#save").click(function(e) {
         key: urlKey,
       },
       success: function(rcvData) {
-        console.log(rcvData);
         rcvUrl += rcvData;
       },
       error: function() {
@@ -658,15 +657,12 @@ $("#save").click(function(e) {
     });
 
     if(push) {
-      console.log("push"+rcvUrl);
-
       history.pushState( {title: ""}, "", location.href.split("?")[0]+"?"+rcvUrl);
       url = rcvUrl;
     }
     else {
       if( !url.localeCompare(rcvUrl))
       {
-        console.log(rcvUrl);
         console.log("process url error");
 
       }
@@ -680,7 +676,6 @@ $("#save").click(function(e) {
 
 window.onload = () => {
   var url = location.href.split("?")[1];
-  console.log("load "+url);
   if(url != null) {
     var urlIndex = url.split("!")[1];
     var urlKey = url.split("!")[2];
@@ -690,9 +685,9 @@ window.onload = () => {
     if(urlKey == null)
       urlKey = "";
 
+
     if(urlIndex.length != 0)
     {
-      console.log("first");
       $.ajax( {
         url: "./js/load.njs",
         async: false,
@@ -705,13 +700,10 @@ window.onload = () => {
           tmpstr = rcvData.split("!")[1];
           abcstr = rcvData.split("!")[2];
           
-          console.log(rcvData);
-          console.log(rcvData.length);
           if(rcvData.length < 2)
             window.location.replace("http://luffy.ee.ncku.edu.tw/~lin11220206/MSOE/");
           else
           {
-            console.log("bbb");
             $(function () { $('#myModal').modal({
             keyboard: false,
             show: false

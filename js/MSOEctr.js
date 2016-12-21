@@ -149,7 +149,7 @@ var print = () => {//output svg
   }});
 	var notes=document.getElementsByTagName("rect");
 	for(var i=0;i<notes.length;i++){
-		if(notes[i].getAttribute("height")=="8.13900000000001"&&notes[i].getAttribute("width")=="9.843"){
+		if(notes[i].getAttribute("height")=="8.139000000000003"&&notes[i].getAttribute("width")=="9.843"){
 			notes[i].previousSibling.setAttribute("fill","rgba(99, 148, 159, 0.9)");
 			notes[i].previousSibling.setAttribute("stroke","rgba(99, 148, 159, 0.9)");
 		}

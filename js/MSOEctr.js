@@ -164,7 +164,7 @@ var print = () => {//output svg
 
 	// translate output of Gaussian blur to the right and downwards with 2px
 	// store result in offsetBlur
-	var fof = filter.appendChild(document.createElement("feOffset").setAttribute("in", "blur")
+	var fof = filter.appendChild(document.createElement("feOffset")).setAttribute("in", "blur")
 	fof.setAttribute("dx", 5);
 	fof.setAttribute("dy", 5);
 	fof.setAttribute("result", "offsetBlur");

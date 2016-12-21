@@ -147,7 +147,7 @@ var print = () => {//output svg
       }
     }
   }});
-	var notes=document.getElementsByTagName("path");
+	var notes=document.getElementsByTagName("rect");
 	for(var i=0;i<notes.length;i++){
 		if(notes[i].getAttribute("hetght")=="8.13900000000001"){
 			notes[i].previousSibling.setAttribute("fill","rgba(99,95,95,1)");

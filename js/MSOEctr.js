@@ -148,7 +148,7 @@ var print = () => {//output svg
     }
   }});
 	//----code copied from other website for shadow----//
-	var defs = document.getElementsByTagName("svg")[0].append("defs");
+	var defs = $("svg")[0].append("defs");
 
 	// create filter with id #drop-shadow
 	// height=130% so that the shadow is not clipped

@@ -153,7 +153,7 @@ var print = () => {//output svg
           }
         }
       }
-	  	print();
+	  print();
     }
   }});
 	var notes=document.getElementsByTagName("rect");

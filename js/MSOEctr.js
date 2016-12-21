@@ -126,8 +126,16 @@ var checkbar = () => {//add bar automatically
 var print = () => {//output svg
   abcjs.renderAbc('boo',"T: "+ttlstr+"\nM: "+tmpstr+"\nL: 1/4\n|"+rmsmb(abcstr),{},{add_classes:true, editable:true, listener:{highlight:(abcElem)=>{//update CrtPos when note is clicked
       console.log(abcElem.startChar);
-      var offset=abcElem.startChar-15-ttlstr.length-tmpstr.length;
-      var ignsmbs=["$","#","*"];//symbols that won't be in the final abcstring
+			var ignsmbs=["$","#","*"];//symbols that won't be in the final abcstring
+			var NumBefCrt=0;//number of chars before current position
+      for(var i=1;i<(mvpos(1)==CrtPos?abcstr.length:mvpos(1));i++){
+				if(!ignsmbs.includes(abcstr[i])){
+					NumBefCrt++;
+				}
+			}
+			var offset=abcElem.startChar-15-ttlstr.length-tmpstr.length;
+      if(offset>NumBefCrt+11)
+				offset-=11;
       if(offset==0){
         CrtPos=0;
         return;
@@ -145,6 +153,7 @@ var print = () => {//output svg
           }
         }
       }
+	  	print();
     }
   }});
 	var notes=document.getElementsByTagName("rect");

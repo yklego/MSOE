@@ -134,7 +134,10 @@ var print = () => {//output svg
 					NumBefCrt++;
 				}
 			}
+	  console.log(NumBefCrt);
+	  console.log(LthofCrt);
 			var offset=abcElem.startChar-15-ttlstr.length-tmpstr.length;
+	  console.log(offset);
       if(offset>NumBefCrt+11){
 				offset-=11;
 			}else if(offset==NumBefCrt+1){

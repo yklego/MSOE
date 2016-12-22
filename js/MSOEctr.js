@@ -680,13 +680,20 @@ window.onload = () => {
     var urlIndex = url.split("!")[1];
     var urlKey = url.split("!")[2];
     
+    var check = true;
+
     if(urlIndex == null)
+    {
       urlIndex = "";
+      check = false;
+    }
     if(urlKey == null)
+    {
       urlKey = "";
+    }
 
 
-    if(urlIndex.length != 0)
+    if(urlIndex.length != 0 && check)
     {
       $.ajax( {
         url: "./js/load.njs",
@@ -714,6 +721,8 @@ window.onload = () => {
         }
       });
     }
+    else
+      window.location.replace("http://luffy.ee.ncku.edu.tw/~lin11220206/MSOE/");
   }
   else
   {

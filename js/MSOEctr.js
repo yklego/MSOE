@@ -664,7 +664,7 @@ $("#save").click(function(e) {
       if( !url.localeCompare(rcvUrl))
       {
         console.log("process url error");
-
+        window.location.replace("http://luffy.ee.ncku.edu.tw/~lin11220206/MSOE/");
       }
     }
     document.getElementById("url").setAttribute('value', location.href.split("?")[0]+"?"+rcvUrl);  

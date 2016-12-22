@@ -51,23 +51,36 @@ MongoDB.connect('mongodb://'+account.id+':'+account.pwd+'@localhost/wp2016_group
       }     
       else
       {
-        collection.update({index: param.index}, 
+        var check = true;
+        collection.findOne({index: param.index}, function(err, data)
         {
-          index: param.index,
-          key: param.key,
-          ttlstr: param.ttlstr,
-          tmpstr: param.tmpstr,
-          abcstr: param.abcstr,
-        }, function(err, data)
-        {
-          if(data)
-            console.log("!"+param.index+"!"+param.key);
+          if(data) {
+            if( data.key.localeCompare(param.key) != 0)
+              check = false;
+          }
           else
-            console.log("");
+            check = false;
         });
-
+        if(check)
+        {
+          collection.update({index: param.index}, 
+          {
+            index: param.index,
+            key: param.key,
+            ttlstr: param.ttlstr,
+            tmpstr: param.tmpstr,
+            abcstr: param.abcstr,
+          }, function(err, data)
+          {
+            if(data)
+              console.log("!"+param.index+"!"+param.key);
+            else
+              console.log("");
+          });
+        }
+        else
+          console.log("");
       }
-
     });
   }
   db.close();

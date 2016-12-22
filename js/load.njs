@@ -10,6 +10,19 @@ var account = JSON.parse(data);
 
 console.log('Content-type: text/plain; charset=utf-8\n');
 
+if(param.index.length != 10)
+{
+  console.log("!!");
+  return;
+}
+
+if(param.key.length != 15)
+{
+  console.log("!!");
+  return;
+}
+
+
 MongoDB.connect("mongodb://"+account.id+":"+account.pwd+"@localhost/wp2016_groupJ", function(err, db)
 {
   if(!err)

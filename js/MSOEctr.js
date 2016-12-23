@@ -697,7 +697,6 @@ $("#save").click(function(e) {
         key: urlKey,
       },
       success: function(rcvData) {
-        console.log(rcvData);
         rcvUrl += rcvData;
       },
       error: function() {
@@ -706,17 +705,14 @@ $("#save").click(function(e) {
     });
 
     if(push) {
-      console.log("push"+rcvUrl);
-
       history.pushState( {title: ""}, "", location.href.split("?")[0]+"?"+rcvUrl);
       url = rcvUrl;
     }
     else {
       if( !url.localeCompare(rcvUrl))
       {
-        console.log(rcvUrl);
         console.log("process url error");
-
+        window.location.replace("http://luffy.ee.ncku.edu.tw/~lin11220206/MSOE/");
       }
     }
     document.getElementById("url").setAttribute('value', location.href.split("?")[0]+"?"+rcvUrl);  
@@ -728,19 +724,25 @@ $("#save").click(function(e) {
 
 window.onload = () => {
   var url = location.href.split("?")[1];
-  console.log("load "+url);
   if(url != null) {
     var urlIndex = url.split("!")[1];
     var urlKey = url.split("!")[2];
     
-    if(urlIndex == null)
-      urlIndex = "";
-    if(urlKey == null)
-      urlKey = "";
+    var check = true;
 
-    if(urlIndex.length != 0)
+    if(urlIndex == null)
     {
-      console.log("first");
+      urlIndex = "";
+      check = false;
+    }
+    if(urlKey == null)
+    {
+      urlKey = "";
+    }
+
+
+    if(urlIndex.length != 0 && check)
+    {
       $.ajax( {
         url: "./js/load.njs",
         async: false,
@@ -752,14 +754,10 @@ window.onload = () => {
           ttlstr = rcvData.split("!")[0]; 
           tmpstr = rcvData.split("!")[1];
           abcstr = rcvData.split("!")[2];
-          
-          console.log(rcvData);
-          console.log(rcvData.length);
-          if(rcvData.length < 2)
+          if(rcvData.trim().length < 4)
             window.location.replace("http://luffy.ee.ncku.edu.tw/~lin11220206/MSOE/");
           else
           {
-            console.log("bbb");
             $(function () { $('#myModal').modal({
             keyboard: false,
             show: false
@@ -771,6 +769,8 @@ window.onload = () => {
         }
       });
     }
+    else
+      window.location.replace("http://luffy.ee.ncku.edu.tw/~lin11220206/MSOE/");
   }
   else
   {

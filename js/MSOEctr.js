@@ -104,7 +104,7 @@ function msoe () {
 			}
 	  	}}});
 	};
-	this.mvpos = (md) => {
+	var mvpos = (md) => {
 		if(md==0){//0: move to the right note (not change if on the first note)
 			for(var i=CrtPos-1;i>=0;i--){
 				if(abcstr[i]=="$"){
@@ -377,7 +377,7 @@ function msoe () {
 		}
 		if(Checkbar==1) checkbar();
 	};
-	this.outinsertch = (ch) {
+	this.outinsertch = (ch) => {
 		var legalchars = ["A","B","C","D","E","F","G"];
 		if(!legalchars.includes(ch)) return;
 		insertch(toabcnote(ch));
@@ -492,6 +492,9 @@ function msoe () {
 	};
 	this.outmove = (md) => {
 		CrtPos=mvpos(md);
+	};
+	this.outmove2 = (md) => {
+		mvpos(md);
 	};
 	this.delete = () => {
 		if(CrtPos!=0){//if not the start of abcstring
@@ -755,16 +758,16 @@ var move = () => { // some keys can't be detected in keypress
 		MSOE.outmove(1);
 	}
   	if(event.keyCode==38){//"up"
-    	MSOE.outmove(2);
+    		MSOE.outmove(2);
   	}
   	if(event.keyCode==40){//"down"
-    	MSOE.outmove(3);
+    		MSOE.outmove(3);
   	}
 	if(event.keyCode==36){//"home"
-    	mvpos(4);
+    		MSOE.outmove2(4);
   	}
 	if(event.keyCode==35){//"end"
-    	mvpos(5);
+    		MSOE.outmove2(5);
   	}
   	if(event.keyCode==8){//"backspace"
 		MSOE.delete();
@@ -803,7 +806,7 @@ var btn = (a) => {//buttons for notes
   	highlight(a);
 };
 
-$("#save").click(MSOE.save(this));
+$("#save").click(function(e){MSOE.save(e)});
 
 window.onload = () => {
 	MSOE.urlload();

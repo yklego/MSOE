@@ -11,14 +11,14 @@ function msoe () {
 	this.chgttl = (a) => {//update title
 		if(!Edit) return;
 		ttlstr=a.value;
-		print();
+		this.print();
 	};
 	var tmpstr="";//tempo string
 	this.chgtmp = (a) => {//update tempo
 		if(!Edit) return;
 		if(a.value.length==2) a.value=a.value[0]+"/"+a.value[1];//if user is lazy and inputs, for example, 44 for 4/4, add "/" for the lazy guy
 		tmpstr=a.value;
-		print();
+		this.print();
 	};
 	var tonum = (str) => {
 		var Dnmntr=0;//denominator
@@ -609,20 +609,20 @@ var key = () => { // only keypress can tell if "shift" is pressed at the same ti
   	if(checkinput()) return;
   	if(!Edit) return;
 	switch(event.keyCode){
-		case 44://"<"
-			MSOE.ChgDstate(0);
+	case 44://"<"
+		MSOE.ChgDstate(0);
         	moveright();
-			break;
-		case 46://">"
-			MSOE.ChgDstate(1);
+		break;
+	case 46://">"
+		MSOE.ChgDstate(1);
         	moveleft();
-			break;
-		case 60://"shift+>"
-			MSOE.ChgDstate(2);
-			break;
-		case 62://"shift+<"
-			MSOE.ChgDstate(3);
-			break;
+		break;
+	case 60://"shift+>"
+		MSOE.ChgDstate(2);
+		break;
+	case 62://"shift+<"
+		MSOE.ChgDstate(3);
+		break;
 	// ----------Change Dstate-----------
     	case 63://"shift+?" for chord mode
     	case 47://"?"
@@ -637,41 +637,41 @@ var key = () => { // only keypress can tell if "shift" is pressed at the same ti
 	// ----------Change Tstate-----------
     	case 122://"Z"
       		MSOE.outinsert("C",1,0,1);
-			MSOE.miditone("C",0);
+		MSOE.miditone("C",0);
       		highlight("#C");
       		break;
     	case 120://"X"
       		MSOE.outinsert("D",1,0,1);
-			MSOE.miditone("D",0);
+		MSOE.miditone("D",0);
       		highlight("#D");
       		break;
     	case 99://"C"
       		MSOE.outinsert("E",1,0,1);
-			MSOE.miditone("E",0);
+		MSOE.miditone("E",0);
       		highlight("#E");
       		break;
     	case 118://"V"
       		MSOE.outinsert("F",1,0,1);
-			MSOE.miditone("F",0);
+		MSOE.miditone("F",0);
       		highlight("#F");
       		break;
     	case 98://"B"
       		MSOE.outinsert("G",1,0,1);
-			MSOE.miditone("G",0);
+		MSOE.miditone("G",0);
       		highlight("#G");
       		break;
     	case 110://"N"
       		MSOE.outinsert("A",1,0,1);
-			MSOE.miditone("A",0);
+		MSOE.miditone("A",0);
       		highlight("#A");
       		break;
     	case 109://"M"
       		MSOE.outinsert("B",1,0,1);
-			MSOE.miditone("B",0);
+		MSOE.miditone("B",0);
       		highlight("#B");
       		break;
   // ----------Insert Note------------
-		case 115://"S"
+	case 115://"S"
       		MSOE.separate();
       		break;
   // ----------Seperate Notes---------
@@ -681,7 +681,7 @@ var key = () => { // only keypress can tell if "shift" is pressed at the same ti
   // ----------Assemble Notes---------
     	case 100://"D"
       		if(Dstate%10!=8){//Pause with duration of 8 is illegal
-				MSOE.outinsert("z",1,0,1);
+			MSOE.outinsert("z",1,0,1);
       		}else{
         		alert("Pause with duration of 8 is illegal.");
       		}
@@ -692,54 +692,54 @@ var key = () => { // only keypress can tell if "shift" is pressed at the same ti
       		break;
   // ----------Insert Bar-------------
     	case 93://"]" for #
-			MSOE.incident(0);
+		MSOE.incident(0);
       		break;
     	case 91://"[" for b
       		MSOE.incident(1);
       		break;
   // ----------Accidental-------------
     	case 90://"shift+Z"
-			MSOE.outinsertch("C");
-			MSOE.miditone("C",0);
+		MSOE.outinsertch("C");
+		MSOE.miditone("C",0);
       		break;
     	case 88://"shift+X"
       		MSOE.outinsertch("D");
-			MSOE.miditone("D",0);
+		MSOE.miditone("D",0);
       		break;
     	case 67://"shift+C"
       		MSOE.outinsertch("E");
-			MSOE.miditone("E",0);
+		MSOE.miditone("E",0);
       		break;
     	case 86://"shift+V"
       		MSOE.outinsertch("F");
-			MSOE.miditone("F",0);
+		MSOE.miditone("F",0);
       		break;
     	case 66://"shift+B"
       		MSOE.outinsertch("G");
-			MSOE.miditone("G",0);
+		MSOE.miditone("G",0);
       		break;
     	case 78://"shift+N"
       		MSOE.outinsertch("A");
-			MSOE.miditone("A",0);
+		MSOE.miditone("A",0);
       		break;
     	case 77://"shift+M"
       		MSOE.outinsertch("B");
-			MSOE.miditone("B",0);
+		MSOE.miditone("B",0);
       		break;
   // ----------Chord Mode-------------
     	case 13://"enter"
-			MSOE.newline();
+		MSOE.newline();
       		break;
   // ----------New Line---------------
-		case 70://"shift+f" turn on and off copy mode
-			MSOE.copymode();
+	case 70://"shift+f" turn on and off copy mode
+		MSOE.copymode();
       		break;
-		case 102://"f" cancel copy mode(when it's on)
-			MSOE.copycancel();
-			break;
-		case 103://"g" paste
-			MSOE.paste();
-			break;
+	case 102://"f" cancel copy mode(when it's on)
+		MSOE.copycancel();
+		break;
+	case 103://"g" paste
+		MSOE.paste();
+		break;
 	// ----------Copy Mode--------------
     	default:
 	}
@@ -805,6 +805,9 @@ var btn = (a) => {//buttons for notes
   	MSOE.print();
   	highlight(a);
 };
+
+var chgtmp = (a) => {MSOE.chgtmp(a)};
+var chgttl = (a) => {MSOE.chgttl(a)};
 
 $("#save").click(function(e){MSOE.save(e)});
 

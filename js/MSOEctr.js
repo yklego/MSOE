@@ -91,15 +91,16 @@ function msoe () {
 			}
 		 	for(var i=0;i<abcstr.length;i++){
 				if(!ignsmbs.includes(abcstr[i])){
-				if(offset!=1){
-					offset--;
-				}else if(abcstr[i]!="["){
-					CrtPos=i-1;
-					return;
-				}else{//for chord
-			  		CrtPos=i-2;
-					return;
-			  	}
+					if(offset!=1){
+						offset--;
+					}else if(abcstr[i]!="["){
+						CrtPos=i-1;
+						return;
+					}else{//for chord
+						CrtPos=i-2;
+						return;
+					}
+				}
 			}
 	  	}}});
 	};

@@ -496,7 +496,7 @@ function msoe () {
 	this.outmove2 = (md) => {
 		mvpos(md);
 	};
-	this.delete = () => {
+	this.del = () => {
 		if(CrtPos!=0){//if not the start of abcstring
 			if(abcstr[CrtPos-1]!="\n"){//deleting notes
 				var DelEnd=mvpos(1);//delete end
@@ -525,8 +525,8 @@ function msoe () {
       		insert("$[]",1);
     	}
 	};
-	this.chmodeoff = () => {
-		if(event.keyCode==16){//"shift" for chord mode off
+	this.chmodeoff = (k) => {
+		if(k==16){//"shift" for chord mode off
 			if(abcstr.substr(mvpos(1),3)==="$[]"){//if no notes are inserted
 				abcstr=abcstr.substring(0,mvpos(1))+abcstr.substring(mvpos(1)+3);
 			}else{
@@ -534,7 +534,7 @@ function msoe () {
 				CrtPos=mvpos(1);
 			}
 			checkbar();
-			print();
+			this.print();
   		}
 	};
 }
@@ -770,7 +770,7 @@ var move = () => { // some keys can't be detected in keypress
     		MSOE.outmove2(5);
   	}
   	if(event.keyCode==8){//"backspace"
-		MSOE.delete();
+		MSOE.del();
   	}
   	if(event.keyCode==16){//"shift" for chord mode on
     	MSOE.chmodeon();
@@ -781,7 +781,7 @@ var move = () => { // some keys can't be detected in keypress
 var chord = () => {//keyup event for chord mode
   	if(checkinput()) return;
   	if(!Edit) return;
-  	MSOE.chmodeoff();
+  	MSOE.chmodeoff(event.keyCode);
 };
 
 var highlight = (a) => {

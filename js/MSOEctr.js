@@ -83,27 +83,44 @@ function msoe () {
 	this.print = () => {//output svg
 		abcjs.renderAbc('boo',"T: "+ttlstr+"\nM: "+tmpstr+"\nL: 1/4\n|"+rmsmb(abcstr),{},{add_classes:true, editable:true, listener:{highlight:(abcElem)=>{//update CrtPos when note is clicked
 			console.log(abcElem.startChar);
-			var offset=abcElem.startChar-15-ttlstr.length-tmpstr.length;
 			var ignsmbs=["$","#","*"];//symbols that won't be in the final abcstring
-			if(offset==0){
-				CrtPos=0;
-				return;
-			}
-		 	for(var i=0;i<abcstr.length;i++){
+			var NumBefCrt=0;//number of chars before current position
+      for(var i=1;i<(mvpos(1)==CrtPos?abcstr.length:mvpos(1));i++){
 				if(!ignsmbs.includes(abcstr[i])){
-					if(offset!=1){
-						offset--;
-					}else if(abcstr[i]!="["){
-						CrtPos=i-1;
-						return;
-					}else{//for chord
-						CrtPos=i-2;
-						return;
-					}
+					NumBefCrt++;
 				}
 			}
+	  	console.log(NumBefCrt);
+			var offset=abcElem.startChar-15-ttlstr.length-tmpstr.length;
+	  	console.log(offset);
+      if(offset>NumBefCrt+11){
+				offset-=11;
+			}else if(offset==NumBefCrt+1){
+				return;
+			}
+      if(offset==0){
+        CrtPos=0;
+	      print();
+        return;
+      }
+      for(var i=0;i<abcstr.length;i++){
+        if(!ignsmbs.includes(abcstr[i])){
+          if(offset!=1){
+            offset--;
+          }else if(abcstr[i]!="["){
+            CrtPos=i-1;
+		  			print();
+            return;
+          }else{//for chord
+            CrtPos=i-2;
+		  			print();
+            return;
+          }
+        }
+      }
 	  	}}});
 	};
+};
 	var mvpos = (md) => {
 		if(md==0){//0: move to the right note (not change if on the first note)
 			for(var i=CrtPos-1;i>=0;i--){
@@ -247,7 +264,7 @@ function msoe () {
 		var Ins=mvpos(1);
 		if(Ins==CrtPos) Ins=abcstr.length;
 		if(abcstr[Ins-1]=="\n") Ins--;
-		str=str.substring(0,Ins)+"!style=x!B4"+str.substring(Ins);
+		str=str.substring(0,Ins)+"!style=x!G4"+str.substring(Ins);
 		console.log("after rmsmb:"+str);
 		return str.replace(/[*]|[$]|[#]/g,"");
 	};
@@ -327,7 +344,6 @@ function msoe () {
 			{
 				urlKey = "";
 			}
-
 
 			if(urlIndex.length != 0 && check)
 			{
@@ -552,7 +568,6 @@ $("#DDDD").click(function(){
       alert("Pause with duration of 8 is illegal.");
   }
 });
-
 
 
 var checkinput = () => {//if input tags are focused, turn off key events

@@ -4,13 +4,16 @@ var querystring = require('querystring');
 var param = querystring.parse(process.env.QUERY_STRING);
 var MongoDB = require('mongodb').MongoClient;
 var crypto = require('crypto');
+var fs = require('fs');
+
+var data = fs.readFileSync('mongo.json', 'utf-8');
+var account = JSON.parse(data);
 
 console.log('Content-type: text/plain; charset=utf-8\n');
-
 var index = "";
 var key = "";
 
-MongoDB.connect('mongodb://wp2016_groupJ:groupJ@localhost/wp2016_groupJ', function(err, db)
+MongoDB.connect('mongodb://'+account.id+':'+account.pwd+'@localhost/wp2016_groupJ', function(err, db)
 { 
   if(!err) 
   {
@@ -48,23 +51,36 @@ MongoDB.connect('mongodb://wp2016_groupJ:groupJ@localhost/wp2016_groupJ', functi
       }     
       else
       {
-        collection.update({index: param.index}, 
+        var check = true;
+        collection.findOne({index: param.index}, function(err, data)
         {
-          index: param.index,
-          key: param.key,
-          ttlstr: param.ttlstr,
-          tmpstr: param.tmpstr,
-          abcstr: param.abcstr,
-        }, function(err, data)
-        {
-          if(data)
-            console.log("!"+param.index+"!"+param.key);
+          if(data) {
+            if( data.key.localeCompare(param.key) != 0)
+              check = false;
+          }
           else
-            console.log("");
+            check = false;
         });
-
+        if(check)
+        {
+          collection.update({index: param.index}, 
+          {
+            index: param.index,
+            key: param.key,
+            ttlstr: param.ttlstr,
+            tmpstr: param.tmpstr,
+            abcstr: param.abcstr,
+          }, function(err, data)
+          {
+            if(data)
+              console.log("!"+param.index+"!"+param.key);
+            else
+              console.log("");
+          });
+        }
+        else
+          console.log("");
       }
-
     });
   }
   db.close();

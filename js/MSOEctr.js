@@ -100,7 +100,7 @@ function msoe () {
 			}
 			if(offset==0){
 				CrtPos=0;
-				print();
+				this.print();
 				return;
 			}
 			for(var i=0;i<abcstr.length;i++){
@@ -109,11 +109,11 @@ function msoe () {
 						offset--;
 					}else if(abcstr[i]!="["){
 						CrtPos=i-1;
-						print();
+						this.print();
 						return;
 					}else{//for chord
 						CrtPos=i-2;
-						print();
+						this.print();
 						return;
 					}
 				}

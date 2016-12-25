@@ -85,42 +85,41 @@ function msoe () {
 			console.log(abcElem.startChar);
 			var ignsmbs=["$","#","*"];//symbols that won't be in the final abcstring
 			var NumBefCrt=0;//number of chars before current position
-      for(var i=1;i<(mvpos(1)==CrtPos?abcstr.length:mvpos(1));i++){
+			for(var i=1;i<(mvpos(1)==CrtPos?abcstr.length:mvpos(1));i++){
 				if(!ignsmbs.includes(abcstr[i])){
 					NumBefCrt++;
 				}
 			}
-	  	console.log(NumBefCrt);
+			console.log(NumBefCrt);
 			var offset=abcElem.startChar-15-ttlstr.length-tmpstr.length;
-	  	console.log(offset);
-      if(offset>NumBefCrt+11){
+			console.log(offset);
+			if(offset>NumBefCrt+11){
 				offset-=11;
 			}else if(offset==NumBefCrt+1){
 				return;
 			}
-      if(offset==0){
-        CrtPos=0;
-	      print();
-        return;
-      }
-      for(var i=0;i<abcstr.length;i++){
-        if(!ignsmbs.includes(abcstr[i])){
-          if(offset!=1){
-            offset--;
-          }else if(abcstr[i]!="["){
-            CrtPos=i-1;
-		  			print();
-            return;
-          }else{//for chord
-            CrtPos=i-2;
-		  			print();
-            return;
-          }
-        }
-      }
+			if(offset==0){
+				CrtPos=0;
+				print();
+				return;
+			}
+			for(var i=0;i<abcstr.length;i++){
+				if(!ignsmbs.includes(abcstr[i])){
+					if(offset!=1){
+						offset--;
+					}else if(abcstr[i]!="["){
+						CrtPos=i-1;
+						print();
+						return;
+					}else{//for chord
+						CrtPos=i-2;
+						print();
+						return;
+					}
+				}
+			}
 	  	}}});
 	};
-};
 	var mvpos = (md) => {
 		if(md==0){//0: move to the right note (not change if on the first note)
 			for(var i=CrtPos-1;i>=0;i--){

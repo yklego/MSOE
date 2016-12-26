@@ -190,12 +190,14 @@ function msoe () {
 	};
 	this.miditone = (ch,inc) => {
 		var temnum;
-		switch(ch.charCodeAt(0)){
+		var code=ch.charCodeAt(0);
+		if(code>=97) code-=32;
+		switch(code){
 			case 65:
-				temnum=8+inc;
+				temnum=9+inc;
 				break;
 			case 66:
-				temnum=10+inc;
+				temnum=11+inc;
 				break;
 			case 67:
 				temnum=0+inc;
@@ -213,6 +215,7 @@ function msoe () {
 				temnum=7+inc;
 				break;
 		}
+		console.log(48+(Tstate)*12+temnum);
 		return 48+(Tstate)*12+temnum;
 	};
 	var toabcnote = (ch) => {//generate a string for a note in ABC format
@@ -418,6 +421,7 @@ function msoe () {
 	this.ChgTstate = (md) => {
 		if(md==0) Tstate=(Tstate==3)?0:Tstate+1;
 		else if(md==1) Tstate=(Tstate==0)?3:Tstate-1;
+		return Tstate;
 	};
 	this.separate = () => {
 		if(abcstr[((mvpos(1)!=CrtPos)?mvpos(1):abcstr.length)-1]!=" ")
@@ -439,8 +443,12 @@ function msoe () {
         		if(abcstr[CrtPos+2]!="^"){//only allow 2 #s
           			if(abcstr[CrtPos+1]!="_"){
            				abcstr=abcstr.substring(0,CrtPos+1)+"^"+abcstr.substring(CrtPos+1);
+						if(abcstr[CrtPos+2]=="^") this.miditone(abcstr[CrtPos+3],2);
+						else this.miditone(abcstr[CrtPos+2],1);
          			}else{//if b exists, delete one b
            				abcstr=abcstr.substring(0,CrtPos+1)+abcstr.substring(CrtPos+2);
+						if(abcstr[CrtPos+1]=="_") this.miditone(abcstr[CrtPos+2],-1);
+						else this.miditone(abcstr[CrtPos+1],0);
          			}
         		}
       		}
@@ -449,8 +457,12 @@ function msoe () {
         		if(abcstr[CrtPos+2]!="_"){//only allow 2 bs
           			if(abcstr[CrtPos+1]!="^"){
             			abcstr=abcstr.substring(0,CrtPos+1)+"_"+abcstr.substring(CrtPos+1);
+						if(abcstr[CrtPos+2]=="_") this.miditone(abcstr[CrtPos+3],-2);
+						else this.miditone(abcstr[CrtPos+2],-1);
           			}else{//if # exists, delete one #
             			abcstr=abcstr.substring(0,CrtPos+1)+abcstr.substring(CrtPos+2);
+						if(abcstr[CrtPos+1]=="^") this.miditone(abcstr[CrtPos+2],1);
+						else this.miditone(abcstr[CrtPos+1],0);
          			}
         		}
       		}
@@ -640,13 +652,11 @@ var key = () => { // only keypress can tell if "shift" is pressed at the same ti
 	// ----------Change Dstate-----------
     	case 63://"shift+?" for chord mode
     	case 47://"?"
-      		MSOE.ChgTstate(0);
-      		document.getElementById("octave").innerHTML=(Tstate+3);
+      		document.getElementById("octave").innerHTML=(MSOE.ChgTstate(0)+3);
       		break;
     	case 34://"shift+'" for chord mode
     	case 39://"'" 
-      		MSOE.ChgTstate(1);
-      		document.getElementById("octave").innerHTML=(Tstate+3);
+      		document.getElementById("octave").innerHTML=(MSOE.ChgTstate(1)+3);
       		break;
 	// ----------Change Tstate-----------
     	case 122://"Z"
@@ -772,16 +782,16 @@ var move = () => { // some keys can't be detected in keypress
 		MSOE.outmove(1);
 	}
   	if(event.keyCode==38){//"up"
-    		MSOE.outmove(2);
+    	MSOE.outmove(2);
   	}
   	if(event.keyCode==40){//"down"
-    		MSOE.outmove(3);
+    	MSOE.outmove(3);
   	}
 	if(event.keyCode==36){//"home"
-    		MSOE.outmove2(4);
+    	MSOE.outmove2(4);
   	}
 	if(event.keyCode==35){//"end"
-    		MSOE.outmove2(5);
+    	MSOE.outmove2(5);
   	}
   	if(event.keyCode==8){//"backspace"
 		MSOE.del();

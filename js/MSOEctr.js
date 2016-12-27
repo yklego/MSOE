@@ -8,6 +8,117 @@ function msoe () {
 	var CpStr=""; //copy string
 	var abcjs=window.ABCJS;
 	var ttlstr="";//title string
+	//-----------------------------------------//for voices
+	var abcindex=0;//index for abcstrings
+	var maxoffset=0;//the maximum of offset
+	var strs=[];//voices
+	var clef=[];//clef of voices
+	clef[0]="treble";//default value
+	this.AddVoice = () => {
+		var temindex=clef.length;
+		clef[temindex]="treble";
+		strs[temindex]="$";
+		SaveNLoad(temindex);
+		
+	};
+	var GetStrOffset = (ix) => {//get the length before the voice for highlight listener (ix: index)
+		var sum=0;
+		for(var i=0;i<ix+1;i++){
+			sum+=12+(Math.floor(Math.log10(i+1))+1)+clef[i].length;
+			if(i!=ix) sum+=rmsmb(strs[i],false).length+4;
+		}
+		maxoffset=rmsmb(abcstr,true).length+4;
+		return sum;
+	};
+	var SaveNLoad = (j) => {//save and load (j: jump to)
+		if(j>=clef.length) return;
+		strs[abcindex]=abcstr;
+		abcstr=strs[j];
+		abcindex=j;
+		CrtPos=0;
+	};
+	var ForPrint = () => {
+		console.log(abcstr);
+		console.log(clef.length);
+		var finalstr="";
+		for(var i=0;i<clef.length;i++){
+			if(i!=abcindex){
+				finalstr+="V: "+(i+1)+" clef="+clef[i]+"\n[|"+rmsmb(strs[i],false)+" |]\n";
+			}else{
+				finalstr+="V: "+(i+1)+" clef="+clef[i]+"\n[|"+rmsmb(abcstr,Edit)+" |]\n";
+			}
+		}
+		console.log(finalstr);
+		return finalstr;
+	};
+	//-----------------------------------------//for clef
+	var clefmode=false;
+	this.ClfMdTgl = () => {//toggle clefmode
+		clefmode=!clefmode;
+	};
+	this.ClfOrVic = (kc) => {
+		if(clefmode){
+			switch(kc){
+				case 49:
+					clef[abcindex]="treble";
+					break;
+				case 50:
+					clef[abcindex]="alto middle=C";
+					break;
+				case 51:
+					clef[abcindex]="tenor middle=A";
+					break;
+				case 52:
+					clef[abcindex]="bass,,";
+					break;
+				default:
+			}
+		}else{
+			SaveNLoad(kc-49);
+		}
+	};
+	//-----------------------------------------//
+	this.print = () => {//output svg
+		abcjs.renderAbc('boo',"T: "+ttlstr+"\nM: "+tmpstr+"\nL: "+Lstr+"\n"+ForPrint(),{},{add_classes:true, editable:true, listener:{highlight:(abcElem)=>{//update CrtPos when note is clicked
+			console.log(abcElem.startChar);
+			var ignsmbs=["$","#","*"];//symbols that won't be in the final abcstring
+			var NumBefCrt=0;//number of chars before current position
+			for(var i=1;i<(mvpos(1)==CrtPos?abcstr.length:mvpos(1));i++){
+				if(!ignsmbs.includes(abcstr[i])){
+					NumBefCrt++;
+				}
+			}
+			console.log(NumBefCrt);
+			var offset=abcElem.startChar-11-ttlstr.length-tmpstr.length-Lstr.length-GetStrOffset(abcindex);
+			console.log(offset);
+			if((offset<0)||(offset>maxoffset)) return;
+			if(offset>NumBefCrt+11){
+				offset-=11;
+			}else if(offset==NumBefCrt+1){
+				return;
+			}
+			if(offset==0){
+				CrtPos=0;
+				this.print();
+				return;
+			}
+			for(var i=0;i<abcstr.length;i++){
+				if(!ignsmbs.includes(abcstr[i])){
+					if(offset!=1){
+						offset--;
+					}else if(abcstr[i]!="["){
+						CrtPos=i-1;
+						this.print();
+						return;
+					}else{//for chord
+						CrtPos=i-2;
+						this.print();
+						return;
+					}
+				}
+			}
+	  	}}});
+	};
 	this.chgttl = (a) => {//update title
 		if(!Edit) return;
 		ttlstr=a.value;
@@ -87,46 +198,6 @@ function msoe () {
 		if(SofD>=MaxD){
 			insert("|",0);
 		}
-	};
-	this.print = () => {//output svg
-		abcjs.renderAbc('boo',"T: "+ttlstr+"\nM: "+tmpstr+"\nL: "+Lstr+"\n|"+rmsmb(abcstr),{},{add_classes:true, editable:true, listener:{highlight:(abcElem)=>{//update CrtPos when note is clicked
-			console.log(abcElem.startChar);
-			var ignsmbs=["$","#","*"];//symbols that won't be in the final abcstring
-			var NumBefCrt=0;//number of chars before current position
-			for(var i=1;i<(mvpos(1)==CrtPos?abcstr.length:mvpos(1));i++){
-				if(!ignsmbs.includes(abcstr[i])){
-					NumBefCrt++;
-				}
-			}
-			console.log(NumBefCrt);
-			var offset=abcElem.startChar-12-ttlstr.length-tmpstr.length-Lstr.length;
-			console.log(offset);
-			if(offset>NumBefCrt+11){
-				offset-=11;
-			}else if(offset==NumBefCrt+1){
-				return;
-			}
-			if(offset==0){
-				CrtPos=0;
-				this.print();
-				return;
-			}
-			for(var i=0;i<abcstr.length;i++){
-				if(!ignsmbs.includes(abcstr[i])){
-					if(offset!=1){
-						offset--;
-					}else if(abcstr[i]!="["){
-						CrtPos=i-1;
-						this.print();
-						return;
-					}else{//for chord
-						CrtPos=i-2;
-						this.print();
-						return;
-					}
-				}
-			}
-	  	}}});
 	};
 	var mvpos = (md) => {
 		if(md==0){//0: move to the right note (not change if on the first note)
@@ -270,11 +341,13 @@ function msoe () {
 			}
 		}
 	};		
-	var rmsmb = (str) => {//remove symbols should not be in the final abcstring
+	var rmsmb = (str,cursor) => {//remove symbols should not be in the final abcstring
 		var Ins=mvpos(1);
 		if(Ins==CrtPos) Ins=abcstr.length;
 		if(abcstr[Ins-1]=="\n") Ins--;
-		str=str.substring(0,Ins)+"!style=x!G"+String(1/eval(Lstr))+str.substring(Ins);
+		if(cursor){
+			str=str.substring(0,Ins)+"!style=x!G"+String(1/eval(Lstr))+str.substring(Ins);
+		}
 		console.log("after rmsmb:"+str);
 		return str.replace(/[*]|[$]|[#]/g,"");
 	};
@@ -644,6 +717,11 @@ var moveleft = () => {
 
 var key = () => { // only keypress can tell if "shift" is pressed at the same time
   	if(checkinput()) return;
+	if(event.keyCode==101){
+		Edit=!Edit;
+		MSOE.print();
+		return;
+	}
   	if(!Edit) return;
 	switch(event.keyCode){
 		case 44://"<"
@@ -775,7 +853,32 @@ var key = () => { // only keypress can tell if "shift" is pressed at the same ti
 		case 103://"g" paste
 			MSOE.paste();
 			break;
-	// ----------Copy Mode--------------
+  // ----------Copy Mode--------------
+		case 113://"q" toggle clef setting mode
+			MSOE.ClfMdTgl();
+			break;
+		case 49://"1" set clef to treble or jump to 1st voice
+			MSOE.ClfOrVic(49);
+			break;
+		case 50://"2" set clef to alto or jump to 2nd voice
+			MSOE.ClfOrVic(50);
+			break;
+		case 51://"3" set clef to tenor or jump to 3rd voice
+			MSOE.ClfOrVic(51);
+			break;
+		case 52://"4" set clef to bass or jump to 4th voice
+			MSOE.ClfOrVic(52);
+			break;
+		case 53://"5" jump to 5th voice
+			MSOE.ClfOrVic(53);
+			break;
+		case 54://"6" jump to 6th voice
+			MSOE.ClfOrVic(54);
+			break;
+		case 119://"w" add a voice
+			MSOE.AddVoice();
+			break;
+  // ----------Clef and Voice----------		
     	default:
 	}
 	console.log(event.keyCode);

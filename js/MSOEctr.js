@@ -10,6 +10,7 @@ function msoe () {
 	var ttlstr="";//title string
 	//-----------------------------------------//for voices
 	var abcindex=0;//index for abcstrings
+	var vicchga;//Ath voice for VicChg;
 	var maxoffset=0;//the maximum of offset
 	var strs=[];//voices
 	var clef=[];//clef of voices
@@ -21,6 +22,26 @@ function msoe () {
 		SaveNLoad(temindex);
 		
 	};
+	this.DelVoice = () => {
+		if(clef.length==1) return;
+		strs=strs.slice(0,abcindex).concat(strs.slice(abcindex+1));
+		clef=clef.slice(0,abcindex).concat(clef.slice(abcindex+1));
+		console.log(strs);
+		console.log(clef);
+		abcindex=0;
+		abcstr=strs[0];
+		CrtPos=0;
+	}
+	this.VicChgA = () => {
+		vicchga=abcindex;
+	}
+	this.VicChgB = () => {
+		if(vicchga===undefined) return;//if not pressed "r" before
+		if(strs[vicchga]===undefined||strs[abcindex]===undefined||clef[vicchga]===undefined) return;//clef of current voice definitely exists
+		strs[vicchga] = [ strs[abcindex], strs[abcindex] = strs[vicchga]] [0];//swap strs
+		clef[vicchga] = [ clef[abcindex], clef[abcindex] = clef[vicchga]] [0];//swap clef
+		abcindex=vicchga;		
+	}
 	var GetStrOffset = (ix) => {//get the length before the voice for highlight listener (ix: index)
 		var sum=0;
 		for(var i=0;i<ix+1;i++){
@@ -637,7 +658,7 @@ function msoe () {
 		if(k==16){//"shift" for chord mode off
 			if(abcstr.substr(mvpos(1),3)==="$[]"){//if no notes are inserted
 				abcstr=abcstr.substring(0,mvpos(1))+abcstr.substring(mvpos(1)+3);
-			}else{
+			}else if(abcstr.substr(mvpos(1),2)==="$["){
 				abcstr=abcstr.substring(0,mvpos(1)+1)+"#"+abcstr.substring(mvpos(1)+1);
 				CrtPos=mvpos(1);
 			}
@@ -877,6 +898,15 @@ var key = () => { // only keypress can tell if "shift" is pressed at the same ti
 			break;
 		case 119://"w" add a voice
 			MSOE.AddVoice();
+			break;
+		case 87://"shift+w" delete current voice
+			MSOE.DelVoice();
+			break;
+		case 114://"r" swap two voices (mark current voice to be one of them)
+			MSOE.VicChgA();
+			break;
+		case 82://"shift+r" swap two voices (swap current voice and the one marked before)
+			MSOE.VicChgB();
 			break;
   // ----------Clef and Voice----------		
     	default:

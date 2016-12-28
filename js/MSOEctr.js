@@ -367,7 +367,7 @@ function msoe () {
 		if(Ins==CrtPos) Ins=abcstr.length;
 		if(abcstr[Ins-1]=="\n") Ins--;
 		if(cursor){
-			str=str.substring(0,Ins)+"!style=x!G"+String(1/eval(Lstr))+str.substring(Ins);
+			str=str.substring(0,Ins)+"!style=x!G"+numtostr(Math.pow(2,Dstate%10-4)*(1-Math.pow(1/2,Math.floor(Dstate/10)+1)))+str.substring(Ins);
 		}
 		console.log("after rmsmb:"+str);
 		return str.replace(/[*]|[$]|[#]/g,"");
@@ -539,9 +539,9 @@ function msoe () {
         		}
       		}
 	};
-	this.incident = (md) => {
+	this.accidental = (md) => {
 		if(md==0){
-			if(CrtPos!=0 && abcstr[CrtPos-1]!="\n" && abcstr[CrtPos+1]!="|"){
+			if(CrtPos!=0 && abcstr[CrtPos-1]!="\n" && abcstr[CrtPos+1]!="|" && abcstr[CrtPos+1]!="#"){
         		if(abcstr[CrtPos+2]!="^"){//only allow 2 #s
           			if(abcstr[CrtPos+1]!="_"){
            				abcstr=abcstr.substring(0,CrtPos+1)+"^"+abcstr.substring(CrtPos+1);
@@ -555,7 +555,7 @@ function msoe () {
         		}
       		}
 		}else if(md==1){
-			if(CrtPos!=0 && abcstr[CrtPos-1]!="\n" && abcstr[CrtPos+1]!="|"){
+			if(CrtPos!=0 && abcstr[CrtPos-1]!="\n" && abcstr[CrtPos+1]!="|" && abcstr[CrtPos+1]!="#"){
         		if(abcstr[CrtPos+2]!="_"){//only allow 2 bs
           			if(abcstr[CrtPos+1]!="^"){
             			abcstr=abcstr.substring(0,CrtPos+1)+"_"+abcstr.substring(CrtPos+1);
@@ -568,6 +568,64 @@ function msoe () {
          			}
         		}
       		}
+		}else if(md==2){
+			var ChEnd;//chord end
+			var LstNt;//last note of this chord
+			var NtChs = ["a","b","c","d","e","f","g","A","B","C","D","E","F","G"];//possible note chars
+			for(var i=mvpos(1)+2;i<abcstr.length;i++){
+				if(abcstr[i]=="]"){
+					ChEnd=i;
+					break;
+				}
+				if(i==abcstr.length-1) return;
+			}
+			for(var i=ChEnd-1;i>mvpos(1);i--){
+				if(NtChs.includes(abcstr[i])){
+					LstNt=i-1;
+					break;
+				}
+				if(i==mvpos(1)+1) return;
+			}
+        	if(!(abcstr[LstNt]=="^" && abcstr[LstNt-1]=="^")){//only allow 2 #s
+          		if(abcstr[LstNt]!="_"){
+           			abcstr=abcstr.substring(0,LstNt+1)+"^"+abcstr.substring(LstNt+1);
+					if(abcstr[LstNt]=="^") this.miditone(abcstr[LstNt+2],2);
+					else this.miditone(abcstr[LstNt+2],1);
+         		}else{//if b exists, delete one b
+           			abcstr=abcstr.substring(0,LstNt)+abcstr.substring(LstNt+1);
+					if(abcstr[LstNt-1]=="_") this.miditone(abcstr[LstNt],-1);
+					else this.miditone(abcstr[LstNt],0);
+         		}
+        	}
+		}else if(md==3){
+			var ChEnd;//chord end
+			var LstNt;//last note of this chord
+			var NtChs = ["a","b","c","d","e","f","g","A","B","C","D","E","F","G"];//possible note chars
+			for(var i=mvpos(1)+2;i<abcstr.length;i++){
+				if(abcstr[i]=="]"){
+					ChEnd=i;
+					break;
+				}
+				if(i==abcstr.length-1) return;
+			}
+			for(var i=ChEnd-1;i>mvpos(1);i--){
+				if(NtChs.includes(abcstr[i])){
+					LstNt=i-1;
+					break;
+				}
+				if(i==mvpos(1)+1) return;
+			}
+			if(!(abcstr[LstNt]=="_" && abcstr[LstNt-1]=="_")){//only allow 2 bs
+          		if(abcstr[LstNt]!="^"){
+           			abcstr=abcstr.substring(0,LstNt+1)+"_"+abcstr.substring(LstNt+1);
+					if(abcstr[LstNt]=="_") this.miditone(abcstr[LstNt+2],-2);
+					else this.miditone(abcstr[LstNt+2],-1);
+         		}else{//if b exists, delete one b
+           			abcstr=abcstr.substring(0,LstNt)+abcstr.substring(LstNt+1);
+					if(abcstr[LstNt-1]=="^") this.miditone(abcstr[LstNt],1);
+					else this.miditone(abcstr[LstNt],0);
+         		}
+        	}
 		}
 	};
 	this.newline = () => {
@@ -826,11 +884,17 @@ var key = () => { // only keypress can tell if "shift" is pressed at the same ti
       		break;
   // ----------Insert Bar-------------
     	case 93://"]" for #
-			MSOE.incident(0);
+			MSOE.accidental(0);
       		break;
     	case 91://"[" for b
-      		MSOE.incident(1);
+      		MSOE.accidental(1);
       		break;
+		case 125://"shift+[" for #(chord mode)
+			MSOE.accidental(2);
+			break;
+		case 123://"shift+]" for b(chord mode)
+			MSOE.accidental(3);
+			break;
   // ----------Accidental-------------
     	case 90://"shift+Z"
 			MSOE.outinsertch("C");

@@ -526,18 +526,18 @@ function msoe () {
 		return Tstate;
 	};
 	this.separate = () => {
-		if(abcstr[((mvpos(1)!=CrtPos)?mvpos(1):abcstr.length)-1]!=" ")
-        		insert(" ",1);
+		if(CrtPos==0||abcstr[CrtPos-1]=="\n"||CrtPos==1||abcstr[CrtPos-1]=="$") return;
+		if(abcstr[CrtPos-1]!=" "){
+			abcstr=abcstr.substring(0,CrtPos)+" "+abcstr.substring(CrtPos);
+			CrtPos++;
+		}
 	};
 	this.assemble = () => {
-		var RmBef=mvpos(1);//remove before
-      		if(abcstr[((RmBef!=CrtPos)?RmBef:abcstr.length)-1]==" "){
-        		if(RmBef==CrtPos){
-          			abcstr=abcstr.substring(0,abcstr.length-1);
-        		}else{
-          			abcstr=abcstr.substring(0,RmBef-1)+abcstr.substring(RmBef);
-        		}
-      		}
+		if(CrtPos==0||abcstr[CrtPos-1]=="\n"||CrtPos==1||abcstr[CrtPos-1]=="$") return;
+      		if(abcstr[CrtPos-1]==" "){
+				abcstr=abcstr.substring(0,CrtPos-1)+abcstr.substring(CrtPos);
+				CrtPos--;
+			}
 	};
 	this.accidental = (md) => {
 		if(md==0){

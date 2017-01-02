@@ -972,7 +972,11 @@ var key = () => { // only keypress can tell if "shift" is pressed at the same ti
 		case 82://"shift+r" swap two voices (swap current voice and the one marked before)
 			MSOE.VicChgB();
 			break;
-  // ----------Clef and Voice----------		
+  // ----------Clef and Voice----------
+		case 116://"t" use browser printer to print the sheet (can save as pdf)
+			printJS('boo','html');
+			break;
+  // ----------Print (as pdf)----------
     	default:
 	}
 	console.log(event.keyCode);

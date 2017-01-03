@@ -110,8 +110,8 @@ function msoe () {
 			var offset=abcElem.startChar-11-ttlstr.length-tmpstr.length-Lstr.length-GetStrOffset(abcindex);
 			console.log(offset);
 			if((offset<0)||(offset>maxoffset)) return;
-			if(offset>NumBefCrt+11){
-				offset-=11;
+			if(offset>NumBefCrt+10+String(numtostr(Math.pow(2,Dstate%10-4)*(1-Math.pow(1/2,Math.floor(Dstate/10)+1)))).length){//if after the cursor, - the string length of cursor
+				offset-=(10+String(numtostr(Math.pow(2,Dstate%10-4)*(1-Math.pow(1/2,Math.floor(Dstate/10)+1)))).length);
 			}else if(offset==NumBefCrt+1){
 				return;
 			}

@@ -3,9 +3,6 @@ function msoe () {
 	var Tstate=1; //0:A, 1:A  2:a  3:a'
 	var Dstate=5; //Mn, n=0~8. n=5 for N=1, n+1=>N*2, n-1=>N/2. 1n=N*(1+1/2), 2n=N*(1+1/2+1/4)... and so on
 	var CrtPos=0; //current position
-	var CpMd=false; //copy mode
-	var CpStP=0; //copy startpoint
-	var CpStr=""; //copy string
 	var abcjs=window.ABCJS;
 	var ttlstr="";//title string
 	//-----------------------------------------//for voices
@@ -534,10 +531,24 @@ function msoe () {
 	};
 	this.assemble = () => {
 		if(CrtPos==0||abcstr[CrtPos-1]=="\n"||CrtPos==1||abcstr[CrtPos-1]=="$") return;
-      		if(abcstr[CrtPos-1]==" "){
-				abcstr=abcstr.substring(0,CrtPos-1)+abcstr.substring(CrtPos);
-				CrtPos--;
-			}
+      	if(abcstr[CrtPos-1]==" "){
+			abcstr=abcstr.substring(0,CrtPos-1)+abcstr.substring(CrtPos);
+			CrtPos--;
+		}
+	};
+	this.tie = () => {
+		if(CrtPos==0||abcstr[CrtPos-1]=="\n"||CrtPos==1||abcstr[CrtPos-1]=="$") return;
+		if(abcstr[CrtPos-1]!="-"){
+			abcstr=abcstr.substring(0,CrtPos)+"-"+abcstr.substring(CrtPos);
+			CrtPos++;
+		}
+	};
+	this.untie = () => {
+		if(CrtPos==0||abcstr[CrtPos-1]=="\n"||CrtPos==1||abcstr[CrtPos-1]=="$") return;
+      	if(abcstr[CrtPos-1]=="-"){
+			abcstr=abcstr.substring(0,CrtPos-1)+abcstr.substring(CrtPos);
+			CrtPos--;
+		}
 	};
 	this.accidental = (md) => {
 		if(md==0){
@@ -634,6 +645,9 @@ function msoe () {
       			CrtPos=mvpos(1);
 			}
 	};
+	var CpMd=false; //copy mode
+	var CpStP=0; //copy startpoint
+	var CpStr=""; //copy string
 	this.copymode = () => {
 		if(CpMd){
 			CpMd=false;
@@ -734,13 +748,12 @@ var Edit = true; //if it's editable
 
 
 $("#DDDD").click(function(){
-  if(Dstate%10!=8){//Pause with duration of 8 is illegal
-	  MSOE.outinsert("z",1,0,1);
-      MSOE.print();
+  if(!MSOE.checkpause()){//Pause with duration of 8 is illegal
+	MSOE.outinsert("z",1,0,1);
+  }else{
+    alert("Pause with duration of 2 is illegal.");
   }
-  else{
-      alert("Pause with duration of 8 is illegal.");
-  }
+  break;
 });
 
 
@@ -977,6 +990,13 @@ var key = () => { // only keypress can tell if "shift" is pressed at the same ti
 			printJS('boo','html');
 			break;
   // ----------Print (as pdf)----------
+		case 45://"-" tie two notes
+			MSOE.tie();
+			break;
+		case 61://"=" untie
+			MSOE.untie();
+			break;
+  // ----------Tie and Untie-----------
     	default:
 	}
 	console.log(event.keyCode);

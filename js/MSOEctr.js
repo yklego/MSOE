@@ -3,21 +3,158 @@ function msoe () {
 	var Tstate=1; //0:A, 1:A  2:a  3:a'
 	var Dstate=5; //Mn, n=0~8. n=5 for N=1, n+1=>N*2, n-1=>N/2. 1n=N*(1+1/2), 2n=N*(1+1/2+1/4)... and so on
 	var CrtPos=0; //current position
-	var CpMd=false; //copy mode
-	var CpStP=0; //copy startpoint
-	var CpStr=""; //copy string
 	var abcjs=window.ABCJS;
 	var ttlstr="";//title string
+	//-----------------------------------------//for voices
+	var abcindex=0;//index for abcstrings
+	var vicchga;//Ath voice for VicChg;
+	var maxoffset=0;//the maximum of offset
+	var strs=[];//voices
+	var clef=[];//clef of voices
+	clef[0]="treble";//default value
+	this.AddVoice = () => {
+		var temindex=clef.length;
+		clef[temindex]="treble";
+		strs[temindex]="$";
+		SaveNLoad(temindex);
+		
+	};
+	this.DelVoice = () => {
+		if(clef.length==1) return;
+		strs=strs.slice(0,abcindex).concat(strs.slice(abcindex+1));
+		clef=clef.slice(0,abcindex).concat(clef.slice(abcindex+1));
+		console.log(strs);
+		console.log(clef);
+		abcindex=0;
+		abcstr=strs[0];
+		CrtPos=0;
+	}
+	this.VicChgA = () => {
+		vicchga=abcindex;
+	}
+	this.VicChgB = () => {
+		if(vicchga===undefined) return;//if not pressed "r" before
+		if(strs[vicchga]===undefined||strs[abcindex]===undefined||clef[vicchga]===undefined) return;//clef of current voice definitely exists
+		strs[vicchga] = [ strs[abcindex], strs[abcindex] = strs[vicchga]] [0];//swap strs
+		clef[vicchga] = [ clef[abcindex], clef[abcindex] = clef[vicchga]] [0];//swap clef
+		abcindex=vicchga;		
+	}
+	var GetStrOffset = (ix) => {//get the length before the voice for highlight listener (ix: index)
+		var sum=0;
+		for(var i=0;i<ix+1;i++){
+			sum+=12+(Math.floor(Math.log10(i+1))+1)+clef[i].length;
+			if(i!=ix) sum+=rmsmb(strs[i],false).length+4;
+		}
+		maxoffset=rmsmb(abcstr,true).length+4;
+		return sum;
+	};
+	var SaveNLoad = (j) => {//save and load (j: jump to)
+		if(j>=clef.length) return;
+		strs[abcindex]=abcstr;
+		abcstr=strs[j];
+		abcindex=j;
+		CrtPos=0;
+	};
+	var ForPrint = () => {
+		console.log(abcstr);
+		console.log(clef.length);
+		var finalstr="";
+		for(var i=0;i<clef.length;i++){
+			if(i!=abcindex){
+				finalstr+="V: "+(i+1)+" clef="+clef[i]+"\n[|"+rmsmb(strs[i],false)+" |]\n";
+			}else{
+				finalstr+="V: "+(i+1)+" clef="+clef[i]+"\n[|"+rmsmb(abcstr,Edit)+" |]\n";
+			}
+		}
+		console.log(finalstr);
+		return finalstr;
+	};
+	//-----------------------------------------//for clef
+	var clefmode=false;
+	this.ClfMdTgl = () => {//toggle clefmode
+		clefmode=!clefmode;
+	};
+	this.ClfOrVic = (kc) => {
+		if(clefmode){
+			switch(kc){
+				case 49:
+					clef[abcindex]="treble";
+					break;
+				case 50:
+					clef[abcindex]="alto middle=C";
+					break;
+				case 51:
+					clef[abcindex]="tenor middle=A";
+					break;
+				case 52:
+					clef[abcindex]="bass,,";
+					break;
+				default:
+			}
+		}else{
+			SaveNLoad(kc-49);
+		}
+	};
+	//-----------------------------------------//
+	this.print = () => {//output svg
+		abcjs.renderAbc('boo',"T: "+ttlstr+"\nM: "+tmpstr+"\nL: "+Lstr+"\n"+ForPrint(),{},{add_classes:true, editable:true, listener:{highlight:(abcElem)=>{//update CrtPos when note is clicked
+			console.log(abcElem.startChar);
+			var ignsmbs=["$","#","*"];//symbols that won't be in the final abcstring
+			var NumBefCrt=0;//number of chars before current position
+			for(var i=1;i<(mvpos(1)==CrtPos?abcstr.length:mvpos(1));i++){
+				if(!ignsmbs.includes(abcstr[i])){
+					NumBefCrt++;
+				}
+			}
+			console.log(NumBefCrt);
+			var offset=abcElem.startChar-11-ttlstr.length-tmpstr.length-Lstr.length-GetStrOffset(abcindex);
+			console.log(offset);
+			if((offset<0)||(offset>maxoffset)) return;
+			if(offset>NumBefCrt+11){
+				offset-=11;
+			}else if(offset==NumBefCrt+1){
+				return;
+			}
+			if(offset==0){
+				CrtPos=0;
+				this.print();
+				return;
+			}
+			for(var i=0;i<abcstr.length;i++){
+				if(!ignsmbs.includes(abcstr[i])){
+					if(offset!=1){
+						offset--;
+					}else if(abcstr[i]!="["){
+						CrtPos=i-1;
+						this.print();
+						return;
+					}else{//for chord
+						CrtPos=i-2;
+						this.print();
+						return;
+					}
+				}
+			}
+	  	}}});
+	};
 	this.chgttl = (a) => {//update title
 		if(!Edit) return;
 		ttlstr=a.value;
 		this.print();
 	};
 	var tmpstr="";//tempo string
+	var Lstr="1/4";
 	this.chgtmp = (a) => {//update tempo
 		if(!Edit) return;
 		if(a.value.length==2) a.value=a.value[0]+"/"+a.value[1];//if user is lazy and inputs, for example, 44 for 4/4, add "/" for the lazy guy
 		tmpstr=a.value;
+		for(var i=0;i<tmpstr.length;i++){
+			if(tmpstr[i]=="/"){
+				Lstr="1/"+tmpstr.substring(i+1);
+				break;
+			}
+		}
+		if(a.value=="") Lstr="1/4";
 		this.print();
 	};
 	var tonum = (str) => {
@@ -79,30 +216,6 @@ function msoe () {
 		if(SofD>=MaxD){
 			insert("|",0);
 		}
-	};
-	this.print = () => {//output svg
-		abcjs.renderAbc('boo',"T: "+ttlstr+"\nM: "+tmpstr+"\nL: 1/4\n|"+rmsmb(abcstr),{},{add_classes:true, editable:true, listener:{highlight:(abcElem)=>{//update CrtPos when note is clicked
-			console.log(abcElem.startChar);
-			var offset=abcElem.startChar-15-ttlstr.length-tmpstr.length;
-			var ignsmbs=["$","#","*"];//symbols that won't be in the final abcstring
-			if(offset==0){
-				CrtPos=0;
-				return;
-			}
-		 	for(var i=0;i<abcstr.length;i++){
-				if(!ignsmbs.includes(abcstr[i])){
-					if(offset!=1){
-						offset--;
-					}else if(abcstr[i]!="["){
-						CrtPos=i-1;
-						return;
-					}else{//for chord
-						CrtPos=i-2;
-						return;
-					}
-				}
-			}
-	  	}}});
 	};
 	var mvpos = (md) => {
 		if(md==0){//0: move to the right note (not change if on the first note)
@@ -174,12 +287,14 @@ function msoe () {
 	};
 	this.miditone = (ch,inc) => {
 		var temnum;
-		switch(ch.charCodeAt(0)){
+		var code=ch.charCodeAt(0);
+		if(code>=97) code-=32;
+		switch(code){
 			case 65:
-				temnum=8+inc;
+				temnum=9+inc;
 				break;
 			case 66:
-				temnum=10+inc;
+				temnum=11+inc;
 				break;
 			case 67:
 				temnum=0+inc;
@@ -197,6 +312,7 @@ function msoe () {
 				temnum=7+inc;
 				break;
 		}
+		console.log(48+(Tstate)*12+temnum);
 		return 48+(Tstate)*12+temnum;
 	};
 	var toabcnote = (ch) => {//generate a string for a note in ABC format
@@ -243,11 +359,13 @@ function msoe () {
 			}
 		}
 	};		
-	var rmsmb = (str) => {//remove symbols should not be in the final abcstring
+	var rmsmb = (str,cursor) => {//remove symbols should not be in the final abcstring
 		var Ins=mvpos(1);
 		if(Ins==CrtPos) Ins=abcstr.length;
 		if(abcstr[Ins-1]=="\n") Ins--;
-		str=str.substring(0,Ins)+"!style=x!B4"+str.substring(Ins);
+		if(cursor){
+			str=str.substring(0,Ins)+"!style=x!G"+numtostr(Math.pow(2,Dstate%10-4)*(1-Math.pow(1/2,Math.floor(Dstate/10)+1)))+str.substring(Ins);
+		}
 		console.log("after rmsmb:"+str);
 		return str.replace(/[*]|[$]|[#]/g,"");
 	};
@@ -328,7 +446,6 @@ function msoe () {
 				urlKey = "";
 			}
 
-
 			if(urlIndex.length != 0 && check)
 			{
 				$.ajax( {
@@ -403,42 +520,123 @@ function msoe () {
 	this.ChgTstate = (md) => {
 		if(md==0) Tstate=(Tstate==3)?0:Tstate+1;
 		else if(md==1) Tstate=(Tstate==0)?3:Tstate-1;
+		return Tstate;
 	};
 	this.separate = () => {
-		if(abcstr[((mvpos(1)!=CrtPos)?mvpos(1):abcstr.length)-1]!=" ")
-        		insert(" ",1);
+		if(CrtPos==0||abcstr[CrtPos-1]=="\n"||CrtPos==1||abcstr[CrtPos-1]=="$") return;
+		if(abcstr[CrtPos-1]!=" "){
+			abcstr=abcstr.substring(0,CrtPos)+" "+abcstr.substring(CrtPos);
+			CrtPos++;
+		}
 	};
 	this.assemble = () => {
-		var RmBef=mvpos(1);//remove before
-      		if(abcstr[((RmBef!=CrtPos)?RmBef:abcstr.length)-1]==" "){
-        		if(RmBef==CrtPos){
-          			abcstr=abcstr.substring(0,abcstr.length-1);
-        		}else{
-          			abcstr=abcstr.substring(0,RmBef-1)+abcstr.substring(RmBef);
-        		}
-      		}
+		if(CrtPos==0||abcstr[CrtPos-1]=="\n"||CrtPos==1||abcstr[CrtPos-1]=="$") return;
+      	if(abcstr[CrtPos-1]==" "){
+			abcstr=abcstr.substring(0,CrtPos-1)+abcstr.substring(CrtPos);
+			CrtPos--;
+		}
 	};
-	this.incident = (md) => {
+	this.tie = () => {
+		if(CrtPos==0||abcstr[CrtPos-1]=="\n"||CrtPos==1||abcstr[CrtPos-1]=="$") return;
+		if(abcstr[CrtPos-1]!="-"){
+			abcstr=abcstr.substring(0,CrtPos)+"-"+abcstr.substring(CrtPos);
+			CrtPos++;
+		}
+	};
+	this.untie = () => {
+		if(CrtPos==0||abcstr[CrtPos-1]=="\n"||CrtPos==1||abcstr[CrtPos-1]=="$") return;
+      	if(abcstr[CrtPos-1]=="-"){
+			abcstr=abcstr.substring(0,CrtPos-1)+abcstr.substring(CrtPos);
+			CrtPos--;
+		}
+	};
+	this.accidental = (md) => {
 		if(md==0){
-			if(CrtPos!=0 && abcstr[CrtPos-1]!="\n" && abcstr[CrtPos+1]!="|"){
+			if(CrtPos!=0 && abcstr[CrtPos-1]!="\n" && abcstr[CrtPos+1]!="|" && abcstr[CrtPos+1]!="#"){
         		if(abcstr[CrtPos+2]!="^"){//only allow 2 #s
           			if(abcstr[CrtPos+1]!="_"){
            				abcstr=abcstr.substring(0,CrtPos+1)+"^"+abcstr.substring(CrtPos+1);
+						if(abcstr[CrtPos+2]=="^") this.miditone(abcstr[CrtPos+3],2);
+						else this.miditone(abcstr[CrtPos+2],1);
          			}else{//if b exists, delete one b
            				abcstr=abcstr.substring(0,CrtPos+1)+abcstr.substring(CrtPos+2);
+						if(abcstr[CrtPos+1]=="_") this.miditone(abcstr[CrtPos+2],-1);
+						else this.miditone(abcstr[CrtPos+1],0);
          			}
         		}
       		}
 		}else if(md==1){
-			if(CrtPos!=0 && abcstr[CrtPos-1]!="\n" && abcstr[CrtPos+1]!="|"){
+			if(CrtPos!=0 && abcstr[CrtPos-1]!="\n" && abcstr[CrtPos+1]!="|" && abcstr[CrtPos+1]!="#"){
         		if(abcstr[CrtPos+2]!="_"){//only allow 2 bs
           			if(abcstr[CrtPos+1]!="^"){
             			abcstr=abcstr.substring(0,CrtPos+1)+"_"+abcstr.substring(CrtPos+1);
+						if(abcstr[CrtPos+2]=="_") this.miditone(abcstr[CrtPos+3],-2);
+						else this.miditone(abcstr[CrtPos+2],-1);
           			}else{//if # exists, delete one #
             			abcstr=abcstr.substring(0,CrtPos+1)+abcstr.substring(CrtPos+2);
+						if(abcstr[CrtPos+1]=="^") this.miditone(abcstr[CrtPos+2],1);
+						else this.miditone(abcstr[CrtPos+1],0);
          			}
         		}
       		}
+		}else if(md==2){
+			var ChEnd;//chord end
+			var LstNt;//last note of this chord
+			var NtChs = ["a","b","c","d","e","f","g","A","B","C","D","E","F","G"];//possible note chars
+			for(var i=mvpos(1)+2;i<abcstr.length;i++){
+				if(abcstr[i]=="]"){
+					ChEnd=i;
+					break;
+				}
+				if(i==abcstr.length-1) return;
+			}
+			for(var i=ChEnd-1;i>mvpos(1);i--){
+				if(NtChs.includes(abcstr[i])){
+					LstNt=i-1;
+					break;
+				}
+				if(i==mvpos(1)+1) return;
+			}
+        	if(!(abcstr[LstNt]=="^" && abcstr[LstNt-1]=="^")){//only allow 2 #s
+          		if(abcstr[LstNt]!="_"){
+           			abcstr=abcstr.substring(0,LstNt+1)+"^"+abcstr.substring(LstNt+1);
+					if(abcstr[LstNt]=="^") this.miditone(abcstr[LstNt+2],2);
+					else this.miditone(abcstr[LstNt+2],1);
+         		}else{//if b exists, delete one b
+           			abcstr=abcstr.substring(0,LstNt)+abcstr.substring(LstNt+1);
+					if(abcstr[LstNt-1]=="_") this.miditone(abcstr[LstNt],-1);
+					else this.miditone(abcstr[LstNt],0);
+         		}
+        	}
+		}else if(md==3){
+			var ChEnd;//chord end
+			var LstNt;//last note of this chord
+			var NtChs = ["a","b","c","d","e","f","g","A","B","C","D","E","F","G"];//possible note chars
+			for(var i=mvpos(1)+2;i<abcstr.length;i++){
+				if(abcstr[i]=="]"){
+					ChEnd=i;
+					break;
+				}
+				if(i==abcstr.length-1) return;
+			}
+			for(var i=ChEnd-1;i>mvpos(1);i--){
+				if(NtChs.includes(abcstr[i])){
+					LstNt=i-1;
+					break;
+				}
+				if(i==mvpos(1)+1) return;
+			}
+			if(!(abcstr[LstNt]=="_" && abcstr[LstNt-1]=="_")){//only allow 2 bs
+          		if(abcstr[LstNt]!="^"){
+           			abcstr=abcstr.substring(0,LstNt+1)+"_"+abcstr.substring(LstNt+1);
+					if(abcstr[LstNt]=="_") this.miditone(abcstr[LstNt+2],-2);
+					else this.miditone(abcstr[LstNt+2],-1);
+         		}else{//if b exists, delete one b
+           			abcstr=abcstr.substring(0,LstNt)+abcstr.substring(LstNt+1);
+					if(abcstr[LstNt-1]=="^") this.miditone(abcstr[LstNt],1);
+					else this.miditone(abcstr[LstNt],0);
+         		}
+        	}
 		}
 	};
 	this.newline = () => {
@@ -447,6 +645,9 @@ function msoe () {
       			CrtPos=mvpos(1);
 			}
 	};
+	var CpMd=false; //copy mode
+	var CpStP=0; //copy startpoint
+	var CpStr=""; //copy string
 	this.copymode = () => {
 		if(CpMd){
 			CpMd=false;
@@ -529,7 +730,7 @@ function msoe () {
 		if(k==16){//"shift" for chord mode off
 			if(abcstr.substr(mvpos(1),3)==="$[]"){//if no notes are inserted
 				abcstr=abcstr.substring(0,mvpos(1))+abcstr.substring(mvpos(1)+3);
-			}else{
+			}else if(abcstr.substr(mvpos(1),2)==="$["){
 				abcstr=abcstr.substring(0,mvpos(1)+1)+"#"+abcstr.substring(mvpos(1)+1);
 				CrtPos=mvpos(1);
 			}
@@ -537,6 +738,9 @@ function msoe () {
 			this.print();
   		}
 	};
+	this.checkpause = () => {
+		return (Math.pow(2,Dstate%10-5)*eval(Lstr)>=2);
+	}
 }
 
 var MSOE = new msoe();
@@ -544,15 +748,13 @@ var Edit = true; //if it's editable
 
 
 $("#DDDD").click(function(){
-  if(Dstate%10!=8){//Pause with duration of 8 is illegal
-	  MSOE.outinsert("z",1,0,1);
-      MSOE.print();
+  if(!MSOE.checkpause()){//Pause with duration of 8 is illegal
+	MSOE.outinsert("z",1,0,1);
+  }else{
+    alert("Pause with duration of 2 is illegal.");
   }
-  else{
-      alert("Pause with duration of 8 is illegal.");
-  }
+  break;
 });
-
 
 
 var checkinput = () => {//if input tags are focused, turn off key events
@@ -607,71 +809,74 @@ var moveleft = () => {
 
 var key = () => { // only keypress can tell if "shift" is pressed at the same time
   	if(checkinput()) return;
+	if(event.keyCode==101){
+		Edit=!Edit;
+		MSOE.print();
+		return;
+	}
   	if(!Edit) return;
 	switch(event.keyCode){
-	case 44://"<"
-		MSOE.ChgDstate(0);
+		case 44://"<"
+			MSOE.ChgDstate(0);
         	moveright();
-		break;
-	case 46://">"
-		MSOE.ChgDstate(1);
+			break;
+		case 46://">"
+			MSOE.ChgDstate(1);
         	moveleft();
-		break;
-	case 60://"shift+>"
-		MSOE.ChgDstate(2);
-		break;
-	case 62://"shift+<"
-		MSOE.ChgDstate(3);
-		break;
+			break;
+		case 60://"shift+>"
+			MSOE.ChgDstate(2);
+			break;
+		case 62://"shift+<"
+			MSOE.ChgDstate(3);
+			break;
 	// ----------Change Dstate-----------
     	case 63://"shift+?" for chord mode
     	case 47://"?"
-      		MSOE.ChgTstate(0);
-      		document.getElementById("octave").innerHTML=(Tstate+3);
+      		document.getElementById("octave").innerHTML=(MSOE.ChgTstate(0)+3);
       		break;
     	case 34://"shift+'" for chord mode
     	case 39://"'" 
-      		MSOE.ChgTstate(1);
-      		document.getElementById("octave").innerHTML=(Tstate+3);
+      		document.getElementById("octave").innerHTML=(MSOE.ChgTstate(1)+3);
       		break;
 	// ----------Change Tstate-----------
     	case 122://"Z"
       		MSOE.outinsert("C",1,0,1);
-		MSOE.miditone("C",0);
+			MSOE.miditone("C",0);
       		highlight("#C");
       		break;
     	case 120://"X"
       		MSOE.outinsert("D",1,0,1);
-		MSOE.miditone("D",0);
+			MSOE.miditone("D",0);
       		highlight("#D");
       		break;
     	case 99://"C"
       		MSOE.outinsert("E",1,0,1);
-		MSOE.miditone("E",0);
+			MSOE.miditone("E",0);
       		highlight("#E");
       		break;
     	case 118://"V"
       		MSOE.outinsert("F",1,0,1);
-		MSOE.miditone("F",0);
+			MSOE.miditone("F",0);
       		highlight("#F");
       		break;
     	case 98://"B"
       		MSOE.outinsert("G",1,0,1);
-		MSOE.miditone("G",0);
+			MSOE.miditone("G",0);
       		highlight("#G");
       		break;
     	case 110://"N"
       		MSOE.outinsert("A",1,0,1);
-		MSOE.miditone("A",0);
+			MSOE.miditone("A",0);
       		highlight("#A");
       		break;
     	case 109://"M"
       		MSOE.outinsert("B",1,0,1);
-		MSOE.miditone("B",0);
+			MSOE.miditone("B",0);
       		highlight("#B");
       		break;
   // ----------Insert Note------------
-	case 115://"S"
+		case 115://"S"
       		MSOE.separate();
       		break;
   // ----------Seperate Notes---------
@@ -680,10 +885,10 @@ var key = () => { // only keypress can tell if "shift" is pressed at the same ti
       		break;
   // ----------Assemble Notes---------
     	case 100://"D"
-      		if(Dstate%10!=8){//Pause with duration of 8 is illegal
+      		if(!MSOE.checkpause()){//Pause with duration of 8 is illegal
 			MSOE.outinsert("z",1,0,1);
       		}else{
-        		alert("Pause with duration of 8 is illegal.");
+        		alert("Pause with duration of 2 is illegal.");
       		}
       		break;
   // ----------Insert Pause-----------
@@ -692,55 +897,106 @@ var key = () => { // only keypress can tell if "shift" is pressed at the same ti
       		break;
   // ----------Insert Bar-------------
     	case 93://"]" for #
-		MSOE.incident(0);
+			MSOE.accidental(0);
       		break;
     	case 91://"[" for b
-      		MSOE.incident(1);
+      		MSOE.accidental(1);
       		break;
+		case 125://"shift+[" for #(chord mode)
+			MSOE.accidental(2);
+			break;
+		case 123://"shift+]" for b(chord mode)
+			MSOE.accidental(3);
+			break;
   // ----------Accidental-------------
     	case 90://"shift+Z"
-		MSOE.outinsertch("C");
-		MSOE.miditone("C",0);
+			MSOE.outinsertch("C");
+			MSOE.miditone("C",0);
       		break;
     	case 88://"shift+X"
       		MSOE.outinsertch("D");
-		MSOE.miditone("D",0);
+			MSOE.miditone("D",0);
       		break;
     	case 67://"shift+C"
       		MSOE.outinsertch("E");
-		MSOE.miditone("E",0);
+			MSOE.miditone("E",0);
       		break;
     	case 86://"shift+V"
       		MSOE.outinsertch("F");
-		MSOE.miditone("F",0);
+			MSOE.miditone("F",0);
       		break;
     	case 66://"shift+B"
       		MSOE.outinsertch("G");
-		MSOE.miditone("G",0);
+			MSOE.miditone("G",0);
       		break;
     	case 78://"shift+N"
       		MSOE.outinsertch("A");
-		MSOE.miditone("A",0);
+			MSOE.miditone("A",0);
       		break;
     	case 77://"shift+M"
       		MSOE.outinsertch("B");
-		MSOE.miditone("B",0);
+			MSOE.miditone("B",0);
       		break;
   // ----------Chord Mode-------------
     	case 13://"enter"
-		MSOE.newline();
+			MSOE.newline();
       		break;
   // ----------New Line---------------
-	case 70://"shift+f" turn on and off copy mode
-		MSOE.copymode();
+		case 70://"shift+f" turn on and off copy mode
+			MSOE.copymode();
       		break;
-	case 102://"f" cancel copy mode(when it's on)
-		MSOE.copycancel();
-		break;
-	case 103://"g" paste
-		MSOE.paste();
-		break;
-	// ----------Copy Mode--------------
+		case 102://"f" cancel copy mode(when it's on)
+			MSOE.copycancel();
+			break;
+		case 103://"g" paste
+			MSOE.paste();
+			break;
+  // ----------Copy Mode--------------
+		case 113://"q" toggle clef setting mode
+			MSOE.ClfMdTgl();
+			break;
+		case 49://"1" set clef to treble or jump to 1st voice
+			MSOE.ClfOrVic(49);
+			break;
+		case 50://"2" set clef to alto or jump to 2nd voice
+			MSOE.ClfOrVic(50);
+			break;
+		case 51://"3" set clef to tenor or jump to 3rd voice
+			MSOE.ClfOrVic(51);
+			break;
+		case 52://"4" set clef to bass or jump to 4th voice
+			MSOE.ClfOrVic(52);
+			break;
+		case 53://"5" jump to 5th voice
+			MSOE.ClfOrVic(53);
+			break;
+		case 54://"6" jump to 6th voice
+			MSOE.ClfOrVic(54);
+			break;
+		case 119://"w" add a voice
+			MSOE.AddVoice();
+			break;
+		case 87://"shift+w" delete current voice
+			MSOE.DelVoice();
+			break;
+		case 114://"r" swap two voices (mark current voice to be one of them)
+			MSOE.VicChgA();
+			break;
+		case 82://"shift+r" swap two voices (swap current voice and the one marked before)
+			MSOE.VicChgB();
+			break;
+  // ----------Clef and Voice----------
+		case 116://"t" use browser printer to print the sheet (can save as pdf)
+			printJS('boo','html');
+			break;
+  // ----------Print (as pdf)----------
+		case 45://"-" tie two notes
+			MSOE.tie();
+			break;
+		case 61://"=" untie
+			MSOE.untie();
+			break;
+  // ----------Tie and Untie-----------
     	default:
 	}
 	console.log(event.keyCode);
@@ -758,16 +1014,16 @@ var move = () => { // some keys can't be detected in keypress
 		MSOE.outmove(1);
 	}
   	if(event.keyCode==38){//"up"
-    		MSOE.outmove(2);
+    	MSOE.outmove(2);
   	}
   	if(event.keyCode==40){//"down"
-    		MSOE.outmove(3);
+    	MSOE.outmove(3);
   	}
 	if(event.keyCode==36){//"home"
-    		MSOE.outmove2(4);
+    	MSOE.outmove2(4);
   	}
 	if(event.keyCode==35){//"end"
-    		MSOE.outmove2(5);
+    	MSOE.outmove2(5);
   	}
   	if(event.keyCode==8){//"backspace"
 		MSOE.del();

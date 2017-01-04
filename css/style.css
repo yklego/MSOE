@@ -41,7 +41,7 @@ html, body {
 }
 .left {
   padding: 10px;
-  position: fixed;
+  /*position: fixed;*/
 }
 .left input {
   margin-left: 10px;

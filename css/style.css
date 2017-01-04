@@ -28,6 +28,11 @@ padding: -15px;
 margin: 0px;
 }
 
+.mode{
+  position: fixed;
+  top: 5%;
+  right: 5%;
+}
 
 .row {
   margin-left: -15px;
@@ -64,6 +69,10 @@ background: rgba(0,0,0,0);
 width: 80%;
 margin: 0px;
 padding: 0px;
+}
+
+.sheet{
+  position: relative;
 }
 
 .panel-group {

@@ -15,25 +15,24 @@
 <link rel='stylesheet' href="css/style.css">
 
 </head>
-
 <body>
 
 
 <div class="logo"><img src="http://i.imgur.com/AXlHDR1.png" class="logo" width=300px></div>
 <div class="info"><button type="button" class="btn btn-secondary-lg" data-toggle="modal" data-target="#myModal">Score Info</button></div>
 <div class="mode">
-<button id="edit_mode">編輯</button>
-<button id="preview_mode">預覽</button>
+<button onclick="edit_mode()">編輯</button>
+<button onclick="preview_mode()">預覽</button>
 </div>
 
 <div class="row top">
 <!--row top left-->
 <div class="col-sm-3 col-md-3 col-lg-3">
 <div class="left">
-<div class="col-sm-12 col-md-12 col-lg-12 title">Tempo</div>
-<input class="col-sm-12 col-md-12 col-lg-12 input_tempo" onchange="chgtmp(this)"/>
-<div class="col-sm-12 col-md-12 col-lg-12 title">Notes</div>
-<div class="col-sm-12 col-md-12 col-lg-12 extnote">
+<div class="title">Tempo</div>
+<input class="input_tempo" onchange="chgtmp(this)"/>
+<div class="title">Notes</div>
+<div class="extnote">
 <div class="row">
 <button class="col-sm2- col-md-2 col-lg-2"><img src="img/notes-01.png" alt="" class="extra_note" id="" /></button>
 <button class="col-sm2- col-md-2 col-lg-2"><img src="img/notes-02.png" alt="" class="extra_note" id="" /></button>
@@ -215,6 +214,7 @@ G:貼上<br>
 <script src='js/abcjs_basic_2.3-min.js'></script>
 <!--<script src="js/initializedlogpage.js"></script>-->
 <script src="js/MSOEctr.js"></script>
+<script src="js/changemode.js"></script>
 
 </body>
 </html>

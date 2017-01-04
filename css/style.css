@@ -42,6 +42,7 @@ height: 30%;
 }
 .left {
 padding: 10px;
+position: fixed;
 }
 .left input {
   margin-left: 10px;
@@ -67,6 +68,7 @@ padding: 0px;
 
 .panel-group {
 width:200px;
+position: fixed;
 }
 
 .panel-heading {

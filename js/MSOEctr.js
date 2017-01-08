@@ -11,6 +11,7 @@ function msoe () {
 	var maxoffset=0;//the maximum of offset
 	var strs=[];//voices
 	var clef=[];//clef of voices
+  var page=[];
 	clef[0]="treble";//default value
 	this.AddVoice = () => {
 		var temindex=clef.length;
@@ -55,6 +56,8 @@ function msoe () {
 		abcindex=j;
 		CrtPos=0;
 	};
+  var start = 0;
+  var p = 0;
 	var ForPrint = () => {
 		console.log(abcstr);
 		console.log(clef.length);
@@ -63,10 +66,26 @@ function msoe () {
 			if(i!=abcindex){
 				finalstr+="V: "+(i+1)+" clef="+clef[i]+"\n[|"+rmsmb(strs[i],false)+" |]\n";
 			}else{
+        var strrr = abcstr.substring(start);
 				finalstr+="V: "+(i+1)+" clef="+clef[i]+"\n[|"+rmsmb(abcstr,Edit)+" |]\n";
 			}
 		}
-		console.log(finalstr);
+    var N = 0;
+      for(var i=0;i<finalstr.length;i++){
+        if(finalstr.charAt(i) == '\n'){
+          N++;
+        }
+      }
+      if((N - 2) % 4 == 0 && N != 2){
+        page[p] = finalstr;
+        p++;
+        finalstr = "";
+        start = abcstr.length;  
+        $('#pg').text("第" + (p + 1) + "頁");
+        var pgstr = '<button class="pagebutton" id="p' +  (p + 1) + ' onclick="">' +  (p + 1) + '</button>';
+        $("#showpages").append(pgstr);
+      }
+		console.l(g(finalstr);
 		return finalstr;
 	};
 	//-----------------------------------------//for clef
@@ -1072,5 +1091,6 @@ window.onload = () => {
 	MSOE.print();
 	document.onkeypress=key;
  	document.onkeydown=move;
-  	document.onkeyup=chord;
+  document.onkeyup=chord;
+  $("#showpages").hide();
 };

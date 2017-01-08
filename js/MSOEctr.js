@@ -67,7 +67,7 @@ function msoe () {
 				finalstr+="V: "+(i+1)+" clef="+clef[i]+"\n[|"+rmsmb(strs[i],false)+" |]\n";
 			}else{
         var strrr = abcstr.substring(start);
-				finalstr+="V: "+(i+1)+" clef="+clef[i]+"\n[|"+rmsmb(abcstr,Edit)+" |]\n";
+				finalstr+="V: "+(i+1)+" clef="+clef[i]+"\n[|"+rmsmb(strrr,Edit)+" |]\n";
 			}
 		}
     var N = 0;

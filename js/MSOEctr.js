@@ -71,21 +71,21 @@ function msoe () {
 			}
 		}
     var N = 0;
-      for(var i=0;i<finalstr.length;i++){
-        if(finalstr.charAt(i) == '\n'){
-          N++;
-        }
+    for(var i=0;i<finalstr.length;i++){
+      if(finalstr.charAt(i) == '\n'){
+        N++;
       }
-      if((N - 2) % 4 == 0 && N != 2){
-        page[p] = finalstr;
-        p++;
-        finalstr = "";
-        start = abcstr.length;  
-        $('#pg').text("第" + (p + 1) + "頁");
-        var pgstr = '<button class="pagebutton" id="p' +  (p + 1) + ' onclick="">' +  (p + 1) + '</button>';
-        $("#showpages").append(pgstr);
-      }
-		console.l(g(finalstr);
+    }
+    if((N - 2) % 4 == 0 && N != 2){
+      page[p] = finalstr;
+      p++;
+      finalstr = "";
+      start = abcstr.length;  
+      $('#pg').text("第" + (p + 1) + "頁");
+      var pgstr = '<button class="pagebutton" id="p' +  (p + 1) + ' onclick="">' +  (p + 1) + '</button>';
+      $("#showpages").append(pgstr);
+    }
+		console.log(finalstr);
 		return finalstr;
 	};
 	//-----------------------------------------//for clef

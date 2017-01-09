@@ -11,6 +11,18 @@
 <link rel="stylesheet" type="text/css" href="semanticUI/semantic.min.css">
 <link rel="stylesheet" type="text/css" href="semanticUI/components/icon.css">
 <link rel='stylesheet' href="css/style.css">
+
+  <script type="text/javascript">
+  $('#logIn').click(function(){
+    $('#modaldiv').modal('show')
+                  .modal('setting', 'transition', fade down);}); </script>
+
+  <script type="text/javascript">
+    window.onload = function(){
+    $('#modaldiv').modal('show')
+                  .modal('setting', 'transition', fade down);}); </script>
+  
+
 </head>
 
 
@@ -18,29 +30,12 @@
   
   <div id="modaldiv" class="ui modal">
   <i class="close icon"></i>
-  <div class="header">
-    Profile Picture
+  <div class="ui header">
+  <img class="ui circular image" src="http://i.imgur.com/AXlHDR1.png"/>
+  <div class="content">帳號設定 <div class="sub header">管理您的帳號與 Email 設定</div>
   </div>
-  <div class="content">
-    <div class="ui medium image">
-      <img src="/images/avatar/large/chris.jpg">
     </div>
-    <div class="description">
-      <div class="ui header">We've auto-chosen a profile image for you.</div>
-      <p>We've grabbed the following image from the <a href="https://www.gravatar.com" target="_blank">gravatar</a> image associated with your registered e-mail address.</p>
-      <p>Is it okay to use this photo?</p>
-    </div>
-  </div>
-  <div class="actions">
-    <div class="ui black button">
-      Nope
-    </div>
-    <div class="ui positive right labeled icon button">
-      Yep, that's me
-      <i class="checkmark icon"></i>
-    </div>
-  </div>
-</div>
+  
  
 <div class="logo"><img src="http://i.imgur.com/AXlHDR1.png" class="logo" width=300px></div>
 <div class="modal" id="logIn"><button class="ui button">Score Info</button></div>
@@ -51,7 +46,15 @@
 <input class="one column row input_tempo" onchange="chgtmp(this)"/>
 <div class="one column row">Notes</div>
 <div class="one column row">
-<button class="circular ui button column"><img src="img/notes-01.png" alt="" class="extra_note ui circular image" id="" /></button>
+<button class="
+               
+               
+               
+               
+               
+               
+               
+               ui button column"><img src="img/notes-01.png" alt="" class="extra_note ui circular image" id="" /></button>
 <button class="circular ui button column"><img src="img/notes-02.png" alt="" class="extra_note ui circular image" id="" /></button>
 <button class="circular ui button column"><img src="img/notes-04.png" alt="" class="extra_note ui circular image" id="" /></button>
 <button class="circular ui button column"><img src="img/notes-08.png" alt="" class="extra_note ui circular image" id="" /></button>
@@ -240,14 +243,6 @@ G:貼上<br>
 <!--<script src="js/initializedlogpage.js"></script>-->
 <script src="js/MSOEctr.js"></script>
 
-<script type="text/javascript">
-  $('#logIn').click(function(){
-    $('#modaldiv').modal('show');    
-  }); </script>
-<script type="text/javascript">
-    window.onload = function(){
-    $('#modaldiv').modal('show');    
-    };</script>
 
 </body>
 </html>

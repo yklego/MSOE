@@ -50,15 +50,11 @@ overflow-y: scroll;
 }
 
 button{
-padding: 0px;
-border: 0px;
 background: rgba(0,0,0,0);
 }
 .extra_note{
 height: 5%;
 width: 5%;
-margin: 0px;
-padding: 0px;
 }
 
 .panel-group {

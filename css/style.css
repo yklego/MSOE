@@ -4,19 +4,7 @@ font-size: 24px;
 padding: -15px;
 margin: 0px;
 }
-
-.modal-content {
-  background-color:#808080;
-color:#FFFFFF;
-
-}
-
-.modal-backdrop {
-opacity: 1 !important;
-filter: Alpha(opacity=50);
-        background-image: url("http://i.giphy.com/rmPO4UCJXGNNu.gif");
-        background-size:cover;  
-}
+ 
 
 html, body {
 padding: -15px;

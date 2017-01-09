@@ -48,9 +48,46 @@
   <div class="ui center aligned large header">Music Sheet Online Editor<div class="center aligned sub header ">線上樂譜編輯網</div></div>
     <button class="ui center aligned large button" id="infomodal">START</button></h1>
   </div>
+
 <div id="modaldiv2" class="ui modal fill">
-  <h1>test</h1>
-  </div>
+ <h2 class="ui header"><img src="img/logo.png" class="ui circular image"> 樂譜資訊 <h3 class="sub header"> Score Info </h3></h2>
+	<p>開始編輯！填入樂譜的資訊</p>
+	<form class="ui form">
+  
+	<div class="two fields">
+   <div class="field">
+    <label> 編輯人 Editor </label>
+    <input type="text" name="whoiseditor" placeholder="Editor Name Here">
+	  </div>
+  
+  <div class="field">
+   <label> 作曲人 Composer </label>
+   <input type="text" name="whoiscomposer" placeholder="Composer Name Here">
+	  </div>
+        </div>
+
+  <div class="field">
+  <label> 譜名 Title </label>
+  <input type="text" name="whatistitle" placeholder="Title Here">
+	  </div>
+  
+  <div class="field">
+  <label> 副標 Subtitle </label>
+  <input type="text" name="whatissubtitle" placeholder="Subtitle Here">
+	  </div>
+		
+   <div class="two fields">
+   <div class="field">
+    <label> 專輯 Album </label>
+    <input type="text" name="whichalbum" placeholder="Album Name">
+	  </div>
+   <div class="field">
+   <label> 演出者 Artist </label>
+   <input type="text" name="whoisartist" placeholder="Artist Name Here">
+	  </div>
+        </div>
+	</form></div> 
+    
   
   
  
@@ -256,7 +293,10 @@ G:貼上<br>
   $('#infohome').click(function(){
     $('#modaldiv2').modal('setting', 'transition', 'fade down')
                   .modal('show')
-                  .modal({allowMultiple: false});});
+                  .modal({allowMultiple: false})
+	          .modal({blurring: true})
+	  	  .modal('setting', 'closable', false)
+	  ;});
                    </script>
  
   <script type="text/javascript">
@@ -265,7 +305,9 @@ G:貼上<br>
     $('#modaldiv2').modal('setting', 'transition', 'fade down')
                    .modal('show')
                    .modal({allowMultiple: false})
-                   .modal({blurring: true});});
+                   .modal({blurring: true})
+	  　　　　   .modal('setting', 'closable', false)
+	  ;});
    
 	</script>
                  
@@ -274,6 +316,8 @@ G:貼上<br>
       $('#modaldiv1').modal('setting', 'transition', 'fade down')
                      .modal('show')
                      .modal({allowMultiple: false})
+	    	     .modal({blurring: true})
+	    	      .modal('setting', 'closable', false)
       ;};</script>
   
   <script type="text/javascript">

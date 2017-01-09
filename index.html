@@ -16,15 +16,25 @@
 
 <body>
 
-<script type="text/javascript">
-  $('.ui.modal').modal('show');</script>
- <div class="ui modal">
- <i class="close icon"></i>
- <div class="header">
-    Profile Picture</div>
-  <div class="image content">
+<a class="item" id="logIn">
+    <i class="user icon"></i> Log In 
+</a>
+ <script type="text/javascript">
+
+  $('#logIn').click(function(){
+    $('#modaldiv').modal('show');    
+  });
+
+  </script>
+  
+  <div id="modaldiv" class="ui modal">
+  <i class="close icon"></i>
+  <div class="header">
+    Profile Picture
+  </div>
+  <div class="content">
     <div class="ui medium image">
-      <img src="img/notes-01.png">
+      <img src="/images/avatar/large/chris.jpg">
     </div>
     <div class="description">
       <div class="ui header">We've auto-chosen a profile image for you.</div>
@@ -33,7 +43,7 @@
     </div>
   </div>
   <div class="actions">
-    <div class="ui black deny button">
+    <div class="ui black button">
       Nope
     </div>
     <div class="ui positive right labeled icon button">

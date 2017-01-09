@@ -11,6 +11,14 @@ padding: -15px;
 margin: 5px;
 }
 
+.fill {
+background-size: cover;
+  background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/full-lonely.jpg") no-repeat center center fixed;
+  background-blend-mode: darken;
+  transition: 3s;
+
+}
+ 
 .top {
 height: 70%;
 overflow-y: scroll;

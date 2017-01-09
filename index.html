@@ -17,7 +17,7 @@
 
 <body>
   
-  <div id="modaldiv" class="ui modal">
+  <!--<div id="modaldiv" class="ui modal">
   <i class="close icon"></i>
   <div class="header">
     Profile Picture
@@ -41,14 +41,15 @@
       <i class="checkmark icon"></i>
     </div>
   </div>
-</div>
+</div>-->
   
- <!-- <div id="modaldiv" class="ui modal">
+<div id="modaldiv" class="ui modal">
+  <div class="header">
   <h2 class="ui header">
   <img class="ui circular image" src="http://i.imgur.com/AXlHDR1.png"/>
   <div class="content">帳號設定 <div class="sub header">管理您的帳號與 Email 設定</div>
   </div>
-    </h2>-->
+  </h2></div>
   
  
 <div class="logo"><img src="http://i.imgur.com/AXlHDR1.png" class="logo" width=300px></div>
@@ -251,13 +252,13 @@ G:貼上<br>
 
 <script type="text/javascript">
   $('#logIn').click(function(){
-    $('#modaldiv').modal('setting', 'transition', 'horizontal flip')
-      .modal('show');});</script>
+    $('#modaldiv').modal('setting', 'transition', 'fade down')
+                  .modal('show');});</script>
                  
   <script type="text/javascript">
     window.onload = function(){
-      $('#modaldiv').modal('setting', 'transition', 'horizontal flip')
-        .modal('show');};</script>
+      $('#modaldiv').modal('setting', 'transition', 'fade down')
+                    .modal('show');};</script>
   
                   
 

@@ -43,17 +43,19 @@
   </div>
 </div>-->
   
-<div id="modaldiv" class="ui modal">
+<div id="modaldiv1" class="ui modal">
   <h1 class="ui center aligned huge header"><img class="ui large circular image" src="img/logo.png"/>
   <div class="ui center aligned large header">Music Sheet Online Editor<div class="center aligned sub header ">線上樂譜編輯網</div></div>
-    <button class="ui center aligned large button">START</button></h1>
+    <button class="ui center aligned large button" id="infomodal">START</button></h1>
   </div>
-
+<div id="modaldiv2" class="ui modal">
+  <h1>test</h1>
+  </div>
   
   
  
 <div class="logo"><img src="http://i.imgur.com/AXlHDR1.png" class="logo" width=300px></div>
-<div class="modal" id="logIn"><button class="ui button">Score Info</button></div>
+<div class="modal" id="infohome"><button class="ui button">Score Info</button></div>
 <!--row top left-->
 <div class="ui grid">
 <div class="four wide column">
@@ -251,14 +253,21 @@ G:貼上<br>
 <script src="js/MSOEctr.js"></script>
 
 <script type="text/javascript">
-  $('#logIn').click(function(){
-    $('#modaldiv').modal('setting', 'transition', 'fade down')
+  $('#infohome').click(function(){
+    $('#modaldiv2').modal('setting', 'transition', 'fade down')
+                  .modal('show');});</script>
+ 
+  <script type="text/javascript">
+  $('#infomodal').click(function(){
+    $('#modaldiv1').modal('setting', 'transition', 'fade down')
+                     .modal('hide')
+    $('#modaldiv2').modal('setting', 'transition', 'fade down')
                   .modal('show');});</script>
                  
   <script type="text/javascript">
     window.onload = function(){
-      $('#modaldiv').modal('setting', 'transition', 'fade down')
-                    .modal('show');};</script>
+      $('#modaldiv1').modal('setting', 'transition', 'fade down')
+                     .modal('show');};</script>
   
                   
 

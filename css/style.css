@@ -49,9 +49,10 @@ background: rgba(0,0,0,0);
 padding: 0px;
 margin: 0px;
 }
+
 .extra_note{
-height: 80px;
-width: auto;
+height: 40px;
+width: 40;
 padding: 0px;
 margin: 0px;
 }

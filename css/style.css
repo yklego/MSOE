@@ -45,14 +45,13 @@ overflow-y: scroll;
 }
 
 button{
-background: rgba(0,0,0,0);
 padding: 0px;
 margin: 0px;
 }
 
 .extra_note{
-height: 40px;
-width: 40;
+height: 30px;
+width: 40px;
 padding: 0px;
 margin: 0px;
 }

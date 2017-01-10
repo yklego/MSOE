@@ -92,6 +92,7 @@ function msoe () {
     }
 		console.log(finalstr);
     console.log(p);
+    console.log(hddiv);
 		return page[a];
 	};
 

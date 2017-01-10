@@ -81,7 +81,7 @@ function msoe () {
       p++;
       start = abcstr.length;  
       $('#pg').text("第" + (p + 1) + "頁");
-      var pgstr = '<button class="pagebutton" id="p' +  (p + 1) + ' onclick="printpage(this)">' +  (p + 1) + '</button>';
+      var pgstr = '<button class="pagebutton" id="p' +  (p + 1) + '" onclick="printpage(this)">' +  (p + 1) + '</button>';
       $('#showpages').append(pgstr);
       var pgdiv = '<div class="boo" id="boo' + (p + 1) + '"></div>';
       $('#sheet').append(pgdiv);

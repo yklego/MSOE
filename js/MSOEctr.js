@@ -1094,11 +1094,11 @@ var chgttl = (a) => {MSOE.chgttl(a)};
 
 $("#save").click(function(e){MSOE.save(e)});
 
-window.onload = () => {
-	MSOE.urlload();
-	MSOE.print();
-	document.onkeypress=key;
- 	document.onkeydown=move;
+$(document).ready(function(){                                                                                                                                 
+  MSOE.urlload();
+  MSOE.print();
+  document.onkeypress=key;
+  document.onkeydown=move;
   document.onkeyup=chord;
   $("#showpages").hide();
-};
+});

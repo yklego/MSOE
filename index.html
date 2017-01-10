@@ -327,13 +327,14 @@ G:貼上<br>
 	</script>
                  
   <script type="text/javascript">
-    window.onload = function(){
+    $(document).ready(function(){
       $('#modaldiv1').modal('setting', 'transition', 'fade down')
                      .modal('show')
                      .modal({allowMultiple: false})
 	    	     .modal({blurring: true})
-	    	      .modal('setting', 'closable', false)
-      ;};</script>
+	    	      .modal('setting', 'closable', false);
+    });
+</script>
   
   <script type="text/javascript">
   $('#cancel').click(function(){

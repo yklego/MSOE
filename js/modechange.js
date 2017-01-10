@@ -10,4 +10,8 @@ var preview_mode = () =>{
   $(".edit_line").hide();
    $("#showpages").show();
 }
-
+var printpage = (a) => {
+  var p = '#boo' + a.substring(1) + '';
+  $(".boo").hide();
+  $(p).show();  
+}

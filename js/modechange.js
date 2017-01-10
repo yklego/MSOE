@@ -11,7 +11,8 @@ var preview_mode = () =>{
    $("#showpages").show();
 }
 var printpage = (a) => {
-  var p = '#boo' + a.substring(1) + '';
+  var b = a.id;
+  var p = '#boo' + b.substring(1) + '';
   $(".boo").hide();
   $(p).show();  
 }

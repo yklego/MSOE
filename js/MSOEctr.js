@@ -86,13 +86,14 @@ function msoe () {
       $('#showpages').append(pgstr);
       
       var pgdiv = '<div class="boo" id="boo' + (p + 1) + '"></div>';
-      var hddiv = 'boo' + (p + 1);
+      var hddiv = 'boo' + p;
       $(hddiv).hide();
       $('#sheet').append(pgdiv);
     }
 		console.log(finalstr);
-    console.log(p);
-    console.log(hddiv);
+    console.log('n' + N);
+    console.log('p' + p);
+    console.log('hddiv' + hddiv);
 		return page[a];
 	};
 

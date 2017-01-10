@@ -327,7 +327,7 @@ G:貼上<br>
 	</script>
                  
   <script type="text/javascript">
-    window.onload,$('#cance1').click = function(){
+    window.onload = function(){
       $('#modaldiv1').modal('setting', 'transition', 'fade down')
                      .modal('show')
                      .modal({allowMultiple: false})
@@ -335,7 +335,17 @@ G:貼上<br>
 	    	      .modal('setting', 'closable', false)
       ;};</script>
   
-  
+  <script type="text/javascript">
+  $('#cance1').click(function(){
+    
+    $('#modaldiv1').modal('setting', 'transition', 'fade down')
+                   .modal('hide')
+                   .modal({allowMultiple: false})
+                   .modal({blurring: true})
+	  　　　　   .modal('setting', 'closable', false)
+	  ;});
+   
+	</script>
                   
 
 </body>

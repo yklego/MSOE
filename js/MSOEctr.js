@@ -86,7 +86,7 @@ function msoe () {
       $('#showpages').append(pgstr);
       
       var pgdiv = '<div class="boo" id="boo' + (p + 1) + '"></div>';
-      var hddiv = '#boo' + p;
+      var hddiv = '#boo' + p + '';
       $(hddiv).hide();
       $('#sheet').append(pgdiv);
     }

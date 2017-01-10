@@ -26,11 +26,6 @@
     <div class="ui medium image">
       <img src="/images/avatar/large/chris.jpg">
     </div>
-    <div class="description">
-      <div class="ui header">We've auto-chosen a profile image for you.</div>
-      <p>We've grabbed the following image from the <a href="https://www.gravatar.com" target="_blank">gravatar</a> image associated with your registered e-mail address.</p>
-      <p>Is it okay to use this photo?</p>
-    </div>
   </div>
   <div class="actions">
     <div class="ui black button">
@@ -97,6 +92,14 @@
  
 <div class="logo"><img src="http://i.imgur.com/AXlHDR1.png" class="logo" width=300px></div>
 <div class="modal" id="infohome"><button class="ui button">Score Info</button></div>
+<div class="mode">
+  <button onclick="edit_mode()">編輯</button>
+  <button onclick="preview_mode()">預覽</button>
+</div>
+<div id="pg">第1頁</div>
+<div id="showpages"><button class="pagebutton" id="p1" onclick="">1</button></div>
+
+
 <!--row top left-->
 <div class="ui grid">
 <div class="four wide column">
@@ -148,8 +151,8 @@
 </div>
  
 <!--row top boo -->
-<div class="ten wide column sheet">
-<div id="boo"></div>
+<div class="ten wide column sheet" id="sheet">
+<div class="boo" id="boo1"></div>
 </div>
 
 
@@ -296,6 +299,7 @@ G:貼上<br>
 <script src='js/abcjs_basic_2.3-min.js'></script>
 <!--<script src="js/initializedlogpage.js"></script>-->
 <script src="js/MSOEctr.js"></script>
+<script src="js/modechange.js"></script>
 
 	
 <script type="text/javascript">	

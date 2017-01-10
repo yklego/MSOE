@@ -58,7 +58,7 @@ function msoe () {
 	};
   var start = 0;
   var p = 0;
-	var ForPrint = (a) => {
+	var ForPrint = () => {
 		console.log(abcstr);
 		console.log(clef.length);
 		var finalstr="";
@@ -79,7 +79,6 @@ function msoe () {
     if((N - 2) % 4 == 0 && N != 2){
       page[p] = finalstr;
       p++;
-      page[p] = "";
       start = abcstr.length;  
       $('#pg').text("第" + (p + 1) + "頁");
       var pgstr = '<button class="pagebutton" id="p' +  (p + 1) + ' onclick="">' +  (p + 1) + '</button>';
@@ -94,7 +93,7 @@ function msoe () {
     console.log('n' + N);
     console.log('p' + p);
     console.log('hddiv' + hddiv);
-		return page[a];
+		return finalstr;
 	};
 
 	//-----------------------------------------//for clef
@@ -125,7 +124,7 @@ function msoe () {
 	};
 	//-----------------------------------------//
 	this.print = () => {//output svg
-		abcjs.renderAbc('boo' + (p + 1),"T: "+ttlstr+"\nM: "+tmpstr+"\nL: "+Lstr+"\n"+ForPrint(p),{},{add_classes:true, editable:true, listener:{highlight:(abcElem)=>{//update CrtPos when note is clicked
+		abcjs.renderAbc('boo' + (p + 1),"T: "+ttlstr+"\nM: "+tmpstr+"\nL: "+Lstr+"\n"+ForPrint(),{},{add_classes:true, editable:true, listener:{highlight:(abcElem)=>{//update CrtPos when note is clicked
 			console.log(abcElem.startChar);
 			var ignsmbs=["$","#","*"];//symbols that won't be in the final abcstring
 			var NumBefCrt=0;//number of chars before current position

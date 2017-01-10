@@ -84,13 +84,13 @@ function msoe () {
       $('#pg').text("第" + (p + 1) + "頁");
       var pgstr = '<button class="pagebutton" id="p' +  (p + 1) + ' onclick="">' +  (p + 1) + '</button>';
       $('#showpages').append(pgstr);
-      
       var pgdiv = '<div class="boo" id="boo' + (p + 1) + '"></div>';
-      var hddiv = '#boo' + p + '';
-      $(hddiv).hide();
       $('#sheet').append(pgdiv);
     }
-		console.log(finalstr);
+    var hddiv = '#boo' + p + '';
+    $(hddiv).hide();
+		
+    console.log(finalstr);
     console.log('n' + N);
     console.log('p' + p);
     console.log('hddiv' + hddiv);

@@ -24,14 +24,7 @@ overflow-y: scroll;
 .bottom {
 height: 30%;
 }
-.left {
-padding: 10px;
-}
-.left input {
-  margin-left: 10px;
-border: solid 1px black;
-width: 50%;
-}
+
 
 h2{
 color:white;

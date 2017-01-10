@@ -125,7 +125,7 @@ function msoe () {
 	};
 	//-----------------------------------------//
 	this.print = () => {//output svg
-		abcjs.renderAbc('boo' + p,"T: "+ttlstr+"\nM: "+tmpstr+"\nL: "+Lstr+"\n"+ForPrint(p),{},{add_classes:true, editable:true, listener:{highlight:(abcElem)=>{//update CrtPos when note is clicked
+		abcjs.renderAbc('boo' + (p + 1),"T: "+ttlstr+"\nM: "+tmpstr+"\nL: "+Lstr+"\n"+ForPrint(p),{},{add_classes:true, editable:true, listener:{highlight:(abcElem)=>{//update CrtPos when note is clicked
 			console.log(abcElem.startChar);
 			var ignsmbs=["$","#","*"];//symbols that won't be in the final abcstring
 			var NumBefCrt=0;//number of chars before current position

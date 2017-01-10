@@ -86,11 +86,9 @@
    <input type="text" name="whoisartist" placeholder="Artist Name Here">
 	  </div>
         </div>
-	<div class="two fields"> 
-	<div class="field">
-		<div class="ui button" tabindex="0"> 取消 Cancel </div></div>
-	<div class="field">
-		<div class="ui button" tabindex="0"> 提交 Submit </div></div>
+	<div class="getin"> 
+	<div class="ui button" tabindex="0"> 提交 Submit </div>
+	<div class="ui button" tabindex="0"> 取消 Cancel </div>
 		</div>
 	</form>
 	</div> 
@@ -157,28 +155,21 @@
 
 <!--row top right-->
 <div class="two wide column">  
-<div class="panel-group" id="accordion">
-<div class="panel panel-default">
-<div class="panel-heading">
-<div class="panel-title">
-<a data-toggle="collapse" data-parent="#accordion" 
-href="#collapseOne">
-Manual
-</a>
-</div>
-</div>
-<div id="collapseOne" class="panel-collapse collapse in">
-<div class="panel-body">
-游標指令:<br>
+<div class="ui visible sidebar inverted vertical menu">
+<a class="item">
+<h4 class="ui header">游標指令</h4>
+<p>游標指令:<br>
 左 :向左移一格<br>
 右 :向右移一格<br>
 上 :移動到上一行最尾端<br>
 下 :移動到下一行最開始<br> 
 home :移動到此行最開始<br> 
 end :移動到此行最尾端<br> 
-<br> 
-編輯指令:<br> 
-shift+Z~M :和弦模式<br> 
+	<br> </p></a>
+
+<a class="item">
+<h4 class="ui header">編輯指令</h4>
+<p>shift+Z~M :和弦模式<br> 
 D :休止符<br> 
 | :手動加小節線<br>  
 < > :節拍(/2 or *2)<br> 
@@ -190,17 +181,22 @@ Backspace :刪除<br>
 [ :增加降音記號<br> 
 S :將連在一起的音符分開<br> 
 A :將被分開的音符再次連起來<br> 
-<br> 
-複製指令:<br>  
-shift+F (普通模式下) :開啟複製模式並記錄此點為複製開始點<br> 
+	<br> </p></a>
+
+<a class="item">
+<h4 class="ui header">複製指令</h4>
+<p>shift+F (普通模式下) :開啟複製模式並記錄此點為複製開始點<br> 
 shift+F (複製模式下) :以目前位置為複製結束點，記錄複製的東西並結束複製模式<br> 
 F (複製模式下) :取消複製<br> 
-G:貼上<br> 
+G:貼上<br>
+<br> </p></a>
+
+  
+ 
 </div>
 </div>
-</div>
-</div>
-</div>
+
+
   
 <!--row bottom-->
 <div class="row bottom">
@@ -243,7 +239,7 @@ G:貼上<br>
 </div>
 
 
-<!-- modal page -->
+<!-- modal page 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 <div class="modal-dialog">
 <div class="modal-content">
@@ -290,12 +286,19 @@ G:貼上<br>
 <button type="submit" class="btn btn-default btn-default" data-dismiss="modal">Cancel</button>
 </div>
 </div>
-</div>
+</div>-->
 
 <script src='js/abcjs_basic_2.3-min.js'></script>
 <!--<script src="js/initializedlogpage.js"></script>-->
 <script src="js/MSOEctr.js"></script>
 
+	
+<script type="text/javascript">	
+	$('#tool').click(function(){
+	$('#sidebar').sidebar('toggle');
+	}
+		
+	
 <script type="text/javascript">
   $('#infohome').click(function(){
     $('#modaldiv2').modal('setting', 'transition', 'fade down')

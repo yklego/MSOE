@@ -87,7 +87,7 @@
 	  </div>
         </div>
 	<div class="ui button" id="submit" tabindex="0"> 提交 Submit </div>
-	<div class="ui button" id="cancel" tabindex="0"> 取消 Cancel </div>
+	<div class="ui button" id="cance1" tabindex="0"> 取消 Cancel </div>
 	
 	</form>
 	</div> 
@@ -327,8 +327,8 @@ G:貼上<br>
 	</script>
                  
   <script type="text/javascript">
-    window.onload = function(){
-      $('#modaldiv1,#cancel').modal('setting', 'transition', 'fade down')
+    window.onload,$('#cance1').click = function(){
+      $('#modaldiv1').modal('setting', 'transition', 'fade down')
                      .modal('show')
                      .modal({allowMultiple: false})
 	    	     .modal({blurring: true})

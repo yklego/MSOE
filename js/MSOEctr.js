@@ -124,7 +124,7 @@ function msoe () {
 	};
 	//-----------------------------------------//
 	this.print = () => {//output svg
-		abcjs.renderAbc('boo' + (p + 1),"T: "+ttlstr+"\nM: "+tmpstr+"\nL: "+Lstr+"\n"+ForPrint(),{},{add_classes:true, editable:true, listener:{highlight:(abcElem)=>{//update CrtPos when note is clicked
+		abcjs.renderAbc('boo' + (p + 1),"T: "+ttlstr+"\nM: "+tmpstr+"\nL: "+Lstr+"\nC: "+cmpstr+"\n"+ForPrint(),{},{add_classes:true, editable:true, listener:{highlight:(abcElem)=>{//update CrtPos when note is clicked
 			console.log(abcElem.startChar);
 			var ignsmbs=["$","#","*"];//symbols that won't be in the final abcstring
 			var NumBefCrt=0;//number of chars before current position
@@ -134,7 +134,7 @@ function msoe () {
 				}
 			}
 			console.log(NumBefCrt);
-			var offset=abcElem.startChar-11-ttlstr.length-tmpstr.length-Lstr.length-GetStrOffset(abcindex);
+			var offset=abcElem.startChar-15-ttlstr.length-tmpstr.length-Lstr.length-cmpstr.length-GetStrOffset(abcindex);
 			console.log(offset);
 			if((offset<0)||(offset>maxoffset)) return;
 			if(offset>NumBefCrt+10+String(numtostr(Math.pow(2,Dstate%10-4)*(1-Math.pow(1/2,Math.floor(Dstate/10)+1)))).length){//if after the cursor, - the string length of cursor
@@ -164,6 +164,12 @@ function msoe () {
 			}
 	  	}}});
 	};
+	this.printabc = () => {
+    	$(".boo").show();
+		printJS("sheet","html");
+		$(".boo").hide();
+		$("#boo"+(p+1)).show();
+	};
 	this.chgttl = (a) => {//update title
 		if(!Edit) return;
 		ttlstr=a.value;
@@ -184,6 +190,12 @@ function msoe () {
 		if(a.value=="") Lstr="1/4";
 		this.print();
 	};
+	var cmpstr="";
+	this.chgcmp = (a) => {
+		if(!Edit) return;
+		cmpstr=a.value;
+		this.print();
+	}
 	var tonum = (str) => {
 		var Dnmntr=0;//denominator
 		var Nmrtr=0;//numerator
@@ -836,11 +848,6 @@ var moveleft = () => {
 
 var key = () => { // only keypress can tell if "shift" is pressed at the same time
   	if(checkinput()) return;
-	if(event.keyCode==101){
-		Edit=!Edit;
-		MSOE.print();
-		return;
-	}
   	if(!Edit) return;
 	switch(event.keyCode){
 		case 44://"<"
@@ -1014,7 +1021,7 @@ var key = () => { // only keypress can tell if "shift" is pressed at the same ti
 			break;
   // ----------Clef and Voice----------
 		case 116://"t" use browser printer to print the sheet (can save as pdf)
-			printJS('boo','html');
+			MSOE.printabc();
 			break;
   // ----------Print (as pdf)----------
 		case 45://"-" tie two notes
@@ -1089,8 +1096,25 @@ var btn = (a) => {//buttons for notes
   	highlight(a);
 };
 
+var chgcmp = (a) => {MSOE.chgcmp(a)};
 var chgtmp = (a) => {MSOE.chgtmp(a)};
 var chgttl = (a) => {MSOE.chgttl(a)};
+
+$(document).ready(function(){
+	$("input").change(function(){
+		switch(this.name){
+			case "whoiscomposer":
+				chgcmp(this);
+				break;
+			case "whatistempo":
+				chgtmp(this);
+				break;
+			case "whatistitle":
+				chgttl(this);
+				break; 
+		}
+	});
+});
 
 $("#save").click(function(e){MSOE.save(e)});
 

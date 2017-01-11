@@ -848,11 +848,6 @@ var moveleft = () => {
 
 var key = () => { // only keypress can tell if "shift" is pressed at the same time
   	if(checkinput()) return;
-	if(event.keyCode==101){
-		Edit=!Edit;
-		MSOE.print();
-		return;
-	}
   	if(!Edit) return;
 	switch(event.keyCode){
 		case 44://"<"

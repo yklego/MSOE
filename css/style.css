@@ -1,13 +1,13 @@
 *{
   font-family: Calibri;
   font-size: 24px;
-  padding: 10px;
+  padding: 0px;
   margin: 0px;
   
 }
 
 html, body {
-padding: -15px;
+padding: 0px;
 margin: 5px;
 }
 
@@ -34,7 +34,7 @@ margin: 0px;
 .extra_note{
 height: 30px;
 width: auto;
-padding: 0px;
+padding: 2px;
 margin: 0px;
 }
 

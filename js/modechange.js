@@ -4,6 +4,7 @@ var edit_mode = () =>{
   $(".edit_line").show();
   $("#showpages").hide();
   Edit=true;
+  MSOE.print();
 }
 var preview_mode = () =>{
   $(".left").hide();
@@ -11,6 +12,7 @@ var preview_mode = () =>{
   $(".edit_line").hide();
   $("#showpages").show();
   Edit=false;
+  MSOE.print();
 }
 var printpage = (a) => {
   var b = a.id;

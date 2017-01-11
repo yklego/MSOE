@@ -124,7 +124,7 @@ function msoe () {
 	};
 	//-----------------------------------------//
 	this.print = () => {//output svg
-		abcjs.renderAbc('boo' + (p + 1),"T: "+ttlstr+"\nM: "+tmpstr+"\nL: "+Lstr+"\n"+ForPrint(),{},{add_classes:true, editable:true, listener:{highlight:(abcElem)=>{//update CrtPos when note is clicked
+		abcjs.renderAbc('boo' + (p + 1),"T: "+ttlstr+"\nM: "+tmpstr+"\nL: "+Lstr+"\nC: "+cmpstr+"\n"+ForPrint(),{},{add_classes:true, editable:true, listener:{highlight:(abcElem)=>{//update CrtPos when note is clicked
 			console.log(abcElem.startChar);
 			var ignsmbs=["$","#","*"];//symbols that won't be in the final abcstring
 			var NumBefCrt=0;//number of chars before current position
@@ -134,7 +134,7 @@ function msoe () {
 				}
 			}
 			console.log(NumBefCrt);
-			var offset=abcElem.startChar-11-ttlstr.length-tmpstr.length-Lstr.length-GetStrOffset(abcindex);
+			var offset=abcElem.startChar-15-ttlstr.length-tmpstr.length-Lstr.length-cmpstr.length-GetStrOffset(abcindex);
 			console.log(offset);
 			if((offset<0)||(offset>maxoffset)) return;
 			if(offset>NumBefCrt+10+String(numtostr(Math.pow(2,Dstate%10-4)*(1-Math.pow(1/2,Math.floor(Dstate/10)+1)))).length){//if after the cursor, - the string length of cursor

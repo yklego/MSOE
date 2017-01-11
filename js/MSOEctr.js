@@ -56,8 +56,6 @@ function msoe () {
 		abcindex=j;
 		CrtPos=0;
 	};
-  var start = 0;
-  var p = 0;
 	var ForPrint = () => {
 		console.log(abcstr);
 		console.log(clef.length);
@@ -66,33 +64,9 @@ function msoe () {
 			if(i!=abcindex){
 				finalstr+="V: "+(i+1)+" clef="+clef[i]+"\n[|"+rmsmb(strs[i],false)+" |]\n";
 			}else{
-        var strrr = abcstr.substring(start);
-				finalstr+="V: "+(i+1)+" clef="+clef[i]+"\n[|"+rmsmb(strrr,Edit)+" |]\n";
+				finalstr+="V: "+(i+1)+" clef="+clef[i]+"\n[|"+rmsmb(abcstr,Edit)+" |]\n";
 			}
 		}
-    var N = 0;
-    for(var i=0;i<finalstr.length;i++){
-      if(finalstr.charAt(i) == '\n'){
-        N++;
-      }
-    }
-    if((N - 2) % 4 == 0 && N != 2){
-      page[p] = finalstr;
-      p++;
-      start = abcstr.length;  
-      $('#pg').text("第" + (p + 1) + "頁");
-      var pgstr = '<button class="pagebutton" id="p' +  (p + 1) + '" onclick="printpage(this)">' +  (p + 1) + '</button>';
-      $('#showpages').append(pgstr);
-      var pgdiv = '<div class="boo" id="boo' + (p + 1) + '"></div>';
-      $('#sheet').append(pgdiv);
-    }
-    var hddiv = '#boo' + p + '';
-    $(hddiv).hide();
-		
-    console.log(finalstr);
-    console.log('n' + N);
-    console.log('p' + p);
-    console.log('hddiv' + hddiv);
 		return finalstr;
 	};
 
@@ -124,7 +98,7 @@ function msoe () {
 	};
 	//-----------------------------------------//
 	this.print = () => {//output svg
-		abcjs.renderAbc('boo' + (p + 1),"T: "+ttlstr+"\nM: "+tmpstr+"\nL: "+Lstr+"\nC: "+cmpstr+"\n"+ForPrint(),{},{add_classes:true, editable:true, listener:{highlight:(abcElem)=>{//update CrtPos when note is clicked
+		abcjs.renderAbc('boo' ,"T: "+ttlstr+"\nM: "+tmpstr+"\nL: "+Lstr+"\nC: "+cmpstr+"\n"+ForPrint(),{},{add_classes:true, editable:true, listener:{highlight:(abcElem)=>{//update CrtPos when note is clicked
 			console.log(abcElem.startChar);
 			var ignsmbs=["$","#","*"];//symbols that won't be in the final abcstring
 			var NumBefCrt=0;//number of chars before current position
@@ -165,10 +139,7 @@ function msoe () {
 	  	}}});
 	};
 	this.printabc = () => {
-    	$(".boo").show();
 		printJS("sheet","html");
-		$(".boo").hide();
-		$("#boo"+(p+1)).show();
 	};
 	this.chgttl = (a) => {//update title
 		if(!Edit) return;
@@ -467,6 +438,11 @@ function msoe () {
 			console.log("web brower doesn't support history api");
 		}
 	};
+    this.showall=()=>{
+        console.log(abcstr);
+        console.log(strs);
+        console.log(abcindex);
+    }
 	this.urlload=()=>{
 		var url = location.href.split("?")[1];
 		if(url != null) {

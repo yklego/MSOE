@@ -164,6 +164,12 @@ function msoe () {
 			}
 	  	}}});
 	};
+	this.printabc = () => {
+    	$(".boo").show();
+		printJS("sheet","html");
+		$(".boo").hide();
+		$("#boo"+(p+1)).show();
+	};
 	this.chgttl = (a) => {//update title
 		if(!Edit) return;
 		ttlstr=a.value;
@@ -184,6 +190,12 @@ function msoe () {
 		if(a.value=="") Lstr="1/4";
 		this.print();
 	};
+	var cmpstr="";
+	this.chgcmp = (a) => {
+		if(!Edit) return;
+		cmpstr=a.value;
+		this.print();
+	}
 	var tonum = (str) => {
 		var Dnmntr=0;//denominator
 		var Nmrtr=0;//numerator
@@ -1014,7 +1026,7 @@ var key = () => { // only keypress can tell if "shift" is pressed at the same ti
 			break;
   // ----------Clef and Voice----------
 		case 116://"t" use browser printer to print the sheet (can save as pdf)
-			printJS('boo','html');
+			MSOE.printabc();
 			break;
   // ----------Print (as pdf)----------
 		case 45://"-" tie two notes
@@ -1089,8 +1101,25 @@ var btn = (a) => {//buttons for notes
   	highlight(a);
 };
 
+var chgcmp = (a) => {MSOE.chgcmp(a)};
 var chgtmp = (a) => {MSOE.chgtmp(a)};
 var chgttl = (a) => {MSOE.chgttl(a)};
+
+$(document).ready(function(){
+	$("input").change(function(){
+		switch(this.name){
+			case "whoiscomposer":
+				chgcmp(this);
+				break;
+			case "whatistempo":
+				chgtmp(this);
+				break;
+			case "whatistitle":
+				chgttl(this);
+				break; 
+		}
+	});
+});
 
 $("#save").click(function(e){MSOE.save(e)});
 

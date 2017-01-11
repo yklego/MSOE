@@ -7,8 +7,8 @@
 }
 
 html, body {
-padding: 0px;
-margin: 4px;
+padding: 2px;
+margin: 0px;
 }
 
 .form {
@@ -21,6 +21,7 @@ padding-top: 10px;
 .top{
 height: 12px;
 margin: -5px;
+padding:-5px;
 font-size: 10px;
 color:grey;
 
@@ -34,8 +35,8 @@ h2{
 color:white;
 }
 button{
-padding: 0px;
-margin: 2px;
+padding: 2px;
+margin: 0px;
 }
 
 .extra_note{

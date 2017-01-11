@@ -86,8 +86,8 @@
 <div class="rows">	
 	<div class="logo"><img src="img/logo.png" class="logo" width=300px></div></div>
 
-<div class="rows">	
-<div id="pg">第1頁</div>
+<div class="rows page">	
+<div id="pg" class="ui orange circular button">第1頁</div>
 	<div id="showpages"><button class="pagebutton" id="p1" onclick="">1</button></div></div>
 
 
@@ -136,9 +136,10 @@
 <button class="circular ui button column"><img src="img/note-25.png" alt="" class="extra_note ui circular image" id="" /></button>
 <button class="circular ui button column"><img src="img/note-26.png" alt="" class="extra_note ui circular image" id="" /></button>
 </div>
-<div class="one column row">Meter</div>
-<input class="one column row input_tempo" onchange="chgtmp(this)"/>
-</div>
+<div class="one column row meter">Meter</div>
+<div class="ui input">
+<input class="one column row input_tempo" onchange="chgtmp(this)"  placeholder="4/4"/>
+	</div></div>
  
 <!--row top boo -->
 <div class="ten wide column sheet" id="sheet">

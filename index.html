@@ -74,9 +74,7 @@
 <div class="logo"><img src="http://i.imgur.com/AXlHDR1.png" class="logo" width=300px></div>
 <div class="modal" id="infohome"><button class="ui button">Score Info</button></div>
 <button class="ui button" id="mannualgo">test</button>
-<div class="ui right sidebar inverted vertical menu" id="sidebar" >
-	<div class="ui animated inverted black left floated button" id="mannualback">
-		<div class="visible content">back</div></div>
+	
 <div class="mode">
   <button class="ui button" onclick="edit_mode()">編輯</button>
   <button class="ui button" onclick="preview_mode()">預覽</button>
@@ -151,7 +149,9 @@
  
 
 	
-	
+<div class="ui right sidebar inverted vertical menu" id="sidebar" >
+	<div class="ui animated inverted black left floated button" id="mannualback">
+	<div class="visible content">back</div></div>	
 <div class="item">
 <h2 class="ui header" style="color:white;">游標指令</h2>
 <p class="mannual">
@@ -331,7 +331,7 @@ G:貼上<br>
 	 $(document).ready(function(){
 	$('#topbar')
   .sidebar('setting', 'transition', 'push')
-  .sidebar('toggle')
+  .sidebar('show' {})
   .sidebar('setting', 'dimPage', false)
   .sidebar('setting', 'closable', false); 
 		  });

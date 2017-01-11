@@ -3,14 +3,14 @@
   font-size: 24px;
   padding: -15px;
   margin: 0px;
-  padding-top: 20px;
+  
 }
 
 html, body {
 padding: -15px;
 margin: 5px;
 }
-
+.
 .form {
 font-size:10px;
 margin: 10px;
@@ -19,8 +19,7 @@ padding-top: 10px;
 }
  
 .top {
-  height: 70%;
-  overflow-y: scroll;
+  height: 20px;
 }
   
 .bottom {

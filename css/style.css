@@ -8,7 +8,7 @@
 
 html, body {
 padding: 0px;
-margin: 0px;
+margin: 4px;
 }
 
 .form {
@@ -19,8 +19,10 @@ padding-top: 10px;
 }
 
 .top{
-height: 10px;
+height: 12px;
 margin: -5px;
+font-size: 10px;
+color:grey;
 
 }
 
@@ -33,7 +35,7 @@ color:white;
 }
 button{
 padding: 0px;
-margin: 0px;
+margin: 2px;
 }
 
 .extra_note{

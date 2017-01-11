@@ -71,6 +71,8 @@
   
   
 <div class="ui top thin inverted menu" id="topbar">
+	<a class="item" id="infohome">Score Info</a>
+	<a class="item" id="mannualgo">Mannual</a>
 	<a class="item">Save</a>
 	<a class="item">Play</a>
 	<a class="item">Share</a>
@@ -79,22 +81,18 @@
 		<a class="item" onclick="preview_mode()">預覽</a></div>
  
 </div>
-	
-<div class="logo"><img src="http://i.imgur.com/AXlHDR1.png" class="logo" width=300px></div>
-<div class="modal" id="infohome"><button class="ui button">Score Info</button></div>
-<div class="modal"><button class="ui button" id="mannualgo">Mannual</button></div>
-	
-<div class="mode">
-  <button class="ui button" onclick="edit_mode()">編輯</button>
-  <button class="ui button" onclick="preview_mode()">預覽</button>
-</div>
+<div class="ui grid">
+<div class="four wide column">	
+<div class="rows">	
+	<div class="logo"><img src="http://i.imgur.com/AXlHDR1.png" class="logo" width=300px></div></div>
+
+<div class="rows">	
 <div id="pg">第1頁</div>
-<div id="showpages"><button class="pagebutton" id="p1" onclick="">1</button></div>
+	<div id="showpages"><button class="pagebutton" id="p1" onclick="">1</button></div></div>
 
 
 <!--row top left-->
-<div class="ui grid">
-<div class="four wide column">
+
 <div class="one column row">Tempo</div>
 <input class="one column row input_tempo" onchange="chgtmp(this)"/>
 <div class="one column row">Notes</div>

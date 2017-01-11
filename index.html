@@ -137,7 +137,7 @@
 </div>
 
 
-<div class="ui top visible sidebar inverted menu">
+<div class="ui top visible thin sidebar inverted menu" id="topbar">
 	<a class="item">Save</a>
 	<a class="item">Play</a>
 	<a class="item">Share</a>
@@ -327,7 +327,15 @@ G:貼上<br>
 	    	      .modal('setting', 'closable', false);
     });
 </script>
-  
+  <script type="text/javascript">
+	 $(document).ready(function(){
+	$('#topbar')
+  .sidebar('setting', 'transition', 'push')
+  .sidebar('toggle');
+		  });
+		 </script>
+	
+	
   <script type="text/javascript">
   $('#cancel').click(function(){
     

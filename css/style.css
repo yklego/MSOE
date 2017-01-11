@@ -8,7 +8,7 @@
 
 html, body {
 padding: 0px;
-margin: 5px;
+margin: 0px;
 }
 
 .form {
@@ -18,7 +18,12 @@ padding: 10px;
 padding-top: 10px;
 }
 
-  
+.top{
+height: 10px;
+margin: -5px;
+
+}
+
 .bottom {
   height: 30%;
 }

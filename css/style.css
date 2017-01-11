@@ -36,6 +36,14 @@ color:grey;
   height: 30%;
 }
 
+.page{
+padding:5px;
+}
+
+.meter{
+padding:5px;
+}
+
 h2{
 color:white;
 }

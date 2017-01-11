@@ -7,10 +7,15 @@
 }
 
 html, body {
-padding: 2px;
+padding: 0px;
 margin: 0px;
 }
 
+.grid {
+padding:2px;
+
+
+}
 .form {
 font-size:10px;
 margin: 10px;
